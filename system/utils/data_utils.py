@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import torch
-
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 def read_data(dataset, idx, is_train=True):
     if is_train:

@@ -6,7 +6,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 from utils.dataset_utils import check, separate_data, split_data, save_file
-
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 random.seed(1)
 np.random.seed(1)
@@ -81,7 +81,9 @@ def generate_cifar10(dir_path, num_clients, num_classes, niid, balance, partitio
     X, y, statistic = separate_data((dataset_image, dataset_label), num_clients, num_classes, 
                                     niid, balance, partition)
 
+    #split_data 函数来将划分后的数据集 X 和 y 分为训练数据和测试数据
     train_data, test_data = split_data(X, y)
+    print(type(train_data),type(test_data))
     save_file(config_path, train_path, test_path, train_data, test_data, num_clients, num_classes, 
         statistic, niid, balance, partition)
 
@@ -90,5 +92,4 @@ if __name__ == "__main__":
     niid = True if sys.argv[1] == "noniid" else False
     balance = True if sys.argv[2] == "balance" else False
     partition = sys.argv[3] if sys.argv[3] != "-" else None
-
     generate_cifar10(dir_path, num_clients, num_classes, niid, balance, partition)
