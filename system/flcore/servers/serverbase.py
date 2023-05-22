@@ -5,13 +5,26 @@ import h5py
 import copy
 import time
 import random
-
+import pandas as pd
 from utils.data_utils import read_client_data
 from utils.dlg import DLG
-
+import ast
+Programpath="/Users/alice/Desktop/python/PFL/"
 
 class Server(object):
-    def __init__(self, args, times):
+    def __init__(self, args, times,filedir):
+        #记录数据文件的位置，同一个数据集不同程度的数据分布差异
+        self.filedir=filedir
+        self.method =None
+        self.select_idlist = []
+        self.randomSelect = False
+
+
+
+
+
+
+
         # Set up the main attributes
         self.args = args
         self.device = args.device
@@ -90,14 +103,27 @@ class Server(object):
         self.send_slow_clients = self.select_slow_clients(
             self.send_slow_rate)
 
-    def select_clients(self):
-        if self.random_join_ratio:
-            num_join_clients = np.random.choice(range(self.num_join_clients, self.num_clients+1), 1, replace=False)[0]
-        else:
-            num_join_clients = self.num_join_clients
-        selected_clients = list(np.random.choice(self.clients, num_join_clients, replace=False))
+    def select_clients(self,round=-1):
+        if round==-1:
+            # 随机选择client
+            if self.random_join_ratio:
+                num_join_clients = np.random.choice(range(self.num_join_clients, self.num_clients+1), 1, replace=False)[0]
+            else:
+                num_join_clients = self.num_join_clients
+            selected_clients = list(np.random.choice(self.clients, num_join_clients, replace=False))
 
-        return selected_clients
+            return selected_clients
+        else:
+            # 按照制定方式选择clients,self.select_idlist[group],设定每一轮要选择的client,方便对不同算法进行比较
+            selected_clients = []
+            ids = []
+            for c in self.clients:
+                if c.id in self.select_idlist[round]:
+                    selected_clients.append(c)
+                    ids.append(c.id)
+            print(f"INFO:----------fix client id is :group is {round}:", ids, type(selected_clients[0]))
+            return selected_clients
+
 
     def send_models(self):
         assert (len(self.clients) > 0)
@@ -224,21 +250,20 @@ class Server(object):
         return ids, num_samples, losses
 
     # evaluate selected clients
-    def evaluate(self, acc=None, loss=None):
+    def evaluate(self, group, acc=None, loss=None):
         stats = self.test_metrics()
         stats_train = self.train_metrics()
-
-        test_acc = sum(stats[2])*1.0 / sum(stats[1])
-        test_auc = sum(stats[3])*1.0 / sum(stats[1])
-        train_loss = sum(stats_train[2])*1.0 / sum(stats_train[1])
+        test_acc = sum(stats[2]) * 1.0 / sum(stats[1])
+        test_auc = sum(stats[3]) * 1.0 / sum(stats[1])
+        train_loss = sum(stats_train[2]) * 1.0 / sum(stats_train[1])
         accs = [a / n for a, n in zip(stats[2], stats[1])]
         aucs = [a / n for a, n in zip(stats[3], stats[1])]
-        
+
         if acc == None:
             self.rs_test_acc.append(test_acc)
         else:
             acc.append(test_acc)
-        
+
         if loss == None:
             self.rs_train_loss.append(train_loss)
         else:
@@ -247,9 +272,11 @@ class Server(object):
         print("Averaged Train Loss: {:.4f}".format(train_loss))
         print("Averaged Test Accurancy: {:.4f}".format(test_acc))
         print("Averaged Test AUC: {:.4f}".format(test_auc))
-        # self.print_(test_acc, train_acc, train_loss)
         print("Std Test Accurancy: {:.4f}".format(np.std(accs)))
         print("Std Test AUC: {:.4f}".format(np.std(aucs)))
+        return [self.method, group, train_loss, test_acc, test_auc, np.std(accs), np.std(aucs)]
+
+
 
     def print_(self, test_acc, test_auc, train_loss):
         print("Average Test Accurancy: {:.4f}".format(test_acc))
@@ -321,6 +348,7 @@ class Server(object):
         # self.save_item(items, f'DLG_{R}')
 
     def set_new_clients(self, clientObj):
+        #增加新的client
         for i in range(self.num_clients, self.num_clients + self.num_new_clients):
             train_data = read_client_data(self.dataset, i, is_train=True)
             test_data = read_client_data(self.dataset, i, is_train=False)
@@ -335,8 +363,10 @@ class Server(object):
     # fine-tuning on new clients
     def fine_tuning_new_clients(self):
         for client in self.new_clients:
+            #将全局模型参数复制给client
             client.set_parameters(self.global_model)
             for e in range(self.fine_tuning_epoch):
+                print(f"fine_tuning_epoch is {fine_tuning_epoch}")
                 client.train()
 
     # evaluating on new clients
@@ -353,3 +383,47 @@ class Server(object):
         ids = [c.id for c in self.new_clients]
 
         return ids, num_samples, tot_correct, tot_auc
+    #add
+    def read_selectInfo(self):
+        print("INFO:---------Using fix select id list--------------------------------")
+        file_path = Programpath+"res/selectids/select_client_ids20_0.1.csv"
+        data = pd.read_csv(file_path)
+        rounds = data['rounds'].tolist()
+        # print(data['ids'].tolist()[0])
+        ids = [ast.literal_eval(i) for i in data['ids'].tolist()]
+        # print("rounds",rounds)
+        # print("ids",ids)
+        id_dict = {}
+        for i in range(len(rounds)):
+            id_dict[rounds[i]] = ids[i]
+        print(id_dict)
+        return id_dict
+
+    def evaluate_origin(self, acc=None, loss=None):
+        stats = self.test_metrics()
+        stats_train = self.train_metrics()
+
+        test_acc = sum(stats[2]) * 1.0 / sum(stats[1])
+        test_auc = sum(stats[3]) * 1.0 / sum(stats[1])
+        train_loss = sum(stats_train[2]) * 1.0 / sum(stats_train[1])
+        accs = [a / n for a, n in zip(stats[2], stats[1])]
+        aucs = [a / n for a, n in zip(stats[3], stats[1])]
+
+        if acc == None:
+            self.rs_test_acc.append(test_acc)
+        else:
+            acc.append(test_acc)
+
+        if loss == None:
+            self.rs_train_loss.append(train_loss)
+        else:
+            loss.append(train_loss)
+
+        print("Averaged Train Loss: {:.4f}".format(train_loss))
+        print("Averaged Test Accurancy: {:.4f}".format(test_acc))
+        print("Averaged Test AUC: {:.4f}".format(test_auc))
+        # self.print_(test_acc, train_acc, train_loss)
+        print("Std Test Accurancy: {:.4f}".format(np.std(accs)))
+        print("Std Test AUC: {:.4f}".format(np.std(aucs)))
+
+

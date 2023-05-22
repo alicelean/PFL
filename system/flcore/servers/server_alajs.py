@@ -4,7 +4,7 @@ import torch
 import pandas as pd
 import time
 from flcore.clients.clientALA import *
-from utils.data_utils import read_client_data
+from utils.data_utils1 import read_client_data
 from methods.distance import jensen_shannon_distance
 from threading import Thread
 import ast
