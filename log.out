@@ -1,0 +1,213 @@
+/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so, 6): Library not loaded: @rpath/libpng16.16.dylib
+  Referenced from: /Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so
+  Reason: Incompatible library version: image.so requires version 56.0.0 or later, but libpng16.16.dylib provides version 54.0.0'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+
+cuda is not avaiable.
+
+==================================================
+Algorithm: FedALA
+Local batch size: 10
+Local steps: 1
+Local learing rate: 0.005
+Local learing rate decay: False
+Total number of clients: 20
+Clients join in each round: 0.1
+Clients randomly join: False
+Client drop rate: 0.0
+Client select regarding time: False
+Running times: 1
+Dataset: mnist-0.1-npz
+Number of classes: 10
+Backbone: cnn
+Using device: cpu
+Using DP: False
+Auto break: False
+Global rounds: 10
+DLG attack: False
+Total number of new clients: 0
+Fine tuning epoches on new clients: 0
+==================================================
+
+============= Running time: 0th =============
+Creating server and clients ...
+FedAvgCNN(
+  (conv1): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=1024, out_features=512, bias=True)
+    (1): ReLU(inplace=True)
+  )
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+
+Join ratio / total clients: 0.1 / 20
+Finished creating server and clients.
+INFO:-----------------global_rounds is---0-----,select client num is-----0-select id :--[15, 6]----------------------------------
+
+-------------Round number: 0-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3127
+Averaged Test Accurancy: 0.0608
+Averaged Test AUC: 0.4337
+Std Test Accurancy: 0.0671
+Std Test AUC: 0.1842
+------------------------- time cost ------------------------- 11.96555781364441
+INFO:-----------------global_rounds is---1-----,select client num is-----1-select id :--[10, 6]----------------------------------
+Client: 0 	Std: 0.009190645243757447 	ALA epochs: 22
+Client: 1 	Std: 0.009399067417361885 	ALA epochs: 35
+Client: 2 	Std: 0.008948858909047785 	ALA epochs: 18
+Client: 3 	Std: 0.00923372794471456 	ALA epochs: 13
+Client: 4 	Std: 0.009357878714625572 	ALA epochs: 22
+Client: 5 	Std: 0.008997609959433371 	ALA epochs: 13
+Client: 6 	Std: 0.009740945148299315 	ALA epochs: 34
+Client: 7 	Std: 0.009379935384221504 	ALA epochs: 22
+Client: 8 	Std: 0.00966099528280596 	ALA epochs: 15
+Client: 9 	Std: 0.009802708252552514 	ALA epochs: 16
+Client: 10 	Std: 0.00944310210334837 	ALA epochs: 16
+Client: 11 	Std: 0.009283504232916736 	ALA epochs: 13
+Client: 12 	Std: 0.008434895128206861 	ALA epochs: 15
+Client: 13 	Std: 0.00888970164541115 	ALA epochs: 13
+Client: 14 	Std: 0.007609722315765088 	ALA epochs: 14
+Client: 15 	Std: 0.006788292250525075 	ALA epochs: 11
+Client: 16 	Std: 0.008019281241265224 	ALA epochs: 14
+Client: 17 	Std: 0.009513427140407189 	ALA epochs: 12
+Client: 18 	Std: 0.009722616153953118 	ALA epochs: 13
+Client: 19 	Std: 0.009548069676936624 	ALA epochs: 12
+
+-------------Round number: 1-------------
+
+Evaluate global model
+Averaged Train Loss: 1.8566
+Averaged Test Accurancy: 0.3085
+Averaged Test AUC: 0.7443
+Std Test Accurancy: 0.3408
+Std Test AUC: 0.1383
+------------------------- time cost ------------------------- 106.43214106559753
+INFO:-----------------global_rounds is---2-----,select client num is-----2-select id :--[14, 2]----------------------------------
+
+-------------Round number: 2-------------
+
+Evaluate global model
+Averaged Train Loss: 1.1172
+Averaged Test Accurancy: 0.6033
+Averaged Test AUC: 0.9156
+Std Test Accurancy: 0.3306
+Std Test AUC: 0.1210
+------------------------- time cost ------------------------- 20.787934064865112
+INFO:-----------------global_rounds is---3-----,select client num is-----3-select id :--[6, 0]----------------------------------
+
+-------------Round number: 3-------------
+
+Evaluate global model
+Averaged Train Loss: 0.9047
+Averaged Test Accurancy: 0.6295
+Averaged Test AUC: 0.9372
+Std Test Accurancy: 0.3194
+Std Test AUC: 0.0598
+------------------------- time cost ------------------------- 19.522898197174072
+INFO:-----------------global_rounds is---4-----,select client num is-----4-select id :--[5, 17]----------------------------------
+
+-------------Round number: 4-------------
+
+Evaluate global model
+Averaged Train Loss: 0.5592
+Averaged Test Accurancy: 0.8079
+Averaged Test AUC: 0.9695
+Std Test Accurancy: 0.2192
+Std Test AUC: 0.0468
+------------------------- time cost ------------------------- 22.166341066360474
+INFO:-----------------global_rounds is---5-----,select client num is-----5-select id :--[15, 6]----------------------------------
+
+-------------Round number: 5-------------
+
+Evaluate global model
+Averaged Train Loss: 0.3791
+Averaged Test Accurancy: 0.8794
+Averaged Test AUC: 0.9806
+Std Test Accurancy: 0.2101
+Std Test AUC: 0.0618
+------------------------- time cost ------------------------- 20.48977279663086
+INFO:-----------------global_rounds is---6-----,select client num is-----6-select id :--[5, 14]----------------------------------
+
+-------------Round number: 6-------------
+
+Evaluate global model
+Averaged Train Loss: 0.3408
+Averaged Test Accurancy: 0.8799
+Averaged Test AUC: 0.9869
+Std Test Accurancy: 0.2164
+Std Test AUC: 0.0341
+------------------------- time cost ------------------------- 23.825680017471313
+INFO:-----------------global_rounds is---7-----,select client num is-----7-select id :--[0, 14]----------------------------------
+
+-------------Round number: 7-------------
+
+Evaluate global model
+Averaged Train Loss: 0.2776
+Averaged Test Accurancy: 0.9096
+Averaged Test AUC: 0.9881
+Std Test Accurancy: 0.1858
+Std Test AUC: 0.0372
+------------------------- time cost ------------------------- 21.872454166412354
+INFO:-----------------global_rounds is---8-----,select client num is-----8-select id :--[1, 16]----------------------------------
+
+-------------Round number: 8-------------
+
+Evaluate global model
+Averaged Train Loss: 0.2933
+Averaged Test Accurancy: 0.8997
+Averaged Test AUC: 0.9859
+Std Test Accurancy: 0.2008
+Std Test AUC: 0.0425
+------------------------- time cost ------------------------- 21.830011129379272
+INFO:-----------------global_rounds is---9-----,select client num is-----9-select id :--[3, 13]----------------------------------
+
+-------------Round number: 9-------------
+
+Evaluate global model
+Averaged Train Loss: 0.2930
+Averaged Test Accurancy: 0.9058
+Averaged Test AUC: 0.9880
+Std Test Accurancy: 0.1100
+Std Test AUC: 0.0145
+------------------------- time cost ------------------------- 21.809436082839966
+INFO:-----------------global_rounds is---10-----,select client num is-----10-select id :--[12, 8]----------------------------------
+
+-------------Round number: 10-------------
+
+Evaluate global model
+Averaged Train Loss: 0.2551
+Averaged Test Accurancy: 0.9239
+Averaged Test AUC: 0.9900
+Std Test Accurancy: 0.0890
+Std Test AUC: 0.0125
+------------------------- time cost ------------------------- 22.712022066116333
+
+Best accuracy.
+0.9238633767420608
+
+Average time cost per round.
+30.14486906528473
+File path: ../results/mnist-0.1-npz_FedALA_test_0.h5
+
+Average time cost: 315.42s.
+Length:  11
+std for best accurancy: 0.0
+mean for best accurancy: 0.9238633767420608
+All done!
+
+Storage on cpu
+-------------------------------------------------------------------------------
+Total Tensors: 111616340 	Used Memory: 237.78M
+-------------------------------------------------------------------------------

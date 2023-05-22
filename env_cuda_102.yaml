@@ -5,7 +5,6 @@ name: fl_torch
 channels:
   - pytorch
   - conda-forge
-  - defaults
 dependencies:
   - _libgcc_mutex=0.1
   - argon2-cffi=20.1.0
