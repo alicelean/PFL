@@ -10,6 +10,9 @@ from utils.data_utils import read_client_data
 from utils.dlg import DLG
 import ast
 Programpath="/Users/alice/Desktop/python/PFL/"
+mpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+Programpath = "/".join(mpath.split("/")[:-1])
+print("serverbase",mpath,Programpath)
 
 class Server(object):
     def __init__(self, args, times,filedir):
@@ -18,7 +21,11 @@ class Server(object):
         self.method =None
         self.select_idlist = []
         self.randomSelect = False
-
+        # 设置client数据
+        self.client_batch_size = args.batch_size
+        self.client_learning_rate = args.local_learning_rate
+        self.client_local_epochs = args.local_epochs
+        self.fix_ids = False
 
 
 
@@ -141,6 +148,7 @@ class Server(object):
 
         active_clients = random.sample(
             self.selected_clients, int((1-self.client_drop_rate) * self.num_join_clients))
+        active_clients=self.selected_clients
 
         self.uploaded_ids = []
         self.uploaded_weights = []
@@ -386,11 +394,11 @@ class Server(object):
     #add
     def read_selectInfo(self):
         print("INFO:---------Using fix select id list--------------------------------")
-        file_path = Programpath+"res/selectids/select_client_ids20_0.1.csv"
+        file_path = Programpath+"/res/selectids/select_client_ids20_0.1.csv"
         data = pd.read_csv(file_path)
-        rounds = data['rounds'].tolist()
+        rounds = data['global_rounds'].tolist()
         # print(data['ids'].tolist()[0])
-        ids = [ast.literal_eval(i) for i in data['ids'].tolist()]
+        ids = [ast.literal_eval(i) for i in data['id_list'].tolist()]
         # print("rounds",rounds)
         # print("ids",ids)
         id_dict = {}

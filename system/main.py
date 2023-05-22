@@ -34,6 +34,8 @@ from flcore.servers.serverscaffold import SCAFFOLD
 from flcore.servers.serverdistill import FedDistill
 from flcore.servers.serverala import FedALA
 
+from flcore.servers.server_alajs import ALAJS
+
 from flcore.trainmodel.models import *
 
 from flcore.trainmodel.bilstm import *
@@ -161,6 +163,7 @@ def run(args):
 
         # select algorithm
         filedir="mnist"
+        print(f"INFO:------------------------args.algorithm is:{args.algorithm}-----------------------")
         if args.algorithm == "FedAvg":
             args.head = copy.deepcopy(args.model.fc)
             args.model.fc = nn.Identity()
@@ -252,17 +255,20 @@ def run(args):
             server = FedGen(args, i)
 
         elif args.algorithm == "SCAFFOLD":
-            server = SCAFFOLD(args, i)
+            server = SCAFFOLD(args, i,filedir)
 
         elif args.algorithm == "FedDistill":
             server = FedDistill(args, i)
 
         elif args.algorithm == "FedALA":
             server = FedALA(args, i,filedir)
+        elif args.algorithm == "ALAJS":
+            server = ALAJS(args, i,filedir)
             
         else:
             raise NotImplementedError
 
+        #模型训练
         server.train()
 
         time_list.append(time.time()-start)
@@ -296,7 +302,7 @@ if __name__ == "__main__":
                         help="Local learning rate")
     parser.add_argument('-ld', "--learning_rate_decay", type=bool, default=False)
     parser.add_argument('-ldg', "--learning_rate_decay_gamma", type=float, default=0.99)
-    parser.add_argument('-gr', "--global_rounds", type=int, default=10)
+    parser.add_argument('-gr', "--global_rounds", type=int, default=3)
     parser.add_argument('-ls', "--local_epochs", type=int, default=1, 
                         help="Multiple update steps in one local epoch.")
     parser.add_argument('-algo', "--algorithm", type=str, default="FedAvg")

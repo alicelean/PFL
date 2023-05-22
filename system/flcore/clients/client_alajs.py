@@ -1,137 +1,67 @@
-import copy
 import torch
 import torch.nn as nn
 import numpy as np
-import torch.nn.functional as F
-from torch.utils.data import DataLoader
-from sklearn.preprocessing import label_binarize
-from sklearn import metrics
+import time
+from flcore.clients.clientbase import Client
 from utils.data_utils import read_client_data
 from utils.ALA import ALA
 
 
-class clientALA(object):
-    def __init__(self, args, id, filedir, client_label, train_samples, test_samples):
-
-        self.model = copy.deepcopy(args.model)
-        self.dataset = args.dataset
-        self.device = args.device
-        self.id = id
-        # --------新增的属性
-        self.client_label = client_label
-        self.distance = None
-        self.filedir = filedir
-        self.alldistance = None
-        self.allsize = None
-        self.last_loss = -1
-
-        self.num_classes = args.num_classes
-        self.train_samples = train_samples
-        self.test_samples = test_samples
-        self.batch_size = args.batch_size
-        self.learning_rate = args.local_learning_rate
-        self.local_steps = args.local_steps
-
-        self.loss = nn.CrossEntropyLoss()
-        self.optimizer = torch.optim.SGD(self.model.parameters(), lr=self.learning_rate)
+class clientALAJS(Client):
+    def __init__(self, args, id,filedir, client_label,train_samples, test_samples, **kwargs):
+        super().__init__(args, id, train_samples, test_samples, **kwargs)
 
         self.eta = args.eta
         self.rand_percent = args.rand_percent
         self.layer_idx = args.layer_idx
 
-        train_data, _ = read_client_data(self.dataset, self.id, self.filedir, is_train=True)
+        # --------新增的属性
+        self.client_label = client_label
+        self.distance = None
+        self.alldistance = None
+        self.filedir=filedir
+
+
+
+
+
+        train_data = read_client_data(self.dataset, self.id, is_train=True)
         self.ALA = ALA(self.id, self.loss, train_data, self.batch_size,
                        self.rand_percent, self.layer_idx, self.eta, self.device)
 
     def train(self):
         trainloader = self.load_train_data()
+        # self.model.to(self.device)
         self.model.train()
 
-        for step in range(self.local_steps):
+        start_time = time.time()
+
+        max_local_steps = self.local_epochs
+        if self.train_slow:
+            max_local_steps = np.random.randint(1, max_local_steps // 2)
+
+        for step in range(max_local_steps):
             for i, (x, y) in enumerate(trainloader):
                 if type(x) == type([]):
                     x[0] = x[0].to(self.device)
                 else:
                     x = x.to(self.device)
                 y = y.to(self.device)
-                self.optimizer.zero_grad()
+                if self.train_slow:
+                    time.sleep(0.1 * np.abs(np.random.rand()))
                 output = self.model(x)
                 loss = self.loss(output, y)
+                self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
 
+        # self.model.cpu()
+
+        if self.learning_rate_decay:
+            self.learning_rate_scheduler.step()
+
+        self.train_time_cost['num_rounds'] += 1
+        self.train_time_cost['total_cost'] += time.time() - start_time
+
     def local_initialization(self, received_global_model):
         self.ALA.adaptive_local_aggregation(received_global_model, self.model)
-
-    def load_train_data(self, batch_size=None):
-        if batch_size == None:
-            batch_size = self.batch_size
-        train_data, _ = read_client_data(self.dataset, self.id, self.filedir, is_train=True)
-        return DataLoader(train_data, batch_size, drop_last=True, shuffle=False)
-
-    def load_test_data(self, batch_size=None):
-        if batch_size == None:
-            batch_size = self.batch_size
-        test_data, _ = read_client_data(self.dataset, self.id, self.filedir, is_train=False)
-        return DataLoader(test_data, batch_size, drop_last=True, shuffle=False)
-
-    def test_metrics(self, model=None):
-        testloader = self.load_test_data()
-        if model == None:
-            model = self.model
-        model.eval()
-
-        test_acc = 0
-        test_num = 0
-        y_prob = []
-        y_true = []
-
-        with torch.no_grad():
-            for x, y in testloader:
-                if type(x) == type([]):
-                    x[0] = x[0].to(self.device)
-                else:
-                    x = x.to(self.device)
-                y = y.to(self.device)
-                output = model(x)
-
-                test_acc += (torch.sum(torch.argmax(output, dim=1) == y)).item()
-                test_num += y.shape[0]
-
-                y_prob.append(F.softmax(output).detach().cpu().numpy())
-                nc = self.num_classes
-                if self.num_classes == 2:
-                    nc += 1
-                lb = label_binarize(y.detach().cpu().numpy(), np.arange(nc))
-                if self.num_classes == 2:
-                    lb = lb[:, :2]
-                y_true.append(lb)
-
-        y_prob = np.concatenate(y_prob, axis=0)
-        y_true = np.concatenate(y_true, axis=0)
-
-        auc = metrics.roc_auc_score(y_true, y_prob, average='micro')
-
-        return test_acc, test_num, auc
-
-    def train_metrics(self, model=None):
-        trainloader = self.load_train_data()
-        if model == None:
-            model = self.model
-        model.eval()
-
-        train_num = 0
-        losses = 0
-        with torch.no_grad():
-            for x, y in trainloader:
-                if type(x) == type([]):
-                    x[0] = x[0].to(self.device)
-                else:
-                    x = x.to(self.device)
-                y = y.to(self.device)
-                output = self.model(x)
-                loss = self.loss(output, y)
-                train_num += y.shape[0]
-                losses += loss.item() * y.shape[0]
-
-        return losses, train_num

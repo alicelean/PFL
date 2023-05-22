@@ -2,6 +2,7 @@ import numpy as np
 import os
 import torch
 import sys
+Programpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 def getlabelvector(label):
     '''
     将label变成一个10维向量，在对应index中的数字为标签index的样本个数
@@ -213,30 +214,25 @@ def get_batch_sample(data, batch_size):
 
 def read_data(dataset, idx,filedir, is_train=True):
     if is_train:
-        train_data_dir = os.path.join('/Users/alice/Desktop/FedJSND/dataset', dataset, 'train/')
-        if filedir=="origin":
-            train_file = train_data_dir + 'train' + str(idx) + '_.npz'
-        else:
-            #print(filedir)
-            train_file = "/Users/alice/Desktop/FedJSND/dataset/" + filedir + "/train/train" + str(idx) + "_.npz"
+
+        train_data_dir = os.path.join(Programpath+'/dataset', dataset, 'train/')
+        train_file = train_data_dir + str(idx) + '.npz'
         with open(train_file, 'rb') as f:
             train_data = np.load(f, allow_pickle=True)['data'].tolist()
 
         return train_data
 
     else:
-        test_data_dir = os.path.join('/Users/alice/Desktop/FedJSND/dataset', dataset, 'test/')
-        if filedir =="origin":
-            test_file = test_data_dir + 'test' + str(idx) + '_.npz'
-        else:
-            test_file = "/Users/alice/Desktop/FedJSND/dataset/" + filedir + "/test/test" + str(idx) + "_.npz"
+
+        test_data_dir = os.path.join(Programpath+'/dataset', dataset, 'test/')
+        test_file = test_data_dir + str(idx) + '.npz'
         with open(test_file, 'rb') as f:
             test_data = np.load(f, allow_pickle=True)['data'].tolist()
 
         return test_data
 
 
-def read_client_data(dataset, idx,filedir, is_train=True):
+def read_client_data_new(dataset, idx,filedir, is_train=True):
     if dataset[:2] == "ag" or dataset[:2] == "SS":
         return read_client_data_text(dataset, idx)
 

@@ -1,0 +1,126 @@
+/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so, 6): Library not loaded: @rpath/libpng16.16.dylib
+  Referenced from: /Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so
+  Reason: Incompatible library version: image.so requires version 56.0.0 or later, but libpng16.16.dylib provides version 54.0.0'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+serverbase /Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+
+cuda is not avaiable.
+
+==================================================
+Algorithm: SCAFFOLD
+Local batch size: 10
+Local steps: 1
+Local learing rate: 0.005
+Local learing rate decay: False
+Total number of clients: 20
+Clients join in each round: 0.1
+Clients randomly join: False
+Client drop rate: 0.0
+Client select regarding time: False
+Running times: 1
+Dataset: mnist
+Number of classes: 10
+Backbone: cnn
+Using device: cpu
+Using DP: False
+Auto break: False
+Global rounds: 3
+DLG attack: False
+Total number of new clients: 0
+Fine tuning epoches on new clients: 0
+==================================================
+
+============= Running time: 0th =============
+Creating server and clients ...
+FedAvgCNN(
+  (conv1): Sequential(
+    (0): Conv2d(1, 32, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=1024, out_features=512, bias=True)
+    (1): ReLU(inplace=True)
+  )
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+INFO:------------------------args.algorithm is:SCAFFOLD-----------------------
+
+Join ratio / total clients: 0.1 / 20
+Finished creating server and clients.
+INFO:---------Using fix select id list--------------------------------
+{0: [11, 13], 1: [11, 0], 2: [8, 5], 3: [5, 1], 4: [8, 2], 5: [0, 9], 6: [9, 15], 7: [7, 16], 8: [0, 16], 9: [7, 4], 10: [7, 19], 11: [1, 2], 12: [12, 17], 13: [1, 15], 14: [18, 16], 15: [7, 2], 16: [2, 10], 17: [14, 9], 18: [11, 16], 19: [17, 11], 20: [7, 10], 21: [12, 17], 22: [13, 3], 23: [7, 19], 24: [15, 2], 25: [7, 9], 26: [10, 19], 27: [0, 14], 28: [15, 0], 29: [18, 0], 30: [3, 8], 31: [5, 10], 32: [1, 14], 33: [13, 5], 34: [5, 2], 35: [18, 2], 36: [9, 19], 37: [3, 13], 38: [14, 3], 39: [9, 2], 40: [17, 19], 41: [16, 14], 42: [12, 2], 43: [18, 13], 44: [14, 10], 45: [6, 4], 46: [15, 4], 47: [7, 12], 48: [1, 14], 49: [4, 3], 50: [9, 2], 51: [5, 10], 52: [3, 19], 53: [11, 16], 54: [0, 1], 55: [5, 8], 56: [1, 13], 57: [18, 3], 58: [1, 10], 59: [18, 6], 60: [11, 9], 61: [13, 10], 62: [4, 1], 63: [4, 5], 64: [4, 11], 65: [2, 9], 66: [17, 19], 67: [6, 2], 68: [2, 9], 69: [5, 1], 70: [4, 11], 71: [3, 6], 72: [1, 10], 73: [4, 13], 74: [15, 5], 75: [19, 4], 76: [6, 13], 77: [10, 13], 78: [14, 15], 79: [9, 14], 80: [2, 3], 81: [0, 18], 82: [16, 0], 83: [9, 11], 84: [4, 0], 85: [4, 17], 86: [3, 12], 87: [11, 0], 88: [1, 19], 89: [3, 10], 90: [9, 7], 91: [3, 1], 92: [12, 18], 93: [7, 19], 94: [14, 10], 95: [7, 5], 96: [5, 1], 97: [19, 3], 98: [17, 15], 99: [8, 5], 100: [3, 18], 101: [1, 12], 102: [7, 14], 103: [0, 1], 104: [11, 18], 105: [7, 11], 106: [5, 17], 107: [9, 2], 108: [2, 14], 109: [19, 4], 110: [17, 5], 111: [11, 7], 112: [18, 8], 113: [0, 15], 114: [12, 6], 115: [11, 7], 116: [13, 2], 117: [0, 2], 118: [17, 16], 119: [4, 1], 120: [13, 14], 121: [10, 6], 122: [9, 0], 123: [1, 12], 124: [5, 2], 125: [3, 0], 126: [16, 6], 127: [0, 17], 128: [0, 2], 129: [2, 10], 130: [5, 6], 131: [12, 11], 132: [10, 15], 133: [17, 0], 134: [5, 9], 135: [10, 0], 136: [15, 13], 137: [18, 13], 138: [13, 3], 139: [3, 18], 140: [19, 18], 141: [14, 3], 142: [4, 12], 143: [12, 15], 144: [11, 13], 145: [3, 19], 146: [8, 9], 147: [12, 17], 148: [7, 13], 149: [7, 4], 150: [11, 18], 151: [11, 10], 152: [0, 12], 153: [19, 12], 154: [10, 11], 155: [13, 16], 156: [3, 9], 157: [9, 4], 158: [19, 4], 159: [16, 6], 160: [16, 13], 161: [9, 8], 162: [1, 12], 163: [8, 0], 164: [18, 16], 165: [7, 5], 166: [19, 8], 167: [1, 3], 168: [1, 8], 169: [5, 10], 170: [14, 12], 171: [1, 16], 172: [3, 19], 173: [13, 19], 174: [1, 4], 175: [18, 6], 176: [5, 14], 177: [7, 8], 178: [14, 2], 179: [9, 5], 180: [0, 4], 181: [0, 15], 182: [12, 10], 183: [9, 14], 184: [16, 9], 185: [14, 0], 186: [5, 9], 187: [15, 6], 188: [17, 8], 189: [7, 4], 190: [15, 9], 191: [19, 7], 192: [17, 2], 193: [0, 2], 194: [12, 17], 195: [11, 10], 196: [13, 1], 197: [6, 3], 198: [14, 6], 199: [5, 2], 200: [18, 4], 201: [3, 6], 202: [13, 0], 203: [15, 12], 204: [2, 12], 205: [15, 5], 206: [0, 7], 207: [3, 17], 208: [13, 14], 209: [11, 6], 210: [8, 7], 211: [8, 7], 212: [4, 13], 213: [14, 3], 214: [4, 9], 215: [16, 7], 216: [13, 15], 217: [11, 16], 218: [12, 11], 219: [3, 10], 220: [3, 9], 221: [10, 4], 222: [14, 6], 223: [15, 13], 224: [13, 15], 225: [18, 13], 226: [14, 10], 227: [15, 2], 228: [11, 2], 229: [12, 13], 230: [5, 12], 231: [0, 13], 232: [6, 13], 233: [3, 10], 234: [16, 5], 235: [12, 17], 236: [12, 2], 237: [10, 11], 238: [6, 3], 239: [13, 14], 240: [1, 13], 241: [17, 8], 242: [16, 12], 243: [9, 13], 244: [12, 11], 245: [1, 14], 246: [1, 9], 247: [18, 11], 248: [11, 13], 249: [16, 14], 250: [14, 9], 251: [16, 3], 252: [3, 12], 253: [8, 13], 254: [10, 6], 255: [2, 8], 256: [15, 3], 257: [17, 15], 258: [9, 18], 259: [14, 13], 260: [8, 1], 261: [14, 18], 262: [3, 7], 263: [17, 19], 264: [4, 5], 265: [18, 15], 266: [10, 11], 267: [5, 15], 268: [1, 2], 269: [10, 2], 270: [6, 19], 271: [13, 17], 272: [16, 7], 273: [2, 7], 274: [1, 9], 275: [19, 6], 276: [4, 10], 277: [15, 17], 278: [16, 2], 279: [7, 1], 280: [9, 13], 281: [9, 2], 282: [17, 5], 283: [16, 3], 284: [5, 13], 285: [15, 6], 286: [18, 6], 287: [9, 0], 288: [2, 19], 289: [2, 7], 290: [16, 10], 291: [2, 0], 292: [5, 12], 293: [13, 3], 294: [10, 2], 295: [4, 1], 296: [3, 15], 297: [3, 7], 298: [5, 1], 299: [0, 5], 300: [12, 17]}
+INFO:----------fix client id is :group is 3: [1, 5] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---0-----,select client num is-----0-select id :--[1, 5]----------------------------------
+
+-------------Round number: 0-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3127
+Averaged Test Accurancy: 0.0608
+Averaged Test AUC: 0.4337
+Std Test Accurancy: 0.0671
+Std Test AUC: 0.1842
+------------------------- time cost ------------------------- 13.21505880355835
+INFO:----------fix client id is :group is 3: [1, 5] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---1-----,select client num is-----1-select id :--[1, 5]----------------------------------
+
+-------------Round number: 1-------------
+
+Evaluate global model
+Averaged Train Loss: 3.2905
+Averaged Test Accurancy: 0.0979
+Averaged Test AUC: 0.4934
+Std Test Accurancy: 0.2170
+Std Test AUC: 0.2550
+------------------------- time cost ------------------------- 13.046164989471436
+INFO:----------fix client id is :group is 3: [1, 5] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---2-----,select client num is-----2-select id :--[1, 5]----------------------------------
+
+-------------Round number: 2-------------
+
+Evaluate global model
+Averaged Train Loss: 3.3692
+Averaged Test Accurancy: 0.0979
+Averaged Test AUC: 0.4996
+Std Test Accurancy: 0.2170
+Std Test AUC: 0.2505
+------------------------- time cost ------------------------- 15.108337879180908
+INFO:----------fix client id is :group is 3: [1, 5] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---3-----,select client num is-----3-select id :--[1, 5]----------------------------------
+
+-------------Round number: 3-------------
+
+Evaluate global model
+Averaged Train Loss: 3.5913
+Averaged Test Accurancy: 0.0979
+Averaged Test AUC: 0.5037
+Std Test Accurancy: 0.2170
+Std Test AUC: 0.2502
+------------------------- time cost ------------------------- 14.729362964630127
+
+Best accuracy.
+0.09789810372401188
+
+Average time cost per round.
+14.29462194442749
+File path: ../results/mnist_SCAFFOLD_test_0.h5
+
+Average time cost: 57.47s.
+Length:  4
+std for best accurancy: 0.0
+mean for best accurancy: 0.09789810372401188
+All done!
+
+Storage on cpu
+-------------------------------------------------------------------------------
+Total Tensors: 28519274 	Used Memory: 104.42M
+-------------------------------------------------------------------------------

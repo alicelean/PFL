@@ -13,12 +13,10 @@ class FedALA(Server):
         # select slow clients
         self.set_slow_clients()
 
-        #设置client数据
-        self.client_batch_size = args.batch_size
-        self.client_learning_rate = args.local_learning_rate
-        self.client_local_epochs = args.local_epochs
+        self.method = "FedALA"
+
         self.set_clients(clientALA)
-        self.fix_ids=False
+
 
 
 
@@ -27,7 +25,7 @@ class FedALA(Server):
 
         # self.load_model()
         self.Budget = []
-        self.method="FedALA"
+
 
 
     def train(self):
