@@ -2,7 +2,8 @@ import numpy as np
 import os
 import torch
 import sys
-Programpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from utils.vars import Programpath
+
 def getlabelvector(label):
     '''
     将label变成一个10维向量，在对应index中的数字为标签index的样本个数

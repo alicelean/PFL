@@ -9,11 +9,14 @@ import pandas as pd
 from utils.data_utils import read_client_data
 from utils.dlg import DLG
 import ast
-Programpath="/Users/alice/Desktop/python/PFL/"
-mpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-Programpath = "/".join(mpath.split("/")[:-1])
-print("serverbase",mpath,Programpath)
+# Programpath="/Users/alice/Desktop/python/PFL/"
+# mpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Programpath = "/".join(mpath.split("/")[:-1])
+# print("serverbase",mpath,Programpath)
 
+from utils.vars import Programpath
+
+#Programpath=" /home/alice/Desktop/python/PFL/"
 class Server(object):
     def __init__(self, args, times,filedir):
         #记录数据文件的位置，同一个数据集不同程度的数据分布差异
@@ -26,6 +29,7 @@ class Server(object):
         self.client_learning_rate = args.local_learning_rate
         self.client_local_epochs = args.local_epochs
         self.fix_ids = False
+        self.programpath=Programpath
 
 
 

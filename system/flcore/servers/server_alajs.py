@@ -4,9 +4,9 @@ from flcore.servers.serverbase import Server
 from utils.distance import jensen_shannon_distance
 from utils.data_utils1 import read_client_data_new
 from threading import Thread
-mpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-Programpath = "/".join(mpath.split("/")[:-1])
-print(mpath,Programpath)
+# mpath = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Programpath = "/".join(mpath.split("/")[:-1])
+
 import random
 
 import pandas as pd
@@ -42,9 +42,10 @@ class ALAJS(Server):
         #1:minist,
         redf = pd.DataFrame(columns=["dataset","global_rounds","client_enpoches","client_batch_size","client_learning_rate","ratio", "client_num", "Dirichlet alpha"])
         redf.loc[len(redf) + 1] = ["dataset","global_rounds","client_enpoches","client_batch_size","client_learning_rate","ratio", "client_num", "Dirichlet alpha"]
-        redf.loc[len(redf) + 1] = [self.filedir,self.global_rounds,self.client_local_epochs,self.client_batch_size,self.client_learning_rate,self.join_ratio, self.num_clients, 0.1]
-        path = Programpath+"/res/"+self.method+"/canshu.csv"
+        redf.loc[len(redf) + 1] = [self.dataset,self.global_rounds,self.client_local_epochs,self.client_batch_size,self.client_learning_rate,self.join_ratio, self.num_clients, 0.1]
+        path = self.programpath+"/res/"+self.method+"/"+self.dataset+"_canshu.csv"
         redf.to_csv(path, mode='a', header=False)
+        print(path)
         # ---------------------------------------
         select_id=[]
         for i in range(self.global_rounds+1):
@@ -103,20 +104,22 @@ class ALAJS(Server):
 
         # 写入idlist----保证整个客户端选择一致，螚更好的判别两种算法的差异---------------------------------------
         redf = pd.DataFrame(columns=["global_rounds", "id_list"])
+        redf.loc[len(redf) + 1] =["*********************","*********************"]
         redf.loc[len(redf) + 1] = ["global_rounds", "id_list"]
         for v in range(len(select_id)):
             redf.loc[len(redf) + 1] = select_id[v]
-        idpath = Programpath+"/res/selectids/select_client_ids" + str(self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+        idpath = self.programpath+"/res/selectids/"+self.dataset+"_select_client_ids" + str(self.num_clients) + "_" + str(self.join_ratio) + ".csv"
         redf.to_csv(idpath, mode='a', header=False)
-
+        print(idpath)
         # --------------训练过程中的全局模型的acc
         colum_name = ["case", "method", "group", "Loss", "Accurancy", "AUC", "Std Test Accurancy", "Std Test AUC"]
         redf = pd.DataFrame(columns=colum_name)
         redf.loc[len(redf) + 1] = colum_name
         for i in range(len(colum_value)):
             redf.loc[len(redf) + 1] = colum_value[i]
-        path = Programpath+"/res/"+self.method+"/acuuray.csv"
-        redf.to_csv(path, mode='a', header=False)
+        accpath = self.programpath+"/res/"+self.method+"/"+self.dataset+"_acc.csv"
+        print(accpath)
+        redf.to_csv(accpath, mode='a', header=False)
 
         #-----------------------------------------------------------------------------------------------
 
