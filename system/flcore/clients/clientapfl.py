@@ -9,8 +9,8 @@ from sklearn.preprocessing import label_binarize
 from sklearn import metrics
 
 class clientAPFL(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id, traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata, train_samples, test_samples, **kwargs)
 
         self.alpha = args.alpha
         self.model_per = copy.deepcopy(self.model)

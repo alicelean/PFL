@@ -8,8 +8,8 @@ import copy
 
 
 class clientMTL(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id, traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata, train_samples, test_samples, **kwargs)
         
         self.omega = None
         self.W_glob = None

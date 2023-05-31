@@ -27,14 +27,44 @@ class FedMTL(Server):
 
 
     def train(self):
+        print(f"*************************** {self.method} train ***************************")
+        self.writeparameters()
+        colum_value = []
+        select_id = []
+
+        if self.fix_ids:
+            file_path = self.programpath + "/res/selectids/" + self.dataset + "_select_client_ids" + str(
+                self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+            self.select_idlist = self.read_selectInfo(file_path)
         for i in range(self.global_rounds+1):
-            self.selected_clients = self.select_clients()
+
+            print(f"*************************** 2.server {self.method} select_clients ***************************\n")
+
+            # ----2.设置不同的选择方式---------------------------------------------------
+            if self.fix_ids:
+                self.selected_clients = self.select_clients(i)
+            else:
+                self.selected_clients = self.select_clients()
+                # ----------------------3.写入每次选择的client的数据----------------------------
+                ids = []
+                for client in self.selected_clients:
+                    ids.append(client.id)
+                select_id.append([i, ids])
+                # -------------------------------------------------------------------------
+
+            # -------------------------------------------------------------------------
+
             self.aggregate_parameters()
 
             if i%self.eval_gap == 0:
                 print(f"\n-------------Round number: {i}-------------")
                 print("\nEvaluate personalized models")
-                self.evaluate()
+                res = self.evaluate(i)
+                # 记录当前模型的状态，loss,accuracy等
+                resc = [self.filedir]
+                for line in res:
+                    resc.append(line)
+                colum_value.append(resc)
                 
             for idx, client in enumerate(self.selected_clients):
                 start_time = time.time()

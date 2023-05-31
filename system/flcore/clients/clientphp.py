@@ -7,8 +7,8 @@ from flcore.clients.clientbase import Client
 
 
 class clientPHP(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id, traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata, train_samples, test_samples, **kwargs)
 
         self.mu = args.mu / args.global_rounds
         self.lamda = args.lamda

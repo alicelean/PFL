@@ -10,7 +10,8 @@ from collections import defaultdict
 class FedProto(Server):
     def __init__(self, args, times):
         super().__init__(args, times)
-
+        self.fix_ids = True
+        self.method = "FedProto"
         # select slow clients
         self.set_slow_clients()
         self.set_clients(clientProto)
@@ -25,14 +26,43 @@ class FedProto(Server):
 
 
     def train(self):
+        print(f"*************************** {self.method} train ***************************")
+        self.writeparameters()
+        colum_value = []
+        select_id = []
+
+        if self.fix_ids:
+            file_path = self.programpath + "/res/selectids/" + self.dataset + "_select_client_ids" + str(
+                self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+            self.select_idlist = self.read_selectInfo(file_path)
         for i in range(self.global_rounds+1):
             s_t = time.time()
-            self.selected_clients = self.select_clients()
+
+            print(f"*************************** 2.server {self.method} select_clients ***************************\n")
+
+            # ----2.设置不同的选择方式---------------------------------------------------
+            if self.fix_ids:
+                self.selected_clients = self.select_clients(i)
+            else:
+                self.selected_clients = self.select_clients()
+                # ----------------------3.写入每次选择的client的数据----------------------------
+                ids = []
+                for client in self.selected_clients:
+                    ids.append(client.id)
+                select_id.append([i, ids])
+                # -------------------------------------------------------------------------
+
+            # -------------------------------------------------------------------------
 
             if i%self.eval_gap == 0:
                 print(f"\n-------------Round number: {i}-------------")
                 print("\nEvaluate personalized models")
-                self.evaluate()
+                res = self.evaluate(i)
+                # 记录当前模型的状态，loss,accuracy等
+                resc = [self.filedir]
+                for line in res:
+                    resc.append(line)
+                colum_value.append(resc)
 
             for client in self.selected_clients:
                 client.train()
@@ -88,7 +118,7 @@ class FedProto(Server):
             self.uploaded_ids.append(client.id)
             self.uploaded_protos.append(client.protos)
 
-    def evaluate(self, acc=None, loss=None):
+    def evaluate(self, round,acc=None, loss=None):
         stats = self.test_metrics()
         stats_train = self.train_metrics()
 
@@ -110,6 +140,7 @@ class FedProto(Server):
         print("Averaged Test Accurancy: {:.4f}".format(test_acc))
         # self.print_(test_acc, train_acc, train_loss)
         print("Std Test Accurancy: {:.4f}".format(np.std(accs)))
+        return[self.method, round, train_loss, test_acc, 0, np.std(accs), 0]
 
     # fine-tuning on new clients
     def fine_tuning_new_clients(self):

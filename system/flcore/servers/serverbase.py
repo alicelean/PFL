@@ -18,7 +18,7 @@ from utils.vars import Programpath
 
 #Programpath=" /home/alice/Desktop/python/PFL/"
 class Server(object):
-    def __init__(self, args, times,filedir):
+    def __init__(self, args, times,filedir="test"):
         #记录数据文件的位置，同一个数据集不同程度的数据分布差异
         self.filedir=filedir
         self.method =None
@@ -31,7 +31,8 @@ class Server(object):
         self.fix_ids = False
         self.programpath=Programpath
 
-
+        # 记录所有的weights
+        self.allweights = []
 
 
 
@@ -86,10 +87,13 @@ class Server(object):
         self.eval_new_clients = False
         self.fine_tuning_epoch = args.fine_tuning_epoch
 
-    def set_clients(self, clientObj):
+    def set_clients_origin(self, clientObj):
+        print("**************************1.INfo,serverbase set_clients ,init data********************")
+        samples=0
         for i, train_slow, send_slow in zip(range(self.num_clients), self.train_slow_clients, self.send_slow_clients):
             train_data = read_client_data(self.dataset, i, is_train=True)
             test_data = read_client_data(self.dataset, i, is_train=False)
+            samples+=len(train_data)+len(test_data)
             client = clientObj(self.args, 
                             id=i, 
                             train_samples=len(train_data), 
@@ -97,6 +101,13 @@ class Server(object):
                             train_slow=train_slow, 
                             send_slow=send_slow)
             self.clients.append(client)
+
+        for client in self.clients:
+            client.sizerate=(client.train_samples+client.test_samples)/samples
+
+            #print(f"client {client.id} ,sizerate is {client.sizerate}")
+        self.writeclientInfo()
+
 
     # random select slow clients
     def select_slow_clients(self, slow_rate):
@@ -132,22 +143,33 @@ class Server(object):
                 if c.id in self.select_idlist[round]:
                     selected_clients.append(c)
                     ids.append(c.id)
-            print(f"INFO:----------fix client id is :group is {round}:", ids, type(selected_clients[0]))
+            print(f"INFO:----------fix client id is :group is {round} select id list is:", ids, type(selected_clients[0]))
             return selected_clients
 
 
     def send_models(self):
+        '''
+        将globalmodel复制给本地模型,并记录time cost
+        Returns:
+
+        '''
         assert (len(self.clients) > 0)
 
         for client in self.clients:
             start_time = time.time()
-            
-            client.set_parameters(self.global_model)
 
+            #更新模型参数，将globalmodel复制给本地模型
+            client.set_parameters(self.global_model)
             client.send_time_cost['num_rounds'] += 1
             client.send_time_cost['total_cost'] += 2 * (time.time() - start_time)
 
     def receive_models(self):
+        '''
+        根据设定的客户端丢失率、时间阈值和客户端的训练时间消耗，
+        选择符合条件的活跃客户端，并收集其模型和样本权重。最后，对样本权重进行归一化，以便后续在联邦学习中使用。
+        Returns:
+
+        '''
         assert (len(self.selected_clients) > 0)
 
         active_clients = random.sample(
@@ -172,6 +194,20 @@ class Server(object):
         for i, w in enumerate(self.uploaded_weights):
             self.uploaded_weights[i] = w / tot_samples
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def aggregate_parameters(self):
         assert (len(self.uploaded_models) > 0)
 
@@ -185,6 +221,8 @@ class Server(object):
     def add_parameters(self, w, client_model):
         for server_param, client_param in zip(self.global_model.parameters(), client_model.parameters()):
             server_param.data += client_param.data.clone() * w
+
+
 
     def save_global_model(self):
         model_path = os.path.join("models", self.dataset)
@@ -265,11 +303,36 @@ class Server(object):
     def evaluate(self, group, acc=None, loss=None):
         stats = self.test_metrics()
         stats_train = self.train_metrics()
-        test_acc = sum(stats[2]) * 1.0 / sum(stats[1])
-        test_auc = sum(stats[3]) * 1.0 / sum(stats[1])
-        train_loss = sum(stats_train[2]) * 1.0 / sum(stats_train[1])
-        accs = [a / n for a, n in zip(stats[2], stats[1])]
-        aucs = [a / n for a, n in zip(stats[3], stats[1])]
+        try:
+            test_acc = sum(stats[2]) * 1.0 / sum(stats[1])
+        except ZeroDivisionError:
+            test_acc = 0.0
+
+        try:
+            test_auc = sum(stats[3]) * 1.0 / sum(stats[1])
+        except ZeroDivisionError:
+            test_auc = 0.0
+
+        try:
+            train_loss = sum(stats_train[2]) * 1.0 / sum(stats_train[1])
+        except ZeroDivisionError:
+            train_loss = 0.0
+
+        try:
+            accs = [a / n for a, n in zip(stats[2], stats[1])]
+        except ZeroDivisionError:
+            accs = [0.0] * len(stats[2])
+
+        try:
+            aucs = [a / n for a, n in zip(stats[3], stats[1])]
+        except ZeroDivisionError:
+            aucs = [0.0] * len(stats[3])
+
+        # test_acc = sum(stats[2]) * 1.0 / sum(stats[1])
+        # test_auc = sum(stats[3]) * 1.0 / sum(stats[1])
+        # train_loss = sum(stats_train[2]) * 1.0 / sum(stats_train[1])
+        # accs = [a / n for a, n in zip(stats[2], stats[1])]
+        # aucs = [a / n for a, n in zip(stats[3], stats[1])]
 
         if acc == None:
             self.rs_test_acc.append(test_acc)
@@ -396,9 +459,9 @@ class Server(object):
 
         return ids, num_samples, tot_correct, tot_auc
     #add
-    def read_selectInfo(self):
+    def read_selectInfo(self,file_path):
         print("INFO:---------Using fix select id list--------------------------------")
-        file_path = Programpath+"/res/selectids/select_client_ids20_0.1.csv"
+
         data = pd.read_csv(file_path)
         rounds = data['global_rounds'].tolist()
         # print(data['ids'].tolist()[0])
@@ -437,5 +500,61 @@ class Server(object):
         # self.print_(test_acc, train_acc, train_loss)
         print("Std Test Accurancy: {:.4f}".format(np.std(accs)))
         print("Std Test AUC: {:.4f}".format(np.std(aucs)))
+    def writeparameters(self):
+       # -----------1.写入超参数
+       # 1:minist,
+       redf = pd.DataFrame(
+           columns=["dataset", "global_rounds", "client_enpoches", "client_batch_size", "client_learning_rate", "ratio",
+                    "client_num", "Dirichlet alpha"])
+       redf.loc[len(redf) + 1] = ["dataset", "global_rounds", "client_enpoches", "client_batch_size",
+                                  "client_learning_rate", "ratio", "client_num", "Dirichlet alpha"]
+       redf.loc[len(redf) + 1] = [self.dataset, self.global_rounds, self.client_local_epochs, self.client_batch_size,
+                                  self.client_learning_rate, self.join_ratio, self.num_clients, 0.1]
+       path = self.programpath + "/res/" + self.method + "/" + self.dataset + "_canshu.csv"
+       redf.to_csv(path, mode='a', header=False)
+       print("-------------------------------------------------------------------------write exe canshu,txt path is",path)
+       # ---------------------------------------
+
+    def writeclientInfo(self):
+        '''
+        写入设置的clients数据信息
+        Returns:
+
+        '''
+        clientinfo = []
+        dataname = ["id", "train_len", "test_len","sizerate", "train_slow", "send_slow","label"]
+        path = self.programpath + "res/" + self.method + "/clientsInfo.csv"
+        for c in self.clients:
+            clientinfo.append([c.id, c.train_samples, c.test_samples,c.sizerate, c.train_slow, c.send_slow,c.label])
+        redf = pd.DataFrame(columns=dataname)
+        for value in clientinfo:
+            redf.loc[len(redf) + 1] = value
+        redf.to_csv(path, mode='a', header=False)
+
+    def set_clients(self, clientObj):
+        print("**************************1.INfo,set_clients ,init data********************")
+        samples = 0
+        for i, train_slow, send_slow in zip(range(self.num_clients), self.train_slow_clients, self.send_slow_clients):
+            train_data = read_client_data(self.dataset, i, is_train=True)
+            test_data = read_client_data(self.dataset, i, is_train=False)
+            samples += len(train_data) + len(test_data)
+            client = clientObj(self.args,
+                               id=i,
+                               traindata=train_data,
+                               testsdata=test_data,
+                               train_samples=len(train_data),
+                               test_samples=len(test_data),
+                               train_slow=train_slow,
+                               send_slow=send_slow)
+            self.clients.append(client)
+
+        for client in self.clients:
+            client.setlabel()
+            client.sizerate = (client.train_samples + client.test_samples) / samples
+        # 根据label 来计算distance
+        # self.setdistance()
+
+        # print(f"client {client.id} ,sizerate is {client.sizerate}")
+        self.writeclientInfo()
 
 

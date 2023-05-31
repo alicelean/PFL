@@ -15,7 +15,7 @@ class Client(object):
     Base class for clients in federated learning.
     """
 
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
+    def __init__(self, args, id,traindata,testsdata, train_samples, test_samples, **kwargs):
         self.model = copy.deepcopy(args.model)
         self.algorithm = args.algorithm
         self.dataset = args.dataset
@@ -29,6 +29,12 @@ class Client(object):
         self.batch_size = args.batch_size
         self.learning_rate = args.local_learning_rate
         self.local_epochs = args.local_epochs
+        self.sizerate = 0
+
+        self.traindata = traindata
+        self.testsdata = testsdata
+        self.label = [0 for i in range(10)]
+        self.jsweight=0
 
         # check BatchNorm
         self.has_BatchNorm = False
@@ -67,6 +73,14 @@ class Client(object):
         return DataLoader(test_data, batch_size, drop_last=False, shuffle=False)
         
     def set_parameters(self, model):
+        '''
+        将model 复制给本地模型
+        Args:
+            model:
+
+        Returns:
+
+        '''
         for new_param, old_param in zip(model.parameters(), self.model.parameters()):
             old_param.data = new_param.data.clone()
 
@@ -81,6 +95,10 @@ class Client(object):
 
     def test_metrics(self):
         testloaderfull = self.load_test_data()
+        if testloaderfull is None:
+            print("client test_metrics Error: Failed to load test data.")
+            return None
+
         # self.model = self.load_model('model')
         # self.model.to(self.device)
         self.model.eval()
@@ -89,7 +107,10 @@ class Client(object):
         test_num = 0
         y_prob = []
         y_true = []
-        
+        # 记录NaN值的数量
+        nan_x=0
+        nan_y=0
+        nan_output=0
         with torch.no_grad():
             for x, y in testloaderfull:
                 if type(x) == type([]):
@@ -97,7 +118,20 @@ class Client(object):
                 else:
                     x = x.to(self.device)
                 y = y.to(self.device)
+
+                # 检查输入数据中是否存在NaN值
+                if torch.isnan(x).any() :
+                    nan_x += 1
+                    continue
+                if torch.isnan(y).any():
+                    nan_y += 1
+
                 output = self.model(x)
+
+                # 检查模型输出中是否存在NaN值
+                if torch.isnan(output).any():
+                    nan_output += 1
+                    continue
 
                 test_acc += (torch.sum(torch.argmax(output, dim=1) == y)).item()
                 test_num += y.shape[0]
@@ -110,16 +144,24 @@ class Client(object):
                 if self.num_classes == 2:
                     lb = lb[:, :2]
                 y_true.append(lb)
-
         # self.model.cpu()
         # self.save_model(self.model, 'model')
+        nan_count=nan_x+nan_y+nan_output
+        if nan_count > 0:
+            nan_ratio = nan_count / len(testloaderfull)  # 计算NaN值在测试数据中的比例
+            print(f"client {self.id} ,nan_x {nan_x},nan_y {nan_y},nan_output {nan_output},total NaN value ratio in test data: {nan_ratio:.2%}")
+        if nan_count!=len(testloaderfull) :
+            y_prob = np.concatenate(y_prob, axis=0)
+            y_true = np.concatenate(y_true, axis=0)
 
-        y_prob = np.concatenate(y_prob, axis=0)
-        y_true = np.concatenate(y_true, axis=0)
+            auc = metrics.roc_auc_score(y_true, y_prob, average='micro')
 
-        auc = metrics.roc_auc_score(y_true, y_prob, average='micro')
-        
-        return test_acc, test_num, auc
+            return test_acc, test_num, auc
+        else:
+            print(f"ERROR:testloaderfull {len(testloaderfull)},nan_count {nan_count}, test_num {test_num}")
+            return 0, test_num, 0
+
+
 
     def train_metrics(self):
         trainloader = self.load_train_data()
@@ -178,3 +220,15 @@ class Client(object):
     # @staticmethod
     # def model_exists():
     #     return os.path.exists(os.path.join("models", "server" + ".pt"))
+
+    def setlabel(self):
+        # train_data = [(x, y) for x, y in zip(X_train, y_train)]
+        label = []
+        for data in self.traindata:
+            label.append(data[1].tolist())
+        for data in self.testsdata:
+            label.append(data[1].tolist())
+        for i in label:
+            self.label[i] += 1
+        #print(f"client base client  {self.id} label is {self.label}")
+

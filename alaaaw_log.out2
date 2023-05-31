@@ -1,0 +1,68 @@
+/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so, 6): Library not loaded: @rpath/libpng16.16.dylib
+  Referenced from: /Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so
+  Reason: Incompatible library version: image.so requires version 56.0.0 or later, but libpng16.16.dylib provides version 54.0.0'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+
+cuda is not avaiable.
+
+==================================================
+Algorithm: FedALA_AAW
+Local batch size: 10
+Local steps: 1
+Local learing rate: 0.005
+Local learing rate decay: False
+Total number of clients: 20
+Clients join in each round: 0.5
+Clients randomly join: False
+Client drop rate: 0.0
+Client select regarding time: False
+Running times: 1
+Dataset: Cifar10
+Number of classes: 10
+Backbone: cnn
+Using device: cpu
+Using DP: False
+Auto break: False
+Global rounds: 20
+DLG attack: False
+Total number of new clients: 0
+Fine tuning epoches on new clients: 0
+==================================================
+
+============= Running time: 0th =============
+Creating server and clients ...
+FedAvgCNN(
+  (conv1): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=1600, out_features=512, bias=True)
+    (1): ReLU(inplace=True)
+  )
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+INFO:------------------------args.algorithm is:FedALA_AAW-----------------------
+**************************1.INfo,set_clients ,init data********************
+Traceback (most recent call last):
+  File "/Users/alice/Desktop/python/PFL/system/main.py", line 462, in <module>
+    run(args)
+  File "/Users/alice/Desktop/python/PFL/system/main.py", line 271, in run
+    server = FedALA_AAW(args, i, filedir)
+  File "/Users/alice/Desktop/python/PFL/system/flcore/servers/serverala_aaw.py", line 19, in __init__
+    self.set_clients(clientALA_AAW)
+  File "/Users/alice/Desktop/python/PFL/system/flcore/servers/serverala_aaw.py", line 184, in set_clients
+    train_data = read_client_data(self.dataset, i, is_train=True)
+  File "/Users/alice/Desktop/python/PFL/system/utils/data_utils.py", line 37, in read_client_data
+    train_data = read_data(dataset, idx, is_train)
+  File "/Users/alice/Desktop/python/PFL/system/utils/data_utils.py", line 15, in read_data
+    with open(train_file, 'rb') as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/alice/Desktop/python/PFL//dataset/Cifar10/train/0.npz'

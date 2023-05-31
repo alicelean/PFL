@@ -8,8 +8,8 @@ from utils.ALA import ALA
 
 
 class clientALA(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id,traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata,train_samples, test_samples, **kwargs)
 
         self.eta = args.eta
         self.rand_percent = args.rand_percent

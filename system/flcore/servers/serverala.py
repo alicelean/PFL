@@ -16,7 +16,7 @@ class FedALA(Server):
         self.method = "FedALA"
 
         self.set_clients(clientALA)
-
+        self.fix_ids = False
 
 
 
@@ -29,39 +29,33 @@ class FedALA(Server):
 
 
     def train(self):
-        if self.fix_ids:
-            self.select_idlist = self.read_selectInfo()
-
+        self.writeparameters()
         colum_value = []
-        # -----------写入超参数
-        #1:minist,
-        redf = pd.DataFrame(columns=["dataset","global_rounds","client_enpoches","client_batch_size","client_learning_rate","ratio", "client_num", "Dirichlet alpha"])
-        redf.loc[len(redf) + 1] = ["dataset","global_rounds","client_enpoches","client_batch_size","client_learning_rate","ratio", "client_num", "Dirichlet alpha"]
-        redf.loc[len(redf) + 1] = [self.filedir,self.global_rounds,self.client_local_epochs,self.client_batch_size,self.client_learning_rate,self.join_ratio, self.num_clients, 0.1]
-        path = Programpath+"/res/"+self.method+"/canshu.csv"
-        redf.to_csv(path, mode='a', header=False)
-        # ---------------------------------------
-        select_id=[]
+        select_id = []
+
+        if self.fix_ids:
+            file_path = self.programpath + "/res/selectids/" + self.dataset + "_select_client_ids" + str(
+                self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+            self.select_idlist = self.read_selectInfo(file_path)
+
+
         for i in range(self.global_rounds+1):
             s_t = time.time()
-            #----设置不同的选择方式
+
+            # ----2.设置不同的选择方式---------------------------------------------------
             if self.fix_ids:
-                self.selected_clients = self.select_clients(self.global_rounds)
+                self.selected_clients = self.select_clients(i)
             else:
-                #随机选择
                 self.selected_clients = self.select_clients()
+                # ----------------------3.写入每次选择的client的数据----------------------------
+                ids = []
+                for client in self.selected_clients:
+                    ids.append(client.id)
+                select_id.append([i, ids])
+                # -------------------------------------------------------------------------
 
+            # -------------------------------------------------------------------------
 
-            # ----------------------写入每次选择的client的数据-----------------------
-            ids = []
-            for client in self.selected_clients:
-                ids.append(client.id)
-                # clientvalue.append(
-                #     [rouds, client.id, client.client_label, client.train_samples, client.test_samples, client.distance,
-                #      client.local_steps, client.learning_rate, client.last_loss])
-            print(f"INFO:-----------------global_rounds is---{i}-----,select client num is-----{len(select_id)}-select id :--{ids}----------------------------------")
-            select_id.append([i, ids])
-            #---------------------------------------------------------------------
 
 
 
@@ -96,24 +90,6 @@ class FedALA(Server):
             if self.auto_break and self.check_done(acc_lss=[self.rs_test_acc], top_cnt=self.top_cnt):
                 break
 
-        # 写入idlist----保证整个客户端选择一致，螚更好的判别两种算法的差异---------------------------------------
-        redf = pd.DataFrame(columns=["global_rounds", "id_list"])
-        redf.loc[len(redf) + 1] = ["global_rounds", "id_list"]
-        for v in range(len(select_id)):
-            redf.loc[len(redf) + 1] = select_id[v]
-        idpath = Programpath+"/res/selectids/select_client_ids" + str(self.num_clients) + "_" + str(self.join_ratio) + ".csv"
-        redf.to_csv(idpath, mode='a', header=False)
-
-        # --------------训练过程中的全局模型的acc
-        colum_name = ["case", "method", "group", "Loss", "Accurancy", "AUC", "Std Test Accurancy", "Std Test AUC"]
-        redf = pd.DataFrame(columns=colum_name)
-        redf.loc[len(redf) + 1] = colum_name
-        for i in range(len(colum_value)):
-            redf.loc[len(redf) + 1] = colum_value[i]
-        path = Programpath+"/res/"+self.method+"/acuuray.csv"
-        redf.to_csv(path, mode='a', header=False)
-
-        #-----------------------------------------------------------------------------------------------
 
         print("\nBest accuracy.")
         # self.print_(max(self.rs_test_acc), max(
@@ -122,8 +98,28 @@ class FedALA(Server):
         print("\nAverage time cost per round.")
         print(sum(self.Budget[1:])/len(self.Budget[1:]))
 
-
-
+        # 6.写入idlist----保证整个客户端选择一致，更好的判别两种算法的差异---------------------------------------
+        if not self.fix_ids:
+            redf = pd.DataFrame(columns=["global_rounds", "id_list"])
+            redf.loc[len(redf) + 1] = ["*********************", "*********************"]
+            redf.loc[len(redf) + 1] = ["global_rounds", "id_list"]
+            for v in range(len(select_id)):
+                redf.loc[len(redf) + 1] = select_id[v]
+            idpath = self.programpath + "/res/selectids/" + self.dataset + "_select_client_ids" + str(
+                self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+            redf.to_csv(idpath, mode='a', header=False)
+            print("write select id list ", idpath)
+        # --------------7.训练过程中的全局模型的acc
+        colum_name = ["case", "method", "group", "Loss", "Accurancy", "AUC", "Std Test Accurancy", "Std Test AUC"]
+        redf = pd.DataFrame(columns=colum_name)
+        redf.loc[len(redf) + 1] = colum_name
+        for i in range(len(colum_value)):
+            redf.loc[len(redf) + 1] = colum_value[i]
+        accpath = self.programpath + "/res/" + self.method + "/" + self.dataset + "_acc.csv"
+        print("success training write acc txt", accpath)
+        redf.to_csv(accpath, mode='a', header=False)
+        print(colum_value)
+        # -----------------------------------------------------------------------------------------------
 
         self.save_results()
         self.save_global_model()

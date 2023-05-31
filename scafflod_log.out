@@ -1,0 +1,1293 @@
+/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so, 6): Library not loaded: @rpath/libpng16.16.dylib
+  Referenced from: /Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so
+  Reason: Incompatible library version: image.so requires version 56.0.0 or later, but libpng16.16.dylib provides version 54.0.0'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+
+cuda is not avaiable.
+
+==================================================
+Algorithm: SCAFFOLD
+Local batch size: 10
+Local steps: 1
+Local learing rate: 0.005
+Local learing rate decay: False
+Total number of clients: 20
+Clients join in each round: 0.5
+Clients randomly join: False
+Client drop rate: 0.0
+Client select regarding time: False
+Running times: 1
+Dataset: Cifar10
+Number of classes: 10
+Backbone: cnn
+Using device: cpu
+Using DP: False
+Auto break: False
+Global rounds: 100
+DLG attack: False
+Total number of new clients: 0
+Fine tuning epoches on new clients: 0
+==================================================
+
+============= Running time: 0th =============
+Creating server and clients ...
+FedAvgCNN(
+  (conv1): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=1600, out_features=512, bias=True)
+    (1): ReLU(inplace=True)
+  )
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+INFO:------------------------args.algorithm is:SCAFFOLD-----------------------
+**************************1.INfo,set_clients ,init data********************
+
+Join ratio / total clients: 0.5 / 20
+Finished creating server and clients.
+*************************** server_sccafoold train ***************************
+-------------------------------------------------------------------------write exe canshu,txt path is /Users/alice/Desktop/python/PFL//res/SCAFFOLD/Cifar10_canshu.csv
+INFO:---------Using fix select id list--------------------------------
+{0: [1, 13, 4, 12, 2, 3, 15, 9, 16, 7], 1: [19, 3, 9, 16, 14, 18, 1, 2, 4, 17], 2: [11, 15, 8, 1, 7, 10, 0, 17, 5, 6], 3: [7, 12, 4, 2, 10, 16, 8, 14, 15, 9], 4: [17, 14, 18, 10, 6, 0, 16, 19, 15, 2], 5: [0, 7, 17, 8, 11, 10, 5, 3, 18, 2], 6: [8, 0, 1, 4, 12, 15, 14, 9, 2, 10], 7: [4, 17, 7, 6, 16, 13, 18, 9, 0, 2], 8: [7, 1, 15, 16, 14, 13, 19, 10, 11, 4], 9: [14, 9, 8, 15, 11, 17, 2, 10, 6, 5], 10: [16, 13, 11, 4, 8, 3, 17, 5, 0, 15], 11: [11, 2, 15, 8, 18, 0, 6, 5, 12, 1], 12: [10, 17, 8, 13, 15, 0, 6, 4, 18, 2], 13: [9, 13, 17, 16, 14, 15, 4, 12, 0, 7], 14: [19, 15, 17, 7, 5, 3, 10, 14, 0, 9], 15: [11, 4, 2, 8, 13, 10, 6, 15, 14, 16], 16: [12, 1, 14, 0, 16, 9, 13, 19, 5, 8], 17: [7, 5, 8, 14, 3, 15, 10, 4, 0, 2], 18: [3, 9, 15, 8, 2, 1, 12, 11, 4, 16], 19: [5, 10, 18, 14, 9, 3, 1, 16, 8, 12], 20: [5, 9, 7, 14, 13, 0, 12, 19, 2, 18], 21: [19, 7, 8, 5, 12, 0, 1, 17, 6, 18], 22: [12, 5, 10, 11, 6, 17, 7, 9, 19, 2], 23: [0, 2, 6, 12, 15, 11, 9, 18, 8, 16], 24: [11, 15, 4, 6, 13, 3, 1, 17, 0, 2], 25: [13, 14, 12, 4, 18, 19, 1, 15, 7, 6], 26: [8, 5, 16, 0, 17, 19, 15, 18, 1, 3], 27: [14, 5, 0, 1, 12, 4, 16, 17, 8, 13], 28: [10, 3, 13, 0, 8, 19, 14, 7, 18, 15], 29: [8, 2, 12, 17, 10, 14, 16, 9, 5, 3], 30: [11, 6, 17, 18, 1, 12, 16, 7, 0, 8], 31: [4, 3, 9, 19, 14, 11, 10, 18, 15, 17], 32: [11, 0, 2, 10, 15, 3, 6, 18, 4, 19], 33: [9, 2, 14, 13, 16, 7, 17, 11, 8, 15], 34: [13, 11, 16, 14, 2, 9, 19, 4, 1, 8], 35: [3, 18, 2, 19, 16, 1, 13, 5, 4, 12], 36: [2, 6, 19, 8, 4, 16, 5, 18, 1, 13], 37: [15, 12, 8, 16, 2, 10, 3, 14, 13, 6], 38: [18, 1, 4, 2, 10, 14, 5, 9, 16, 3], 39: [14, 6, 1, 2, 11, 15, 12, 8, 5, 16], 40: [4, 12, 15, 16, 7, 18, 10, 11, 2, 19], 41: [9, 17, 8, 14, 12, 13, 11, 6, 4, 7], 42: [2, 18, 7, 9, 13, 16, 15, 0, 10, 5], 43: [14, 9, 11, 17, 2, 15, 6, 7, 18, 0], 44: [16, 8, 0, 19, 13, 4, 1, 18, 14, 17], 45: [19, 14, 9, 15, 17, 0, 4, 10, 11, 7], 46: [15, 18, 17, 11, 12, 14, 13, 8, 0, 1], 47: [3, 17, 2, 4, 9, 10, 8, 18, 15, 12], 48: [16, 1, 5, 9, 7, 18, 4, 0, 2, 10], 49: [2, 7, 5, 9, 3, 12, 10, 19, 0, 8], 50: [14, 13, 16, 4, 2, 6, 1, 11, 17, 12], 51: [12, 13, 10, 3, 5, 2, 18, 0, 4, 1], 52: [1, 14, 3, 5, 18, 4, 7, 13, 11, 6], 53: [6, 14, 19, 16, 11, 10, 5, 13, 18, 15], 54: [9, 12, 3, 6, 8, 17, 19, 14, 18, 16], 55: [7, 2, 14, 6, 5, 4, 1, 12, 19, 3], 56: [9, 18, 0, 15, 2, 5, 10, 14, 1, 7], 57: [8, 13, 15, 9, 12, 11, 5, 14, 17, 2], 58: [9, 4, 16, 7, 10, 1, 5, 11, 12, 17], 59: [0, 5, 6, 19, 3, 13, 17, 10, 8, 11], 60: [16, 8, 0, 4, 15, 1, 13, 3, 6, 10], 61: [5, 10, 1, 2, 18, 14, 6, 0, 3, 9], 62: [13, 17, 2, 0, 7, 12, 10, 5, 19, 8], 63: [4, 18, 17, 16, 8, 9, 2, 12, 11, 5], 64: [1, 2, 19, 10, 12, 15, 0, 18, 13, 8], 65: [4, 14, 8, 11, 6, 19, 1, 13, 12, 7], 66: [6, 10, 1, 15, 16, 0, 14, 12, 8, 7], 67: [12, 17, 2, 8, 16, 11, 5, 6, 7, 13], 68: [6, 17, 13, 19, 14, 4, 10, 12, 11, 18], 69: [19, 0, 3, 1, 12, 8, 6, 14, 10, 16], 70: [6, 13, 17, 10, 7, 16, 14, 11, 8, 4], 71: [5, 15, 16, 17, 1, 18, 2, 0, 14, 10], 72: [6, 7, 9, 19, 2, 18, 11, 5, 4, 3], 73: [16, 2, 13, 10, 1, 14, 0, 6, 4, 7], 74: [16, 0, 18, 9, 3, 10, 7, 4, 11, 6], 75: [13, 10, 9, 12, 8, 0, 17, 7, 1, 14], 76: [15, 19, 17, 18, 11, 10, 7, 1, 8, 5], 77: [17, 3, 8, 15, 18, 2, 12, 10, 9, 7], 78: [18, 5, 7, 3, 9, 14, 13, 0, 4, 12], 79: [9, 12, 10, 0, 11, 1, 8, 16, 14, 2], 80: [3, 16, 17, 15, 9, 13, 19, 0, 7, 6], 81: [8, 1, 17, 9, 11, 3, 16, 4, 15, 0], 82: [16, 18, 15, 12, 14, 8, 9, 2, 13, 17], 83: [16, 17, 10, 2, 8, 7, 15, 6, 3, 1], 84: [9, 10, 5, 8, 0, 1, 6, 13, 14, 16], 85: [7, 4, 13, 18, 0, 1, 8, 16, 5, 15], 86: [19, 2, 16, 1, 8, 11, 12, 4, 0, 9], 87: [10, 5, 11, 8, 14, 7, 17, 9, 6, 18], 88: [15, 4, 9, 6, 8, 19, 17, 18, 16, 11], 89: [19, 12, 2, 18, 3, 7, 6, 13, 16, 17], 90: [4, 3, 13, 15, 0, 12, 14, 9, 16, 8], 91: [2, 4, 18, 1, 8, 10, 6, 15, 13, 19], 92: [7, 5, 10, 0, 8, 9, 15, 3, 19, 11], 93: [3, 11, 0, 10, 13, 2, 19, 1, 12, 4], 94: [18, 6, 12, 3, 9, 10, 13, 15, 19, 11], 95: [6, 3, 11, 0, 17, 9, 13, 19, 8, 7], 96: [4, 19, 15, 2, 8, 6, 3, 11, 12, 10], 97: [10, 4, 1, 19, 11, 12, 16, 14, 13, 8], 98: [3, 19, 10, 13, 8, 0, 5, 4, 14, 18], 99: [0, 17, 6, 7, 11, 1, 15, 14, 5, 3], 100: [11, 2, 13, 9, 14, 12, 4, 18, 19, 0]}
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---0-----,select client num is-----0-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 0-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3039
+Averaged Test Accurancy: 0.0937
+Averaged Test AUC: 0.4940
+Std Test Accurancy: 0.1815
+Std Test AUC: 0.2182
+------------------------- time cost ------------------------- 129.77066016197205
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---1-----,select client num is-----1-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 1-------------
+
+Evaluate global model
+Averaged Train Loss: 2.5146
+Averaged Test Accurancy: 0.1065
+Averaged Test AUC: 0.5106
+Std Test Accurancy: 0.2062
+Std Test AUC: 0.2451
+------------------------- time cost ------------------------- 168.49652409553528
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---2-----,select client num is-----2-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 2-------------
+
+Evaluate global model
+Averaged Train Loss: 3.0506
+Averaged Test Accurancy: 0.1046
+Averaged Test AUC: 0.5184
+Std Test Accurancy: 0.2095
+Std Test AUC: 0.2348
+------------------------- time cost ------------------------- 192.4771568775177
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---3-----,select client num is-----3-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 3-------------
+
+Evaluate global model
+Averaged Train Loss: 3.0881
+Averaged Test Accurancy: 0.1210
+Averaged Test AUC: 0.5270
+Std Test Accurancy: 0.1994
+Std Test AUC: 0.2271
+------------------------- time cost ------------------------- 182.9022560119629
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---4-----,select client num is-----4-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 4-------------
+
+Evaluate global model
+Averaged Train Loss: 3.0334
+Averaged Test Accurancy: 0.1269
+Averaged Test AUC: 0.5340
+Std Test Accurancy: 0.1988
+Std Test AUC: 0.2214
+------------------------- time cost ------------------------- 169.16485619544983
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---5-----,select client num is-----5-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 5-------------
+
+Evaluate global model
+Averaged Train Loss: 2.9553
+Averaged Test Accurancy: 0.1337
+Averaged Test AUC: 0.5431
+Std Test Accurancy: 0.1974
+Std Test AUC: 0.2153
+------------------------- time cost ------------------------- 188.6653618812561
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---6-----,select client num is-----6-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 6-------------
+
+Evaluate global model
+Averaged Train Loss: 2.9085
+Averaged Test Accurancy: 0.1391
+Averaged Test AUC: 0.5510
+Std Test Accurancy: 0.1945
+Std Test AUC: 0.2103
+------------------------- time cost ------------------------- 175.10827898979187
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---7-----,select client num is-----7-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 7-------------
+
+Evaluate global model
+Averaged Train Loss: 2.9043
+Averaged Test Accurancy: 0.1452
+Averaged Test AUC: 0.5563
+Std Test Accurancy: 0.1963
+Std Test AUC: 0.2074
+------------------------- time cost ------------------------- 168.82032418251038
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---8-----,select client num is-----8-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 8-------------
+
+Evaluate global model
+Averaged Train Loss: 3.0190
+Averaged Test Accurancy: 0.1466
+Averaged Test AUC: 0.5597
+Std Test Accurancy: 0.1978
+Std Test AUC: 0.2034
+------------------------- time cost ------------------------- 168.16241002082825
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---9-----,select client num is-----9-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 9-------------
+
+Evaluate global model
+Averaged Train Loss: 3.2177
+Averaged Test Accurancy: 0.1440
+Averaged Test AUC: 0.5607
+Std Test Accurancy: 0.2062
+Std Test AUC: 0.2034
+------------------------- time cost ------------------------- 167.0997850894928
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---10-----,select client num is-----10-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 10-------------
+
+Evaluate global model
+Averaged Train Loss: 3.4604
+Averaged Test Accurancy: 0.1446
+Averaged Test AUC: 0.5614
+Std Test Accurancy: 0.2069
+Std Test AUC: 0.2050
+------------------------- time cost ------------------------- 167.04955410957336
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---11-----,select client num is-----11-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 11-------------
+
+Evaluate global model
+Averaged Train Loss: 3.4110
+Averaged Test Accurancy: 0.1442
+Averaged Test AUC: 0.5722
+Std Test Accurancy: 0.2133
+Std Test AUC: 0.1969
+------------------------- time cost ------------------------- 166.60313510894775
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---12-----,select client num is-----12-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 12-------------
+
+Evaluate global model
+Averaged Train Loss: 3.3188
+Averaged Test Accurancy: 0.1452
+Averaged Test AUC: 0.5790
+Std Test Accurancy: 0.2098
+Std Test AUC: 0.1915
+------------------------- time cost ------------------------- 167.35095238685608
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---13-----,select client num is-----13-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 13-------------
+
+Evaluate global model
+Averaged Train Loss: 3.1010
+Averaged Test Accurancy: 0.1466
+Averaged Test AUC: 0.5920
+Std Test Accurancy: 0.2072
+Std Test AUC: 0.1834
+------------------------- time cost ------------------------- 192.20025539398193
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---14-----,select client num is-----14-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 14-------------
+
+Evaluate global model
+Averaged Train Loss: 2.9601
+Averaged Test Accurancy: 0.1538
+Averaged Test AUC: 0.5992
+Std Test Accurancy: 0.2033
+Std Test AUC: 0.1797
+------------------------- time cost ------------------------- 202.05050110816956
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---15-----,select client num is-----15-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 15-------------
+
+Evaluate global model
+Averaged Train Loss: 2.8066
+Averaged Test Accurancy: 0.1646
+Averaged Test AUC: 0.6112
+Std Test Accurancy: 0.1991
+Std Test AUC: 0.1738
+------------------------- time cost ------------------------- 204.0421769618988
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---16-----,select client num is-----16-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 16-------------
+
+Evaluate global model
+Averaged Train Loss: 2.7514
+Averaged Test Accurancy: 0.1727
+Averaged Test AUC: 0.6179
+Std Test Accurancy: 0.1985
+Std Test AUC: 0.1700
+------------------------- time cost ------------------------- 205.35412907600403
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---17-----,select client num is-----17-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 17-------------
+
+Evaluate global model
+Averaged Train Loss: 2.6810
+Averaged Test Accurancy: 0.1860
+Averaged Test AUC: 0.6265
+Std Test Accurancy: 0.1993
+Std Test AUC: 0.1661
+------------------------- time cost ------------------------- 201.13664627075195
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---18-----,select client num is-----18-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 18-------------
+
+Evaluate global model
+Averaged Train Loss: 2.6822
+Averaged Test Accurancy: 0.1916
+Averaged Test AUC: 0.6304
+Std Test Accurancy: 0.2015
+Std Test AUC: 0.1640
+------------------------- time cost ------------------------- 202.5477011203766
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---19-----,select client num is-----19-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 19-------------
+
+Evaluate global model
+Averaged Train Loss: 2.6395
+Averaged Test Accurancy: 0.1980
+Averaged Test AUC: 0.6365
+Std Test Accurancy: 0.2059
+Std Test AUC: 0.1619
+------------------------- time cost ------------------------- 207.38049483299255
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---20-----,select client num is-----20-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 20-------------
+
+Evaluate global model
+Averaged Train Loss: 2.6455
+Averaged Test Accurancy: 0.1998
+Averaged Test AUC: 0.6382
+Std Test Accurancy: 0.2066
+Std Test AUC: 0.1621
+------------------------- time cost ------------------------- 208.7830832004547
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---21-----,select client num is-----21-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 21-------------
+
+Evaluate global model
+Averaged Train Loss: 2.6119
+Averaged Test Accurancy: 0.2059
+Averaged Test AUC: 0.6441
+Std Test Accurancy: 0.2045
+Std Test AUC: 0.1598
+------------------------- time cost ------------------------- 205.89742016792297
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---22-----,select client num is-----22-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 22-------------
+
+Evaluate global model
+Averaged Train Loss: 2.6159
+Averaged Test Accurancy: 0.2077
+Averaged Test AUC: 0.6450
+Std Test Accurancy: 0.2055
+Std Test AUC: 0.1601
+------------------------- time cost ------------------------- 197.9875168800354
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---23-----,select client num is-----23-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 23-------------
+
+Evaluate global model
+Averaged Train Loss: 2.5602
+Averaged Test Accurancy: 0.2123
+Averaged Test AUC: 0.6519
+Std Test Accurancy: 0.2032
+Std Test AUC: 0.1577
+------------------------- time cost ------------------------- 202.3973822593689
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---24-----,select client num is-----24-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 24-------------
+
+Evaluate global model
+Averaged Train Loss: 2.5734
+Averaged Test Accurancy: 0.2138
+Averaged Test AUC: 0.6520
+Std Test Accurancy: 0.2053
+Std Test AUC: 0.1574
+------------------------- time cost ------------------------- 204.95963883399963
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---25-----,select client num is-----25-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 25-------------
+
+Evaluate global model
+Averaged Train Loss: 2.5127
+Averaged Test Accurancy: 0.2180
+Averaged Test AUC: 0.6604
+Std Test Accurancy: 0.2093
+Std Test AUC: 0.1545
+------------------------- time cost ------------------------- 201.7145516872406
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---26-----,select client num is-----26-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 26-------------
+
+Evaluate global model
+Averaged Train Loss: 2.5099
+Averaged Test Accurancy: 0.2207
+Averaged Test AUC: 0.6623
+Std Test Accurancy: 0.2112
+Std Test AUC: 0.1543
+------------------------- time cost ------------------------- 200.68700218200684
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---27-----,select client num is-----27-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 27-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4757
+Averaged Test Accurancy: 0.2257
+Averaged Test AUC: 0.6681
+Std Test Accurancy: 0.2104
+Std Test AUC: 0.1522
+------------------------- time cost ------------------------- 208.57273697853088
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---28-----,select client num is-----28-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 28-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4631
+Averaged Test Accurancy: 0.2279
+Averaged Test AUC: 0.6702
+Std Test Accurancy: 0.2015
+Std Test AUC: 0.1504
+------------------------- time cost ------------------------- 202.18291592597961
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---29-----,select client num is-----29-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 29-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4329
+Averaged Test Accurancy: 0.2293
+Averaged Test AUC: 0.6747
+Std Test Accurancy: 0.2028
+Std Test AUC: 0.1482
+------------------------- time cost ------------------------- 201.70270991325378
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---30-----,select client num is-----30-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 30-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4289
+Averaged Test Accurancy: 0.2301
+Averaged Test AUC: 0.6759
+Std Test Accurancy: 0.1997
+Std Test AUC: 0.1473
+------------------------- time cost ------------------------- 198.73471212387085
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---31-----,select client num is-----31-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 31-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4096
+Averaged Test Accurancy: 0.2335
+Averaged Test AUC: 0.6796
+Std Test Accurancy: 0.2049
+Std Test AUC: 0.1465
+------------------------- time cost ------------------------- 201.73680996894836
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---32-----,select client num is-----32-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 32-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4350
+Averaged Test Accurancy: 0.2314
+Averaged Test AUC: 0.6796
+Std Test Accurancy: 0.2016
+Std Test AUC: 0.1461
+------------------------- time cost ------------------------- 203.54006791114807
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---33-----,select client num is-----33-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 33-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4149
+Averaged Test Accurancy: 0.2361
+Averaged Test AUC: 0.6834
+Std Test Accurancy: 0.2021
+Std Test AUC: 0.1454
+------------------------- time cost ------------------------- 202.53480911254883
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---34-----,select client num is-----34-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 34-------------
+
+Evaluate global model
+Averaged Train Loss: 2.4067
+Averaged Test Accurancy: 0.2385
+Averaged Test AUC: 0.6864
+Std Test Accurancy: 0.1990
+Std Test AUC: 0.1436
+------------------------- time cost ------------------------- 207.95842623710632
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---35-----,select client num is-----35-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 35-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3876
+Averaged Test Accurancy: 0.2396
+Averaged Test AUC: 0.6902
+Std Test Accurancy: 0.2012
+Std Test AUC: 0.1425
+------------------------- time cost ------------------------- 207.29144716262817
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---36-----,select client num is-----36-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 36-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3762
+Averaged Test Accurancy: 0.2463
+Averaged Test AUC: 0.6935
+Std Test Accurancy: 0.1985
+Std Test AUC: 0.1415
+------------------------- time cost ------------------------- 205.2160849571228
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---37-----,select client num is-----37-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 37-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3594
+Averaged Test Accurancy: 0.2474
+Averaged Test AUC: 0.6964
+Std Test Accurancy: 0.1985
+Std Test AUC: 0.1403
+------------------------- time cost ------------------------- 197.0681028366089
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---38-----,select client num is-----38-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 38-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3536
+Averaged Test Accurancy: 0.2506
+Averaged Test AUC: 0.6992
+Std Test Accurancy: 0.1969
+Std Test AUC: 0.1385
+------------------------- time cost ------------------------- 198.68203997612
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---39-----,select client num is-----39-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 39-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3150
+Averaged Test Accurancy: 0.2547
+Averaged Test AUC: 0.7036
+Std Test Accurancy: 0.1906
+Std Test AUC: 0.1370
+------------------------- time cost ------------------------- 205.10640573501587
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---40-----,select client num is-----40-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 40-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3385
+Averaged Test Accurancy: 0.2544
+Averaged Test AUC: 0.7026
+Std Test Accurancy: 0.1954
+Std Test AUC: 0.1365
+------------------------- time cost ------------------------- 201.97725415229797
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---41-----,select client num is-----41-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 41-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3170
+Averaged Test Accurancy: 0.2570
+Averaged Test AUC: 0.7066
+Std Test Accurancy: 0.1901
+Std Test AUC: 0.1361
+------------------------- time cost ------------------------- 204.84117603302002
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---42-----,select client num is-----42-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 42-------------
+
+Evaluate global model
+Averaged Train Loss: 2.3072
+Averaged Test Accurancy: 0.2643
+Averaged Test AUC: 0.7091
+Std Test Accurancy: 0.1905
+Std Test AUC: 0.1359
+------------------------- time cost ------------------------- 202.69176816940308
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---43-----,select client num is-----43-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 43-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2917
+Averaged Test Accurancy: 0.2666
+Averaged Test AUC: 0.7121
+Std Test Accurancy: 0.1912
+Std Test AUC: 0.1360
+------------------------- time cost ------------------------- 203.5366861820221
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---44-----,select client num is-----44-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 44-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2989
+Averaged Test Accurancy: 0.2666
+Averaged Test AUC: 0.7129
+Std Test Accurancy: 0.1940
+Std Test AUC: 0.1354
+------------------------- time cost ------------------------- 205.79810190200806
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---45-----,select client num is-----45-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 45-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2856
+Averaged Test Accurancy: 0.2674
+Averaged Test AUC: 0.7155
+Std Test Accurancy: 0.1972
+Std Test AUC: 0.1350
+------------------------- time cost ------------------------- 203.33456778526306
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---46-----,select client num is-----46-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 46-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2618
+Averaged Test Accurancy: 0.2736
+Averaged Test AUC: 0.7196
+Std Test Accurancy: 0.1978
+Std Test AUC: 0.1342
+------------------------- time cost ------------------------- 197.95506286621094
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---47-----,select client num is-----47-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 47-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2319
+Averaged Test Accurancy: 0.2762
+Averaged Test AUC: 0.7225
+Std Test Accurancy: 0.1952
+Std Test AUC: 0.1306
+------------------------- time cost ------------------------- 201.97934794425964
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---48-----,select client num is-----48-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 48-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2550
+Averaged Test Accurancy: 0.2728
+Averaged Test AUC: 0.7216
+Std Test Accurancy: 0.1872
+Std Test AUC: 0.1302
+------------------------- time cost ------------------------- 201.09165906906128
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---49-----,select client num is-----49-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 49-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2137
+Averaged Test Accurancy: 0.2804
+Averaged Test AUC: 0.7267
+Std Test Accurancy: 0.1860
+Std Test AUC: 0.1306
+------------------------- time cost ------------------------- 206.16177701950073
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---50-----,select client num is-----50-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 50-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2194
+Averaged Test Accurancy: 0.2802
+Averaged Test AUC: 0.7282
+Std Test Accurancy: 0.1868
+Std Test AUC: 0.1290
+------------------------- time cost ------------------------- 205.43932700157166
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---51-----,select client num is-----51-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 51-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2072
+Averaged Test Accurancy: 0.2825
+Averaged Test AUC: 0.7296
+Std Test Accurancy: 0.1852
+Std Test AUC: 0.1296
+------------------------- time cost ------------------------- 203.41335773468018
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---52-----,select client num is-----52-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 52-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2096
+Averaged Test Accurancy: 0.2828
+Averaged Test AUC: 0.7307
+Std Test Accurancy: 0.1870
+Std Test AUC: 0.1268
+------------------------- time cost ------------------------- 200.00803184509277
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---53-----,select client num is-----53-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 53-------------
+
+Evaluate global model
+Averaged Train Loss: 2.2050
+Averaged Test Accurancy: 0.2852
+Averaged Test AUC: 0.7325
+Std Test Accurancy: 0.1843
+Std Test AUC: 0.1285
+------------------------- time cost ------------------------- 196.7164649963379
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---54-----,select client num is-----54-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 54-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1828
+Averaged Test Accurancy: 0.2923
+Averaged Test AUC: 0.7364
+Std Test Accurancy: 0.1827
+Std Test AUC: 0.1275
+------------------------- time cost ------------------------- 199.8488278388977
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---55-----,select client num is-----55-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 55-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1895
+Averaged Test Accurancy: 0.2925
+Averaged Test AUC: 0.7362
+Std Test Accurancy: 0.1854
+Std Test AUC: 0.1281
+------------------------- time cost ------------------------- 204.6753170490265
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---56-----,select client num is-----56-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 56-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1844
+Averaged Test Accurancy: 0.2942
+Averaged Test AUC: 0.7377
+Std Test Accurancy: 0.1847
+Std Test AUC: 0.1266
+------------------------- time cost ------------------------- 205.3097858428955
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---57-----,select client num is-----57-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 57-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1826
+Averaged Test Accurancy: 0.2927
+Averaged Test AUC: 0.7385
+Std Test Accurancy: 0.1850
+Std Test AUC: 0.1269
+------------------------- time cost ------------------------- 200.66428399085999
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---58-----,select client num is-----58-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 58-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1925
+Averaged Test Accurancy: 0.2940
+Averaged Test AUC: 0.7379
+Std Test Accurancy: 0.1833
+Std Test AUC: 0.1259
+------------------------- time cost ------------------------- 203.10373783111572
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---59-----,select client num is-----59-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 59-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1601
+Averaged Test Accurancy: 0.3040
+Averaged Test AUC: 0.7416
+Std Test Accurancy: 0.1832
+Std Test AUC: 0.1281
+------------------------- time cost ------------------------- 202.42704606056213
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---60-----,select client num is-----60-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 60-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1719
+Averaged Test Accurancy: 0.3002
+Averaged Test AUC: 0.7408
+Std Test Accurancy: 0.1788
+Std Test AUC: 0.1252
+------------------------- time cost ------------------------- 193.8638951778412
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---61-----,select client num is-----61-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 61-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1764
+Averaged Test Accurancy: 0.3014
+Averaged Test AUC: 0.7402
+Std Test Accurancy: 0.1817
+Std Test AUC: 0.1267
+------------------------- time cost ------------------------- 196.7457058429718
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---62-----,select client num is-----62-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 62-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1803
+Averaged Test Accurancy: 0.2981
+Averaged Test AUC: 0.7405
+Std Test Accurancy: 0.1823
+Std Test AUC: 0.1239
+------------------------- time cost ------------------------- 205.10412502288818
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---63-----,select client num is-----63-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 63-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1848
+Averaged Test Accurancy: 0.3046
+Averaged Test AUC: 0.7406
+Std Test Accurancy: 0.1823
+Std Test AUC: 0.1283
+------------------------- time cost ------------------------- 200.552738904953
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---64-----,select client num is-----64-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 64-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1637
+Averaged Test Accurancy: 0.3045
+Averaged Test AUC: 0.7436
+Std Test Accurancy: 0.1832
+Std Test AUC: 0.1226
+------------------------- time cost ------------------------- 203.76209497451782
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---65-----,select client num is-----65-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 65-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1586
+Averaged Test Accurancy: 0.3082
+Averaged Test AUC: 0.7446
+Std Test Accurancy: 0.1831
+Std Test AUC: 0.1243
+------------------------- time cost ------------------------- 204.02112412452698
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---66-----,select client num is-----66-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 66-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1377
+Averaged Test Accurancy: 0.3060
+Averaged Test AUC: 0.7467
+Std Test Accurancy: 0.1876
+Std Test AUC: 0.1212
+------------------------- time cost ------------------------- 199.3747317790985
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---67-----,select client num is-----67-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 67-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1447
+Averaged Test Accurancy: 0.3076
+Averaged Test AUC: 0.7460
+Std Test Accurancy: 0.1853
+Std Test AUC: 0.1237
+------------------------- time cost ------------------------- 201.3828489780426
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---68-----,select client num is-----68-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 68-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1440
+Averaged Test Accurancy: 0.3100
+Averaged Test AUC: 0.7480
+Std Test Accurancy: 0.1830
+Std Test AUC: 0.1213
+------------------------- time cost ------------------------- 200.760812997818
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---69-----,select client num is-----69-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 69-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1835
+Averaged Test Accurancy: 0.3039
+Averaged Test AUC: 0.7457
+Std Test Accurancy: 0.1840
+Std Test AUC: 0.1217
+------------------------- time cost ------------------------- 197.22572684288025
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---70-----,select client num is-----70-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 70-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1494
+Averaged Test Accurancy: 0.3069
+Averaged Test AUC: 0.7506
+Std Test Accurancy: 0.1832
+Std Test AUC: 0.1172
+------------------------- time cost ------------------------- 199.9622700214386
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---71-----,select client num is-----71-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 71-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1504
+Averaged Test Accurancy: 0.3080
+Averaged Test AUC: 0.7513
+Std Test Accurancy: 0.1865
+Std Test AUC: 0.1187
+------------------------- time cost ------------------------- 201.11359977722168
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---72-----,select client num is-----72-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 72-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1124
+Averaged Test Accurancy: 0.3137
+Averaged Test AUC: 0.7547
+Std Test Accurancy: 0.1777
+Std Test AUC: 0.1171
+------------------------- time cost ------------------------- 202.1556396484375
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---73-----,select client num is-----73-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 73-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1633
+Averaged Test Accurancy: 0.3098
+Averaged Test AUC: 0.7509
+Std Test Accurancy: 0.1834
+Std Test AUC: 0.1206
+------------------------- time cost ------------------------- 200.75483298301697
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---74-----,select client num is-----74-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 74-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0973
+Averaged Test Accurancy: 0.3207
+Averaged Test AUC: 0.7580
+Std Test Accurancy: 0.1773
+Std Test AUC: 0.1160
+------------------------- time cost ------------------------- 202.1271939277649
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---75-----,select client num is-----75-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 75-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1292
+Averaged Test Accurancy: 0.3127
+Averaged Test AUC: 0.7545
+Std Test Accurancy: 0.1804
+Std Test AUC: 0.1165
+------------------------- time cost ------------------------- 203.8060920238495
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---76-----,select client num is-----76-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 76-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1454
+Averaged Test Accurancy: 0.3087
+Averaged Test AUC: 0.7525
+Std Test Accurancy: 0.1824
+Std Test AUC: 0.1168
+------------------------- time cost ------------------------- 195.99277210235596
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---77-----,select client num is-----77-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 77-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1464
+Averaged Test Accurancy: 0.3136
+Averaged Test AUC: 0.7528
+Std Test Accurancy: 0.1841
+Std Test AUC: 0.1206
+------------------------- time cost ------------------------- 195.3989691734314
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---78-----,select client num is-----78-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 78-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1294
+Averaged Test Accurancy: 0.3121
+Averaged Test AUC: 0.7553
+Std Test Accurancy: 0.1819
+Std Test AUC: 0.1170
+------------------------- time cost ------------------------- 198.5801362991333
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---79-----,select client num is-----79-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 79-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1372
+Averaged Test Accurancy: 0.3112
+Averaged Test AUC: 0.7540
+Std Test Accurancy: 0.1893
+Std Test AUC: 0.1181
+------------------------- time cost ------------------------- 195.99169182777405
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---80-----,select client num is-----80-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 80-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1290
+Averaged Test Accurancy: 0.3112
+Averaged Test AUC: 0.7559
+Std Test Accurancy: 0.1843
+Std Test AUC: 0.1137
+------------------------- time cost ------------------------- 202.95450973510742
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---81-----,select client num is-----81-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 81-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1402
+Averaged Test Accurancy: 0.3144
+Averaged Test AUC: 0.7565
+Std Test Accurancy: 0.1877
+Std Test AUC: 0.1176
+------------------------- time cost ------------------------- 203.1184539794922
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---82-----,select client num is-----82-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 82-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1251
+Averaged Test Accurancy: 0.3147
+Averaged Test AUC: 0.7583
+Std Test Accurancy: 0.1903
+Std Test AUC: 0.1137
+------------------------- time cost ------------------------- 198.43074584007263
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---83-----,select client num is-----83-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 83-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1268
+Averaged Test Accurancy: 0.3231
+Averaged Test AUC: 0.7595
+Std Test Accurancy: 0.1819
+Std Test AUC: 0.1185
+------------------------- time cost ------------------------- 208.12076687812805
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---84-----,select client num is-----84-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 84-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1009
+Averaged Test Accurancy: 0.3279
+Averaged Test AUC: 0.7625
+Std Test Accurancy: 0.1846
+Std Test AUC: 0.1145
+------------------------- time cost ------------------------- 207.85268688201904
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---85-----,select client num is-----85-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 85-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1360
+Averaged Test Accurancy: 0.3219
+Averaged Test AUC: 0.7594
+Std Test Accurancy: 0.1817
+Std Test AUC: 0.1169
+------------------------- time cost ------------------------- 203.20500087738037
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---86-----,select client num is-----86-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 86-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0919
+Averaged Test Accurancy: 0.3275
+Averaged Test AUC: 0.7633
+Std Test Accurancy: 0.1813
+Std Test AUC: 0.1125
+------------------------- time cost ------------------------- 201.9553427696228
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---87-----,select client num is-----87-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 87-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0965
+Averaged Test Accurancy: 0.3280
+Averaged Test AUC: 0.7624
+Std Test Accurancy: 0.1803
+Std Test AUC: 0.1138
+------------------------- time cost ------------------------- 203.35677695274353
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---88-----,select client num is-----88-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 88-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0937
+Averaged Test Accurancy: 0.3298
+Averaged Test AUC: 0.7619
+Std Test Accurancy: 0.1803
+Std Test AUC: 0.1134
+------------------------- time cost ------------------------- 182.0984218120575
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---89-----,select client num is-----89-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 89-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1114
+Averaged Test Accurancy: 0.3240
+Averaged Test AUC: 0.7614
+Std Test Accurancy: 0.1824
+Std Test AUC: 0.1127
+------------------------- time cost ------------------------- 145.98165488243103
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---90-----,select client num is-----90-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 90-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0686
+Averaged Test Accurancy: 0.3308
+Averaged Test AUC: 0.7658
+Std Test Accurancy: 0.1771
+Std Test AUC: 0.1111
+------------------------- time cost ------------------------- 145.4014708995819
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---91-----,select client num is-----91-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 91-------------
+
+Evaluate global model
+Averaged Train Loss: 2.1005
+Averaged Test Accurancy: 0.3229
+Averaged Test AUC: 0.7645
+Std Test Accurancy: 0.1825
+Std Test AUC: 0.1111
+------------------------- time cost ------------------------- 139.88289594650269
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---92-----,select client num is-----92-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 92-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0727
+Averaged Test Accurancy: 0.3297
+Averaged Test AUC: 0.7671
+Std Test Accurancy: 0.1787
+Std Test AUC: 0.1115
+------------------------- time cost ------------------------- 123.04705715179443
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---93-----,select client num is-----93-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 93-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0898
+Averaged Test Accurancy: 0.3249
+Averaged Test AUC: 0.7647
+Std Test Accurancy: 0.1806
+Std Test AUC: 0.1127
+------------------------- time cost ------------------------- 123.73027729988098
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---94-----,select client num is-----94-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 94-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0422
+Averaged Test Accurancy: 0.3293
+Averaged Test AUC: 0.7704
+Std Test Accurancy: 0.1783
+Std Test AUC: 0.1081
+------------------------- time cost ------------------------- 125.2203528881073
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---95-----,select client num is-----95-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 95-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0030
+Averaged Test Accurancy: 0.3466
+Averaged Test AUC: 0.7746
+Std Test Accurancy: 0.1824
+Std Test AUC: 0.1139
+------------------------- time cost ------------------------- 121.82000994682312
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---96-----,select client num is-----96-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 96-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0111
+Averaged Test Accurancy: 0.3408
+Averaged Test AUC: 0.7733
+Std Test Accurancy: 0.1755
+Std Test AUC: 0.1103
+------------------------- time cost ------------------------- 120.04398107528687
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---97-----,select client num is-----97-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 97-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0775
+Averaged Test Accurancy: 0.3308
+Averaged Test AUC: 0.7665
+Std Test Accurancy: 0.1772
+Std Test AUC: 0.1123
+------------------------- time cost ------------------------- 119.52675008773804
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---98-----,select client num is-----98-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 98-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0551
+Averaged Test Accurancy: 0.3349
+Averaged Test AUC: 0.7690
+Std Test Accurancy: 0.1796
+Std Test AUC: 0.1108
+------------------------- time cost ------------------------- 123.97781419754028
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---99-----,select client num is-----99-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 99-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0775
+Averaged Test Accurancy: 0.3322
+Averaged Test AUC: 0.7678
+Std Test Accurancy: 0.1833
+Std Test AUC: 0.1121
+------------------------- time cost ------------------------- 122.62647700309753
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientscaffold.clientSCAFFOLD'>
+INFO:-----------------global_rounds is---100-----,select client num is-----100-select id :--[0, 2, 4, 9, 11, 12, 13, 14, 18, 19]----------------------------------
+
+-------------Round number: 100-------------
+
+Evaluate global model
+Averaged Train Loss: 2.0230
+Averaged Test Accurancy: 0.3392
+Averaged Test AUC: 0.7742
+Std Test Accurancy: 0.1810
+Std Test AUC: 0.1078
+------------------------- time cost ------------------------- 123.30514097213745
+
+Best accuracy.
+0.3465511496167944
+
+Average time cost per round.
+189.54673535585403
+success training write acc txt /Users/alice/Desktop/python/PFL//res/SCAFFOLD/Cifar10_acc.csv
+[['mnist', 'SCAFFOLD', 0, 2.3039326570634455, 0.09370209930023325, 0.4940292791749328, 0.18145544267502495, 0.21821810742021094], ['mnist', 'SCAFFOLD', 1, 2.514594995532209, 0.10649783405531489, 0.5106090455554265, 0.2061678932689614, 0.2450729155155644], ['mnist', 'SCAFFOLD', 2, 3.0505953345524923, 0.10456514495168277, 0.5184125185283796, 0.2094878602816723, 0.2348084824516406], ['mnist', 'SCAFFOLD', 3, 3.088088972110362, 0.12095968010663112, 0.5269572080935578, 0.19940088962213667, 0.22710269637726332], ['mnist', 'SCAFFOLD', 4, 3.0334218428836213, 0.12689103632122625, 0.5339954412738107, 0.1988312189062765, 0.22140485783091043], ['mnist', 'SCAFFOLD', 5, 2.9552739555759806, 0.13368877040986338, 0.5431341071762472, 0.19740475145417166, 0.21525018684794375], ['mnist', 'SCAFFOLD', 6, 2.9084571586555588, 0.13908697100966344, 0.5509679932009595, 0.19447965999086506, 0.21027214493804758], ['mnist', 'SCAFFOLD', 7, 2.9043174651066725, 0.14521826057980672, 0.5562692328315948, 0.1963413852619767, 0.20739261744688417], ['mnist', 'SCAFFOLD', 8, 3.0189563356749707, 0.1465511496167944, 0.5596751807373341, 0.1977545013194254, 0.20340451283717048], ['mnist', 'SCAFFOLD', 9, 3.217710757130797, 0.14401866044651782, 0.5606962151211874, 0.20621906819055882, 0.2033787600721978], ['mnist', 'SCAFFOLD', 10, 3.4604405940866396, 0.14461846051316227, 0.5613570718921805, 0.20691753718665096, 0.20499902297038725], ['mnist', 'SCAFFOLD', 11, 3.411020470459194, 0.1441519493502166, 0.5722002420049496, 0.2132726187247851, 0.19688809607529723], ['mnist', 'SCAFFOLD', 12, 3.3187809048875407, 0.14515161612795735, 0.5789960988883572, 0.20982282637251654, 0.19149331843266873], ['mnist', 'SCAFFOLD', 13, 3.100989492041474, 0.1465511496167944, 0.5919621970053304, 0.2072246336285791, 0.18339143938352145], ['mnist', 'SCAFFOLD', 14, 2.9600824138895754, 0.1538153948683772, 0.5992290347947923, 0.20328013088676453, 0.17967842458838054], ['mnist', 'SCAFFOLD', 15, 2.8065886756301963, 0.16461179606797735, 0.6111826180908877, 0.19912881118578676, 0.173814501993683], ['mnist', 'SCAFFOLD', 16, 2.751358648181041, 0.17274241919360214, 0.6178946962451382, 0.19853625055549665, 0.16997833124907613], ['mnist', 'SCAFFOLD', 17, 2.6809776264239304, 0.18600466511162947, 0.626511886425457, 0.19931207564825607, 0.16612002585299715], ['mnist', 'SCAFFOLD', 18, 2.682196720050985, 0.19160279906697766, 0.6304142571852213, 0.2015378051383938, 0.16395471298381772], ['mnist', 'SCAFFOLD', 19, 2.6394806942358975, 0.1980006664445185, 0.6364815488710946, 0.20592390042232026, 0.16190824685348212], ['mnist', 'SCAFFOLD', 20, 2.6455197689050665, 0.19980006664445185, 0.6381800268823056, 0.20660119302423918, 0.1620955271107356], ['mnist', 'SCAFFOLD', 21, 2.611891529443826, 0.20593135621459513, 0.6440806947032494, 0.20454591321020085, 0.15983051640618712], ['mnist', 'SCAFFOLD', 22, 2.6159187474088346, 0.20773075641452848, 0.644973303353906, 0.20553289505913327, 0.16010280337384045], ['mnist', 'SCAFFOLD', 23, 2.5602208875489643, 0.21232922359213596, 0.6518711840611939, 0.20315015682807558, 0.15770101676416717], ['mnist', 'SCAFFOLD', 24, 2.573408652495977, 0.2137954015328224, 0.6519847649919311, 0.20530594521044915, 0.15743672110049145], ['mnist', 'SCAFFOLD', 25, 2.512705635039691, 0.21799400199933355, 0.6603549781486617, 0.20930990082720483, 0.15454507984400104], ['mnist', 'SCAFFOLD', 26, 2.5098696089194363, 0.22072642452515828, 0.662258390310689, 0.21121763172969843, 0.1542750487243711], ['mnist', 'SCAFFOLD', 27, 2.4757317437464135, 0.22565811396201266, 0.6680976350842053, 0.21043852168756338, 0.15219972850113778], ['mnist', 'SCAFFOLD', 28, 2.46310500151276, 0.2279240253248917, 0.67023227757152, 0.20151622196732577, 0.1503845714481704], ['mnist', 'SCAFFOLD', 29, 2.432887500788634, 0.22932355881372876, 0.6747066082725075, 0.20283010774031793, 0.14817632256125574], ['mnist', 'SCAFFOLD', 30, 2.4288863259656104, 0.23012329223592137, 0.6759248546946887, 0.19970610584280432, 0.14727763179202966], ['mnist', 'SCAFFOLD', 31, 2.4095995301951865, 0.23345551482839053, 0.67964982729886, 0.2048509031002222, 0.1464719632623222], ['mnist', 'SCAFFOLD', 32, 2.4349701084981277, 0.23138953682105964, 0.6795724551328106, 0.20155508616337806, 0.14605732165798066], ['mnist', 'SCAFFOLD', 33, 2.4149257703683236, 0.2360546484505165, 0.6834129945816119, 0.20209283454115037, 0.14540615886733677], ['mnist', 'SCAFFOLD', 34, 2.4066592800380975, 0.2385204931689437, 0.6863695687927681, 0.19900791803724666, 0.14356759857979115], ['mnist', 'SCAFFOLD', 35, 2.3876492025538454, 0.23958680439853383, 0.6902151157464678, 0.20123654663783264, 0.14245372861212308], ['mnist', 'SCAFFOLD', 36, 2.3761597401419983, 0.24625124958347216, 0.6934654143775906, 0.1985475302349435, 0.14146554151309607], ['mnist', 'SCAFFOLD', 37, 2.359375511317868, 0.2473842052649117, 0.6963736004526335, 0.1985003489220026, 0.1402752795431549], ['mnist', 'SCAFFOLD', 38, 2.3535842770883537, 0.2506497834055315, 0.6992265847382692, 0.1969257874935901, 0.13846668099832513], ['mnist', 'SCAFFOLD', 39, 2.3149675838508257, 0.2547150949683439, 0.703630391243194, 0.19062879363713664, 0.13696173941947717], ['mnist', 'SCAFFOLD', 40, 2.338526227909004, 0.25438187270909696, 0.7026434987773451, 0.19541879048126998, 0.13650255265093308], ['mnist', 'SCAFFOLD', 41, 2.3169768630754866, 0.2570476507830723, 0.70660038982331, 0.19008766302805416, 0.13613248647487358], ['mnist', 'SCAFFOLD', 42, 2.307241648694397, 0.2643118960346551, 0.709073023587722, 0.19051114954614937, 0.13591436991942668], ['mnist', 'SCAFFOLD', 43, 2.291674554321448, 0.26657780739753417, 0.712128592601658, 0.19122315943797627, 0.13604355961927683], ['mnist', 'SCAFFOLD', 44, 2.298899113202886, 0.2666444518493835, 0.7129261886914142, 0.19396158272390188, 0.13537593743003945], ['mnist', 'SCAFFOLD', 45, 2.2855607885689015, 0.26744418527157615, 0.7155187895690556, 0.19722019717471556, 0.13503538220887992], ['mnist', 'SCAFFOLD', 46, 2.2617544858048473, 0.2735754748417194, 0.7195538453371028, 0.1977535150588696, 0.13423768328001193], ['mnist', 'SCAFFOLD', 47, 2.2318867470872505, 0.2761746084638454, 0.7225204462374041, 0.19516585130037747, 0.13059948696846368], ['mnist', 'SCAFFOLD', 48, 2.2549597437677447, 0.2727757414195268, 0.721589108823167, 0.18717397097322286, 0.13017979918435277], ['mnist', 'SCAFFOLD', 49, 2.2137329166037976, 0.28037320893035655, 0.7266970142280024, 0.18603946876325847, 0.13059398341089493], ['mnist', 'SCAFFOLD', 50, 2.2194397278417064, 0.2801732755748084, 0.7281861326352688, 0.18675045172821178, 0.1290497972919432], ['mnist', 'SCAFFOLD', 51, 2.207212225813771, 0.28250583138953683, 0.7296020176434637, 0.18520805932630086, 0.12960496483833012], ['mnist', 'SCAFFOLD', 52, 2.2096049049282307, 0.28277240919693436, 0.7306855038196243, 0.1870276151279777, 0.12677550051885889], ['mnist', 'SCAFFOLD', 53, 2.2050257851009882, 0.28523825391536156, 0.7325355331366086, 0.18429288386744352, 0.12850643170074774], ['mnist', 'SCAFFOLD', 54, 2.1828380774161618, 0.2923025658113962, 0.7363556646894851, 0.18274893842023096, 0.12749225717724808], ['mnist', 'SCAFFOLD', 55, 2.1894824022812505, 0.2925024991669444, 0.7361514930445496, 0.1854374783101391, 0.12806456215568174], ['mnist', 'SCAFFOLD', 56, 2.184383514197678, 0.29416861046317894, 0.7377158829168314, 0.18471644656419162, 0.12657589940841069], ['mnist', 'SCAFFOLD', 57, 2.182640744752699, 0.2927024325224925, 0.7385482322669318, 0.18496096933920111, 0.12688618070107585], ['mnist', 'SCAFFOLD', 58, 2.192511698605621, 0.2940353215594802, 0.7379260619769622, 0.18328253313370568, 0.12588645501487458], ['mnist', 'SCAFFOLD', 59, 2.1600961794807554, 0.30396534488503835, 0.7416442109366244, 0.18320056130240414, 0.12810857462710434], ['mnist', 'SCAFFOLD', 60, 2.171878007572601, 0.30016661112962345, 0.7408082011228176, 0.17875614706792153, 0.12524546820533936], ['mnist', 'SCAFFOLD', 61, 2.1764094100394513, 0.30143285571476175, 0.7401687736182267, 0.1816866309315108, 0.1267472563649398], ['mnist', 'SCAFFOLD', 62, 2.1803391010624296, 0.29810063312229257, 0.7404570140077451, 0.18233748723178347, 0.12390477827495003], ['mnist', 'SCAFFOLD', 63, 2.1847717610692374, 0.30463178940353214, 0.740593242692314, 0.1822817610916568, 0.1282916931255474], ['mnist', 'SCAFFOLD', 64, 2.1637373464698384, 0.3044985004998334, 0.7435606707538452, 0.1831823311341615, 0.12264088660728995], ['mnist', 'SCAFFOLD', 65, 2.158569240432039, 0.30823058980339885, 0.7446290829194991, 0.18309381148057308, 0.12432788952317282], ['mnist', 'SCAFFOLD', 66, 2.1377305433442775, 0.30596467844051983, 0.7466803728525063, 0.18761684201587717, 0.12119740655221518], ['mnist', 'SCAFFOLD', 67, 2.144728621324859, 0.3076307897367544, 0.7459819845177058, 0.18530244952998903, 0.12367959320451849], ['mnist', 'SCAFFOLD', 68, 2.1440171087884448, 0.3100299900033322, 0.7480382819407928, 0.18295284029220152, 0.12130609593206326], ['mnist', 'SCAFFOLD', 69, 2.183505053795995, 0.30389870043318895, 0.7456572111819166, 0.1840289844353742, 0.12166235885775369], ['mnist', 'SCAFFOLD', 70, 2.1494227336087968, 0.3068977007664112, 0.7505805095165856, 0.18315361750512835, 0.11715795415097661], ['mnist', 'SCAFFOLD', 71, 2.1503828828928335, 0.3080306564478507, 0.7513020374806433, 0.18653461036947167, 0.11871668545055254], ['mnist', 'SCAFFOLD', 72, 2.11240690946579, 0.3136954348550483, 0.7547128674167788, 0.17766284059509538, 0.11711057394523725], ['mnist', 'SCAFFOLD', 73, 2.1632792661939106, 0.3097634121959347, 0.7508801184979883, 0.18337683700964758, 0.12062237224091304], ['mnist', 'SCAFFOLD', 74, 2.0972716658146178, 0.3206931022992336, 0.7580206515812762, 0.17730892637605458, 0.11604230753690421], ['mnist', 'SCAFFOLD', 75, 2.1292404549354385, 0.3126957680773076, 0.7545260705927596, 0.18036006490283285, 0.11649713505772444], ['mnist', 'SCAFFOLD', 76, 2.1454269101308623, 0.30869710096634456, 0.752464610424601, 0.18243031535692414, 0.11683465920288055], ['mnist', 'SCAFFOLD', 77, 2.1464428599402092, 0.3136287904031989, 0.7527577715519392, 0.1840505903379379, 0.1206340127536189], ['mnist', 'SCAFFOLD', 78, 2.1294333459313797, 0.31209596801066314, 0.7552841709709354, 0.18188598476232803, 0.11695714817531533], ['mnist', 'SCAFFOLD', 79, 2.137223514017988, 0.31116294568477176, 0.7539815363272055, 0.18933347691616836, 0.11814707087277032], ['mnist', 'SCAFFOLD', 80, 2.1290418354433966, 0.3112295901366211, 0.7558800188812946, 0.18431802452094392, 0.11366654661283639], ['mnist', 'SCAFFOLD', 81, 2.1402194682127966, 0.31436187937354215, 0.7564969445547677, 0.18772091181791192, 0.11763800786440137], ['mnist', 'SCAFFOLD', 82, 2.1250975354361232, 0.3146951016327891, 0.758315549334789, 0.19034778280168274, 0.11370752847598196], ['mnist', 'SCAFFOLD', 83, 2.1268101518920206, 0.3230923025658114, 0.7594932497212706, 0.18192882311614167, 0.1185421308812902], ['mnist', 'SCAFFOLD', 84, 2.100855995766757, 0.327890703098967, 0.7625412374269307, 0.1846215868559752, 0.11447591532874599], ['mnist', 'SCAFFOLD', 85, 2.135962043174044, 0.3218927024325225, 0.7594497677260014, 0.1816638568395571, 0.11688205951776168], ['mnist', 'SCAFFOLD', 86, 2.0919457756246658, 0.3274908363878707, 0.7633218512073746, 0.18132707073057708, 0.1125022496073443], ['mnist', 'SCAFFOLD', 87, 2.0964946747489774, 0.3279573475508164, 0.7623701711319194, 0.18028762824795988, 0.11376760568251064], ['mnist', 'SCAFFOLD', 88, 2.093744494653019, 0.32975674775074976, 0.7618729810493599, 0.18030602145965544, 0.11336720058097326], ['mnist', 'SCAFFOLD', 89, 2.1113951071098107, 0.3239586804398534, 0.761361230241857, 0.1824122629162614, 0.11272774488187061], ['mnist', 'SCAFFOLD', 90, 2.068641886470101, 0.3307564145284905, 0.7658298698450315, 0.17713638471656332, 0.11112515469543557], ['mnist', 'SCAFFOLD', 91, 2.10051341369778, 0.32289236921026326, 0.7645239843029881, 0.18254744724699407, 0.11105042166530453], ['mnist', 'SCAFFOLD', 92, 2.072694755408791, 0.32969010329890036, 0.7671272335962586, 0.17868023918180545, 0.11145301518121094], ['mnist', 'SCAFFOLD', 93, 2.0898381410184457, 0.32489170276574475, 0.7647324014567365, 0.18061368075320053, 0.11267538042523546], ['mnist', 'SCAFFOLD', 94, 2.042175883553761, 0.32929023658780404, 0.770372497331881, 0.17832693586320397, 0.10813214812578534], ['mnist', 'SCAFFOLD', 95, 2.0029767942611745, 0.3465511496167944, 0.7746420265073061, 0.18238086819977195, 0.11394117377253139], ['mnist', 'SCAFFOLD', 96, 2.0110871758858626, 0.340753082305898, 0.7733214588676831, 0.17548223786415593, 0.11025969595011957], ['mnist', 'SCAFFOLD', 97, 2.0775275346338815, 0.3307564145284905, 0.7664871573698167, 0.1772487129547453, 0.1123145904491609], ['mnist', 'SCAFFOLD', 98, 2.0551365845467777, 0.3348883705431523, 0.7689807234185988, 0.17958300329182778, 0.11076909160703015], ['mnist', 'SCAFFOLD', 99, 2.0775073106757147, 0.33215594801732756, 0.7677895425728465, 0.18330329491462946, 0.11208129682349435], ['mnist', 'SCAFFOLD', 100, 2.0229655304416414, 0.3392202599133622, 0.7741864819613371, 0.18103806832968908, 0.10776164560422855]]
+File path: ../results/Cifar10_SCAFFOLD_test_0.h5
+
+Average time cost: 19092.14s.
+Length:  101
+std for best accurancy: 0.0
+mean for best accurancy: 0.3465511496167944
+All done!
+
+Storage on cpu
+-------------------------------------------------------------------------------
+Total Tensors: 425864970 	Used Memory: 887.98M
+-------------------------------------------------------------------------------

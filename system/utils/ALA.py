@@ -37,6 +37,7 @@ class ALA:
             None.
         """
 
+
         self.cid = cid
         self.loss = loss
         self.train_data = train_data
@@ -47,6 +48,7 @@ class ALA:
         self.threshold = threshold
         self.num_pre_loss = num_pre_loss
         self.device = device
+        self.jsweight=0
 
         self.weights = None # Learnable local aggregation weights.
         self.start_phase = True
@@ -66,7 +68,7 @@ class ALA:
         Returns:
             None.
         """
-
+        #print(f"ALA adaptive_local_aggregation weight learning self.start_phase ={self.start_phase}----------------")
         # randomly sample partial local training data
         rand_ratio = self.rand_percent / 100
         rand_num = int(rand_ratio*len(self.train_data))
@@ -78,8 +80,9 @@ class ALA:
         params_g = list(global_model.parameters())
         params = list(local_model.parameters())
 
-        # deactivate ALA at the 1st communication iteration
+        # deactivate ALA at the 1st communication iteration,第一次直接不做任何处理
         if torch.sum(params_g[0] - params[0]) == 0:
+            print(" ALA at the 1st communication iteration")
             return
 
         # preserve all the updates in the lower layers
@@ -157,3 +160,76 @@ class ALA:
         # obtain initialized local model
         for param, param_t in zip(params_p, params_tp):
             param.data = param_t.data.clone()
+        #print("ALA  weight type is",type(self.weights))
+
+    def adaptive_local_aggregation_aaw(self,
+                                   global_model: nn.Module,
+                                   local_model: nn.Module) -> None:
+        """
+        Generates the Dataloader for the randomly sampled local training data and
+        preserves the lower layers of the update.
+
+        Args:
+            global_model: The received global/aggregated model.
+            local_model: The trained local model.
+
+        Returns:
+            None.
+        """
+        print("loacl model init global  weight ")
+        # temp local model only for weight learning
+        model_t = copy.deepcopy(local_model)
+        params_t = list(model_t.parameters())
+        params_g = list(global_model.parameters())
+        params_l = list(local_model.parameters())
+        for param_t, param, param_g in zip(params_t, params_l,params_g):
+            param_t.data = param + (param_g - param) * 0.3
+            #param_t.data = param_g
+        for param, param_t in zip(params_l, params_t):
+            param.data = param_t.data.clone()
+
+
+    def static_local_aggregation(self,
+                            global_model: nn.Module,
+                            local_model: nn.Module) -> None:
+        """
+        Generates the Dataloader for the randomly sampled local training data and
+        preserves the lower layers of the update.
+
+        Args:
+            global_model: The received global/aggregated model.
+            local_model: The trained local model.
+
+        Returns:
+            None.
+        """
+        #print("adaptive_local_aggregation weight learning----------------")
+        # randomly sample partial local training data
+
+
+        # obtain the references of the parameters
+        params_g = list(global_model.parameters())
+        params = list(local_model.parameters())
+        # preserve all the updates in the lower layers
+        for param, param_g in zip(params[:-self.layer_idx], params_g[:-self.layer_idx]):
+            param.data = param_g.data.clone()
+
+        # temp local model only for weight learning
+        model_t = copy.deepcopy(local_model)
+        params_t = list(model_t.parameters())
+
+        # only consider higher layers
+        params_p = params[-self.layer_idx:]
+        params_gp = params_g[-self.layer_idx:]
+        params_tp = params_t[-self.layer_idx:]
+        # initialize the higher layers in the temp local model
+        for param_t, param, param_g in zip(params_tp, params_p, params_gp):
+            param_t.data = param + (param_g - param) * 0.3
+
+        # obtain initialized local model
+        for param, param_t in zip(params_p, params_tp):
+            param.data = param_t.data.clone()
+
+
+
+

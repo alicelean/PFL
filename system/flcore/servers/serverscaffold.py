@@ -42,11 +42,15 @@ class SCAFFOLD(Server):
             self.global_c.append(torch.zeros_like(param))
 
     def train(self):
-        #fix_ids默认是False
-        if self.fix_ids:
-            self.select_idlist = self.read_selectInfo()
-
+        print("*************************** server_sccafoold train ***************************")
+        self.writeparameters()
         colum_value = []
+        select_id = []
+
+        if self.fix_ids:
+            file_path = self.programpath + "/res/selectids/" + self.dataset + "_select_client_ids" + str(
+                self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+            self.select_idlist = self.read_selectInfo(file_path)
         # -----------写入超参数
         # 1:minist,
         redf = pd.DataFrame(
@@ -117,26 +121,28 @@ class SCAFFOLD(Server):
         print(max(self.rs_test_acc))
         print("\nAverage time cost per round.")
         print(sum(self.Budget[1:]) / len(self.Budget[1:]))
-        # 写入idlist----保证整个客户端选择一致，螚更好的判别两种算法的差异---------------------------------------
-        redf = pd.DataFrame(columns=["global_rounds", "id_list"])
-        redf.loc[len(redf) + 1] = ["global_rounds", "id_list"]
-        for v in range(len(select_id)):
-            redf.loc[len(redf) + 1] = select_id[v]
-        idpath = Programpath + "/res/selectids/select_client_ids" + str(self.num_clients) + "_" + str(
-            self.join_ratio) + ".csv"
-        redf.to_csv(idpath, mode='a', header=False)
-
-        # --------------训练过程中的全局模型的acc
+        # 6.写入idlist----保证整个客户端选择一致，更好的判别两种算法的差异---------------------------------------
+        if not self.fix_ids:
+            redf = pd.DataFrame(columns=["global_rounds", "id_list"])
+            redf.loc[len(redf) + 1] = ["*********************", "*********************"]
+            redf.loc[len(redf) + 1] = ["global_rounds", "id_list"]
+            for v in range(len(select_id)):
+                redf.loc[len(redf) + 1] = select_id[v]
+            idpath = self.programpath + "/res/selectids/" + self.dataset + "_select_client_ids" + str(
+                self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+            redf.to_csv(idpath, mode='a', header=False)
+            print("write select id list ", idpath)
+        # --------------7.训练过程中的全局模型的acc
         colum_name = ["case", "method", "group", "Loss", "Accurancy", "AUC", "Std Test Accurancy", "Std Test AUC"]
         redf = pd.DataFrame(columns=colum_name)
         redf.loc[len(redf) + 1] = colum_name
         for i in range(len(colum_value)):
             redf.loc[len(redf) + 1] = colum_value[i]
-        path = Programpath + "/res/" + self.method + "/acuuray.csv"
-        redf.to_csv(path, mode='a', header=False)
-
+        accpath = self.programpath + "/res/" + self.method + "/" + self.dataset + "_acc.csv"
+        print("success training write acc txt", accpath)
+        redf.to_csv(accpath, mode='a', header=False)
+        print(colum_value)
         # -----------------------------------------------------------------------------------------------
-
         self.save_results()
         self.save_global_model()
 

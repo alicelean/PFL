@@ -8,8 +8,8 @@ from flcore.clients.clientbase import Client
 
 
 class clientpFedMe(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id, traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata, train_samples, test_samples, **kwargs)
 
         self.lamda = args.lamda
         self.K = args.K

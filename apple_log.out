@@ -1,0 +1,1192 @@
+/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so, 6): Library not loaded: @rpath/libpng16.16.dylib
+  Referenced from: /Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so
+  Reason: Incompatible library version: image.so requires version 56.0.0 or later, but libpng16.16.dylib provides version 54.0.0'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+
+cuda is not avaiable.
+
+==================================================
+Algorithm: APPLE
+Local batch size: 10
+Local steps: 1
+Local learing rate: 0.005
+Local learing rate decay: False
+Total number of clients: 20
+Clients join in each round: 0.5
+Clients randomly join: False
+Client drop rate: 0.0
+Client select regarding time: False
+Running times: 1
+Dataset: Cifar10
+Number of classes: 10
+Backbone: cnn
+Using device: cpu
+Using DP: False
+Auto break: False
+Global rounds: 100
+DLG attack: False
+Total number of new clients: 0
+Fine tuning epoches on new clients: 0
+==================================================
+
+============= Running time: 0th =============
+Creating server and clients ...
+FedAvgCNN(
+  (conv1): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=1600, out_features=512, bias=True)
+    (1): ReLU(inplace=True)
+  )
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+INFO:------------------------args.algorithm is:APPLE-----------------------
+**************************1.INfo,set_clients ,init data********************
+
+Join ratio / total clients: 0.5 / 20
+Finished creating server and clients.
+*************************** server_aaw train ***************************
+-------------------------------------------------------------------------write exe canshu,txt path is /Users/alice/Desktop/python/PFL//res/APPLE/Cifar10_canshu.csv
+INFO:---------Using fix select id list--------------------------------
+{0: [1, 13, 4, 12, 2, 3, 15, 9, 16, 7], 1: [19, 3, 9, 16, 14, 18, 1, 2, 4, 17], 2: [11, 15, 8, 1, 7, 10, 0, 17, 5, 6], 3: [7, 12, 4, 2, 10, 16, 8, 14, 15, 9], 4: [17, 14, 18, 10, 6, 0, 16, 19, 15, 2], 5: [0, 7, 17, 8, 11, 10, 5, 3, 18, 2], 6: [8, 0, 1, 4, 12, 15, 14, 9, 2, 10], 7: [4, 17, 7, 6, 16, 13, 18, 9, 0, 2], 8: [7, 1, 15, 16, 14, 13, 19, 10, 11, 4], 9: [14, 9, 8, 15, 11, 17, 2, 10, 6, 5], 10: [16, 13, 11, 4, 8, 3, 17, 5, 0, 15], 11: [11, 2, 15, 8, 18, 0, 6, 5, 12, 1], 12: [10, 17, 8, 13, 15, 0, 6, 4, 18, 2], 13: [9, 13, 17, 16, 14, 15, 4, 12, 0, 7], 14: [19, 15, 17, 7, 5, 3, 10, 14, 0, 9], 15: [11, 4, 2, 8, 13, 10, 6, 15, 14, 16], 16: [12, 1, 14, 0, 16, 9, 13, 19, 5, 8], 17: [7, 5, 8, 14, 3, 15, 10, 4, 0, 2], 18: [3, 9, 15, 8, 2, 1, 12, 11, 4, 16], 19: [5, 10, 18, 14, 9, 3, 1, 16, 8, 12], 20: [5, 9, 7, 14, 13, 0, 12, 19, 2, 18], 21: [19, 7, 8, 5, 12, 0, 1, 17, 6, 18], 22: [12, 5, 10, 11, 6, 17, 7, 9, 19, 2], 23: [0, 2, 6, 12, 15, 11, 9, 18, 8, 16], 24: [11, 15, 4, 6, 13, 3, 1, 17, 0, 2], 25: [13, 14, 12, 4, 18, 19, 1, 15, 7, 6], 26: [8, 5, 16, 0, 17, 19, 15, 18, 1, 3], 27: [14, 5, 0, 1, 12, 4, 16, 17, 8, 13], 28: [10, 3, 13, 0, 8, 19, 14, 7, 18, 15], 29: [8, 2, 12, 17, 10, 14, 16, 9, 5, 3], 30: [11, 6, 17, 18, 1, 12, 16, 7, 0, 8], 31: [4, 3, 9, 19, 14, 11, 10, 18, 15, 17], 32: [11, 0, 2, 10, 15, 3, 6, 18, 4, 19], 33: [9, 2, 14, 13, 16, 7, 17, 11, 8, 15], 34: [13, 11, 16, 14, 2, 9, 19, 4, 1, 8], 35: [3, 18, 2, 19, 16, 1, 13, 5, 4, 12], 36: [2, 6, 19, 8, 4, 16, 5, 18, 1, 13], 37: [15, 12, 8, 16, 2, 10, 3, 14, 13, 6], 38: [18, 1, 4, 2, 10, 14, 5, 9, 16, 3], 39: [14, 6, 1, 2, 11, 15, 12, 8, 5, 16], 40: [4, 12, 15, 16, 7, 18, 10, 11, 2, 19], 41: [9, 17, 8, 14, 12, 13, 11, 6, 4, 7], 42: [2, 18, 7, 9, 13, 16, 15, 0, 10, 5], 43: [14, 9, 11, 17, 2, 15, 6, 7, 18, 0], 44: [16, 8, 0, 19, 13, 4, 1, 18, 14, 17], 45: [19, 14, 9, 15, 17, 0, 4, 10, 11, 7], 46: [15, 18, 17, 11, 12, 14, 13, 8, 0, 1], 47: [3, 17, 2, 4, 9, 10, 8, 18, 15, 12], 48: [16, 1, 5, 9, 7, 18, 4, 0, 2, 10], 49: [2, 7, 5, 9, 3, 12, 10, 19, 0, 8], 50: [14, 13, 16, 4, 2, 6, 1, 11, 17, 12], 51: [12, 13, 10, 3, 5, 2, 18, 0, 4, 1], 52: [1, 14, 3, 5, 18, 4, 7, 13, 11, 6], 53: [6, 14, 19, 16, 11, 10, 5, 13, 18, 15], 54: [9, 12, 3, 6, 8, 17, 19, 14, 18, 16], 55: [7, 2, 14, 6, 5, 4, 1, 12, 19, 3], 56: [9, 18, 0, 15, 2, 5, 10, 14, 1, 7], 57: [8, 13, 15, 9, 12, 11, 5, 14, 17, 2], 58: [9, 4, 16, 7, 10, 1, 5, 11, 12, 17], 59: [0, 5, 6, 19, 3, 13, 17, 10, 8, 11], 60: [16, 8, 0, 4, 15, 1, 13, 3, 6, 10], 61: [5, 10, 1, 2, 18, 14, 6, 0, 3, 9], 62: [13, 17, 2, 0, 7, 12, 10, 5, 19, 8], 63: [4, 18, 17, 16, 8, 9, 2, 12, 11, 5], 64: [1, 2, 19, 10, 12, 15, 0, 18, 13, 8], 65: [4, 14, 8, 11, 6, 19, 1, 13, 12, 7], 66: [6, 10, 1, 15, 16, 0, 14, 12, 8, 7], 67: [12, 17, 2, 8, 16, 11, 5, 6, 7, 13], 68: [6, 17, 13, 19, 14, 4, 10, 12, 11, 18], 69: [19, 0, 3, 1, 12, 8, 6, 14, 10, 16], 70: [6, 13, 17, 10, 7, 16, 14, 11, 8, 4], 71: [5, 15, 16, 17, 1, 18, 2, 0, 14, 10], 72: [6, 7, 9, 19, 2, 18, 11, 5, 4, 3], 73: [16, 2, 13, 10, 1, 14, 0, 6, 4, 7], 74: [16, 0, 18, 9, 3, 10, 7, 4, 11, 6], 75: [13, 10, 9, 12, 8, 0, 17, 7, 1, 14], 76: [15, 19, 17, 18, 11, 10, 7, 1, 8, 5], 77: [17, 3, 8, 15, 18, 2, 12, 10, 9, 7], 78: [18, 5, 7, 3, 9, 14, 13, 0, 4, 12], 79: [9, 12, 10, 0, 11, 1, 8, 16, 14, 2], 80: [3, 16, 17, 15, 9, 13, 19, 0, 7, 6], 81: [8, 1, 17, 9, 11, 3, 16, 4, 15, 0], 82: [16, 18, 15, 12, 14, 8, 9, 2, 13, 17], 83: [16, 17, 10, 2, 8, 7, 15, 6, 3, 1], 84: [9, 10, 5, 8, 0, 1, 6, 13, 14, 16], 85: [7, 4, 13, 18, 0, 1, 8, 16, 5, 15], 86: [19, 2, 16, 1, 8, 11, 12, 4, 0, 9], 87: [10, 5, 11, 8, 14, 7, 17, 9, 6, 18], 88: [15, 4, 9, 6, 8, 19, 17, 18, 16, 11], 89: [19, 12, 2, 18, 3, 7, 6, 13, 16, 17], 90: [4, 3, 13, 15, 0, 12, 14, 9, 16, 8], 91: [2, 4, 18, 1, 8, 10, 6, 15, 13, 19], 92: [7, 5, 10, 0, 8, 9, 15, 3, 19, 11], 93: [3, 11, 0, 10, 13, 2, 19, 1, 12, 4], 94: [18, 6, 12, 3, 9, 10, 13, 15, 19, 11], 95: [6, 3, 11, 0, 17, 9, 13, 19, 8, 7], 96: [4, 19, 15, 2, 8, 6, 3, 11, 12, 10], 97: [10, 4, 1, 19, 11, 12, 16, 14, 13, 8], 98: [3, 19, 10, 13, 8, 0, 5, 4, 14, 18], 99: [0, 17, 6, 7, 11, 1, 15, 14, 5, 3], 100: [11, 2, 13, 9, 14, 12, 4, 18, 19, 0]}
+INFO:----------fix client id is :group is 0 select id list is: [1, 2, 3, 4, 7, 9, 12, 13, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 0-------------
+
+Evaluate personalized models
+Averaged Train Loss: 2.3039
+Averaged Test Accurancy: 0.0937
+Averaged Test AUC: 0.4940
+Std Test Accurancy: 0.1815
+Std Test AUC: 0.2182
+-------------------------------------------------- 825.2082250118256
+INFO:----------fix client id is :group is 1 select id list is: [1, 2, 3, 4, 9, 14, 16, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 1-------------
+
+Evaluate personalized models
+Averaged Train Loss: 1.9885
+Averaged Test Accurancy: 0.4957
+Averaged Test AUC: 0.8355
+Std Test Accurancy: 0.3925
+Std Test AUC: 0.1496
+-------------------------------------------------- 1111.1300327777863
+INFO:----------fix client id is :group is 2 select id list is: [0, 1, 5, 6, 7, 8, 10, 11, 15, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 2-------------
+
+Evaluate personalized models
+Averaged Train Loss: 1.7384
+Averaged Test Accurancy: 0.5985
+Averaged Test AUC: 0.8709
+Std Test Accurancy: 0.3558
+Std Test AUC: 0.1567
+-------------------------------------------------- 1189.682566165924
+INFO:----------fix client id is :group is 3 select id list is: [2, 4, 7, 8, 9, 10, 12, 14, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 3-------------
+
+Evaluate personalized models
+Averaged Train Loss: 1.1505
+Averaged Test Accurancy: 0.7028
+Averaged Test AUC: 0.9248
+Std Test Accurancy: 0.2779
+Std Test AUC: 0.1048
+-------------------------------------------------- 1326.8366758823395
+INFO:----------fix client id is :group is 4 select id list is: [0, 2, 6, 10, 14, 15, 16, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 4-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.7924
+Averaged Test Accurancy: 0.7728
+Averaged Test AUC: 0.9508
+Std Test Accurancy: 0.2415
+Std Test AUC: 0.0606
+-------------------------------------------------- 1332.158451795578
+INFO:----------fix client id is :group is 5 select id list is: [0, 2, 3, 5, 7, 8, 10, 11, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 5-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.6780
+Averaged Test Accurancy: 0.7945
+Averaged Test AUC: 0.9583
+Std Test Accurancy: 0.2075
+Std Test AUC: 0.0465
+-------------------------------------------------- 1326.419196844101
+INFO:----------fix client id is :group is 6 select id list is: [0, 1, 2, 4, 8, 9, 10, 12, 14, 15] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 6-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.6253
+Averaged Test Accurancy: 0.8086
+Averaged Test AUC: 0.9617
+Std Test Accurancy: 0.1810
+Std Test AUC: 0.0408
+-------------------------------------------------- 1308.9848368167877
+INFO:----------fix client id is :group is 7 select id list is: [0, 2, 4, 6, 7, 9, 13, 16, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 7-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.5936
+Averaged Test Accurancy: 0.8160
+Averaged Test AUC: 0.9639
+Std Test Accurancy: 0.1703
+Std Test AUC: 0.0378
+-------------------------------------------------- 1324.2406878471375
+INFO:----------fix client id is :group is 8 select id list is: [1, 4, 7, 10, 11, 13, 14, 15, 16, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 8-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.5701
+Averaged Test Accurancy: 0.8225
+Averaged Test AUC: 0.9655
+Std Test Accurancy: 0.1625
+Std Test AUC: 0.0359
+-------------------------------------------------- 1316.9081027507782
+INFO:----------fix client id is :group is 9 select id list is: [2, 5, 6, 8, 9, 10, 11, 14, 15, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 9-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.5502
+Averaged Test Accurancy: 0.8273
+Averaged Test AUC: 0.9669
+Std Test Accurancy: 0.1561
+Std Test AUC: 0.0344
+-------------------------------------------------- 1315.145192861557
+INFO:----------fix client id is :group is 10 select id list is: [0, 3, 4, 5, 8, 11, 13, 15, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 10-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.5325
+Averaged Test Accurancy: 0.8316
+Averaged Test AUC: 0.9681
+Std Test Accurancy: 0.1527
+Std Test AUC: 0.0333
+-------------------------------------------------- 1313.0417029857635
+INFO:----------fix client id is :group is 11 select id list is: [0, 1, 2, 5, 6, 8, 11, 12, 15, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 11-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.5165
+Averaged Test Accurancy: 0.8351
+Averaged Test AUC: 0.9693
+Std Test Accurancy: 0.1501
+Std Test AUC: 0.0323
+-------------------------------------------------- 1308.9432621002197
+INFO:----------fix client id is :group is 12 select id list is: [0, 2, 4, 6, 8, 10, 13, 15, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 12-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.5020
+Averaged Test Accurancy: 0.8390
+Averaged Test AUC: 0.9702
+Std Test Accurancy: 0.1469
+Std Test AUC: 0.0315
+-------------------------------------------------- 1307.5162899494171
+INFO:----------fix client id is :group is 13 select id list is: [0, 4, 7, 9, 12, 13, 14, 15, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 13-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4891
+Averaged Test Accurancy: 0.8425
+Averaged Test AUC: 0.9711
+Std Test Accurancy: 0.1420
+Std Test AUC: 0.0309
+-------------------------------------------------- 1325.0740327835083
+INFO:----------fix client id is :group is 14 select id list is: [0, 3, 5, 7, 9, 10, 14, 15, 17, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 14-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4778
+Averaged Test Accurancy: 0.8458
+Averaged Test AUC: 0.9718
+Std Test Accurancy: 0.1398
+Std Test AUC: 0.0303
+-------------------------------------------------- 905.2361681461334
+INFO:----------fix client id is :group is 15 select id list is: [2, 4, 6, 8, 10, 11, 13, 14, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 15-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4679
+Averaged Test Accurancy: 0.8495
+Averaged Test AUC: 0.9724
+Std Test Accurancy: 0.1372
+Std Test AUC: 0.0298
+-------------------------------------------------- 787.3391149044037
+INFO:----------fix client id is :group is 16 select id list is: [0, 1, 5, 8, 9, 12, 13, 14, 16, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 16-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4591
+Averaged Test Accurancy: 0.8517
+Averaged Test AUC: 0.9729
+Std Test Accurancy: 0.1347
+Std Test AUC: 0.0294
+-------------------------------------------------- 545.2697200775146
+INFO:----------fix client id is :group is 17 select id list is: [0, 2, 3, 4, 5, 7, 8, 10, 14, 15] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 17-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4515
+Averaged Test Accurancy: 0.8541
+Averaged Test AUC: 0.9734
+Std Test Accurancy: 0.1335
+Std Test AUC: 0.0290
+-------------------------------------------------- 463.1566619873047
+INFO:----------fix client id is :group is 18 select id list is: [1, 2, 3, 4, 8, 9, 11, 12, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 18-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4448
+Averaged Test Accurancy: 0.8549
+Averaged Test AUC: 0.9738
+Std Test Accurancy: 0.1314
+Std Test AUC: 0.0287
+-------------------------------------------------- 461.8815441131592
+INFO:----------fix client id is :group is 19 select id list is: [1, 3, 5, 8, 9, 10, 12, 14, 16, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 19-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4389
+Averaged Test Accurancy: 0.8573
+Averaged Test AUC: 0.9741
+Std Test Accurancy: 0.1293
+Std Test AUC: 0.0284
+-------------------------------------------------- 418.01645708084106
+INFO:----------fix client id is :group is 20 select id list is: [0, 2, 5, 7, 9, 12, 13, 14, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 20-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4337
+Averaged Test Accurancy: 0.8584
+Averaged Test AUC: 0.9744
+Std Test Accurancy: 0.1287
+Std Test AUC: 0.0282
+-------------------------------------------------- 289.69678688049316
+INFO:----------fix client id is :group is 21 select id list is: [0, 1, 5, 6, 7, 8, 12, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 21-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4290
+Averaged Test Accurancy: 0.8594
+Averaged Test AUC: 0.9746
+Std Test Accurancy: 0.1282
+Std Test AUC: 0.0280
+-------------------------------------------------- 221.04143905639648
+INFO:----------fix client id is :group is 22 select id list is: [2, 5, 6, 7, 9, 10, 11, 12, 17, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 22-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4247
+Averaged Test Accurancy: 0.8616
+Averaged Test AUC: 0.9749
+Std Test Accurancy: 0.1262
+Std Test AUC: 0.0278
+-------------------------------------------------- 219.0720820426941
+INFO:----------fix client id is :group is 23 select id list is: [0, 2, 6, 8, 9, 11, 12, 15, 16, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 23-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4207
+Averaged Test Accurancy: 0.8630
+Averaged Test AUC: 0.9751
+Std Test Accurancy: 0.1249
+Std Test AUC: 0.0276
+-------------------------------------------------- 224.07214093208313
+INFO:----------fix client id is :group is 24 select id list is: [0, 1, 2, 3, 4, 6, 11, 13, 15, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 24-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4171
+Averaged Test Accurancy: 0.8645
+Averaged Test AUC: 0.9752
+Std Test Accurancy: 0.1229
+Std Test AUC: 0.0275
+-------------------------------------------------- 219.09442496299744
+INFO:----------fix client id is :group is 25 select id list is: [1, 4, 6, 7, 12, 13, 14, 15, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 25-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4137
+Averaged Test Accurancy: 0.8646
+Averaged Test AUC: 0.9754
+Std Test Accurancy: 0.1234
+Std Test AUC: 0.0274
+-------------------------------------------------- 219.61507415771484
+INFO:----------fix client id is :group is 26 select id list is: [0, 1, 3, 5, 8, 15, 16, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 26-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4105
+Averaged Test Accurancy: 0.8651
+Averaged Test AUC: 0.9756
+Std Test Accurancy: 0.1225
+Std Test AUC: 0.0273
+-------------------------------------------------- 225.32439589500427
+INFO:----------fix client id is :group is 27 select id list is: [0, 1, 4, 5, 8, 12, 13, 14, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 27-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4076
+Averaged Test Accurancy: 0.8665
+Averaged Test AUC: 0.9757
+Std Test Accurancy: 0.1208
+Std Test AUC: 0.0272
+-------------------------------------------------- 221.35998797416687
+INFO:----------fix client id is :group is 28 select id list is: [0, 3, 7, 8, 10, 13, 14, 15, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 28-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4048
+Averaged Test Accurancy: 0.8678
+Averaged Test AUC: 0.9758
+Std Test Accurancy: 0.1202
+Std Test AUC: 0.0271
+-------------------------------------------------- 222.26610398292542
+INFO:----------fix client id is :group is 29 select id list is: [2, 3, 5, 8, 9, 10, 12, 14, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 29-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.4023
+Averaged Test Accurancy: 0.8689
+Averaged Test AUC: 0.9759
+Std Test Accurancy: 0.1198
+Std Test AUC: 0.0270
+-------------------------------------------------- 221.7717308998108
+INFO:----------fix client id is :group is 30 select id list is: [0, 1, 6, 7, 8, 11, 12, 16, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 30-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3998
+Averaged Test Accurancy: 0.8694
+Averaged Test AUC: 0.9761
+Std Test Accurancy: 0.1197
+Std Test AUC: 0.0269
+-------------------------------------------------- 219.31741309165955
+INFO:----------fix client id is :group is 31 select id list is: [3, 4, 9, 10, 11, 14, 15, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 31-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3974
+Averaged Test Accurancy: 0.8694
+Averaged Test AUC: 0.9762
+Std Test Accurancy: 0.1193
+Std Test AUC: 0.0269
+-------------------------------------------------- 220.63623189926147
+INFO:----------fix client id is :group is 32 select id list is: [0, 2, 3, 4, 6, 10, 11, 15, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 32-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3951
+Averaged Test Accurancy: 0.8710
+Averaged Test AUC: 0.9763
+Std Test Accurancy: 0.1185
+Std Test AUC: 0.0268
+-------------------------------------------------- 220.20100927352905
+INFO:----------fix client id is :group is 33 select id list is: [2, 7, 8, 9, 11, 13, 14, 15, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 33-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3930
+Averaged Test Accurancy: 0.8712
+Averaged Test AUC: 0.9764
+Std Test Accurancy: 0.1183
+Std Test AUC: 0.0267
+-------------------------------------------------- 220.20273423194885
+INFO:----------fix client id is :group is 34 select id list is: [1, 2, 4, 8, 9, 11, 13, 14, 16, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 34-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3908
+Averaged Test Accurancy: 0.8714
+Averaged Test AUC: 0.9765
+Std Test Accurancy: 0.1184
+Std Test AUC: 0.0266
+-------------------------------------------------- 218.11320281028748
+INFO:----------fix client id is :group is 35 select id list is: [1, 2, 3, 4, 5, 12, 13, 16, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 35-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3887
+Averaged Test Accurancy: 0.8722
+Averaged Test AUC: 0.9766
+Std Test Accurancy: 0.1178
+Std Test AUC: 0.0265
+-------------------------------------------------- 221.37316608428955
+INFO:----------fix client id is :group is 36 select id list is: [1, 2, 4, 5, 6, 8, 13, 16, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 36-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3866
+Averaged Test Accurancy: 0.8725
+Averaged Test AUC: 0.9768
+Std Test Accurancy: 0.1183
+Std Test AUC: 0.0264
+-------------------------------------------------- 223.9687159061432
+INFO:----------fix client id is :group is 37 select id list is: [2, 3, 6, 8, 10, 12, 13, 14, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 37-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3846
+Averaged Test Accurancy: 0.8727
+Averaged Test AUC: 0.9769
+Std Test Accurancy: 0.1184
+Std Test AUC: 0.0263
+-------------------------------------------------- 225.10700106620789
+INFO:----------fix client id is :group is 38 select id list is: [1, 2, 3, 4, 5, 9, 10, 14, 16, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 38-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3825
+Averaged Test Accurancy: 0.8733
+Averaged Test AUC: 0.9770
+Std Test Accurancy: 0.1174
+Std Test AUC: 0.0262
+-------------------------------------------------- 222.814759016037
+INFO:----------fix client id is :group is 39 select id list is: [1, 2, 5, 6, 8, 11, 12, 14, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 39-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3805
+Averaged Test Accurancy: 0.8733
+Averaged Test AUC: 0.9771
+Std Test Accurancy: 0.1174
+Std Test AUC: 0.0261
+-------------------------------------------------- 219.0674328804016
+INFO:----------fix client id is :group is 40 select id list is: [2, 4, 7, 10, 11, 12, 15, 16, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 40-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3785
+Averaged Test Accurancy: 0.8740
+Averaged Test AUC: 0.9772
+Std Test Accurancy: 0.1167
+Std Test AUC: 0.0260
+-------------------------------------------------- 219.42606282234192
+INFO:----------fix client id is :group is 41 select id list is: [4, 6, 7, 8, 9, 11, 12, 13, 14, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 41-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3765
+Averaged Test Accurancy: 0.8747
+Averaged Test AUC: 0.9774
+Std Test Accurancy: 0.1159
+Std Test AUC: 0.0259
+-------------------------------------------------- 218.6239869594574
+INFO:----------fix client id is :group is 42 select id list is: [0, 2, 5, 7, 9, 10, 13, 15, 16, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 42-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3746
+Averaged Test Accurancy: 0.8758
+Averaged Test AUC: 0.9775
+Std Test Accurancy: 0.1153
+Std Test AUC: 0.0258
+-------------------------------------------------- 230.66241097450256
+INFO:----------fix client id is :group is 43 select id list is: [0, 2, 6, 7, 9, 11, 14, 15, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 43-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3727
+Averaged Test Accurancy: 0.8769
+Averaged Test AUC: 0.9776
+Std Test Accurancy: 0.1144
+Std Test AUC: 0.0257
+-------------------------------------------------- 222.15559124946594
+INFO:----------fix client id is :group is 44 select id list is: [0, 1, 4, 8, 13, 14, 16, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 44-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3708
+Averaged Test Accurancy: 0.8768
+Averaged Test AUC: 0.9777
+Std Test Accurancy: 0.1142
+Std Test AUC: 0.0256
+-------------------------------------------------- 220.44555592536926
+INFO:----------fix client id is :group is 45 select id list is: [0, 4, 7, 9, 10, 11, 14, 15, 17, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 45-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3690
+Averaged Test Accurancy: 0.8770
+Averaged Test AUC: 0.9778
+Std Test Accurancy: 0.1141
+Std Test AUC: 0.0254
+-------------------------------------------------- 223.51833510398865
+INFO:----------fix client id is :group is 46 select id list is: [0, 1, 8, 11, 12, 13, 14, 15, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 46-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3671
+Averaged Test Accurancy: 0.8774
+Averaged Test AUC: 0.9779
+Std Test Accurancy: 0.1134
+Std Test AUC: 0.0253
+-------------------------------------------------- 215.4283971786499
+INFO:----------fix client id is :group is 47 select id list is: [2, 3, 4, 8, 9, 10, 12, 15, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 47-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3652
+Averaged Test Accurancy: 0.8774
+Averaged Test AUC: 0.9780
+Std Test Accurancy: 0.1137
+Std Test AUC: 0.0252
+-------------------------------------------------- 217.54945611953735
+INFO:----------fix client id is :group is 48 select id list is: [0, 1, 2, 4, 5, 7, 9, 10, 16, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 48-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3634
+Averaged Test Accurancy: 0.8775
+Averaged Test AUC: 0.9782
+Std Test Accurancy: 0.1133
+Std Test AUC: 0.0251
+-------------------------------------------------- 217.55269718170166
+INFO:----------fix client id is :group is 49 select id list is: [0, 2, 3, 5, 7, 8, 9, 10, 12, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 49-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3615
+Averaged Test Accurancy: 0.8782
+Averaged Test AUC: 0.9783
+Std Test Accurancy: 0.1130
+Std Test AUC: 0.0250
+-------------------------------------------------- 221.8447949886322
+INFO:----------fix client id is :group is 50 select id list is: [1, 2, 4, 6, 11, 12, 13, 14, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 50-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3597
+Averaged Test Accurancy: 0.8786
+Averaged Test AUC: 0.9784
+Std Test Accurancy: 0.1124
+Std Test AUC: 0.0249
+-------------------------------------------------- 222.66186714172363
+INFO:----------fix client id is :group is 51 select id list is: [0, 1, 2, 3, 4, 5, 10, 12, 13, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 51-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3579
+Averaged Test Accurancy: 0.8791
+Averaged Test AUC: 0.9785
+Std Test Accurancy: 0.1120
+Std Test AUC: 0.0247
+-------------------------------------------------- 221.3660750389099
+INFO:----------fix client id is :group is 52 select id list is: [1, 3, 4, 5, 6, 7, 11, 13, 14, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 52-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3561
+Averaged Test Accurancy: 0.8795
+Averaged Test AUC: 0.9786
+Std Test Accurancy: 0.1123
+Std Test AUC: 0.0246
+-------------------------------------------------- 221.84673714637756
+INFO:----------fix client id is :group is 53 select id list is: [5, 6, 10, 11, 13, 14, 15, 16, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 53-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3542
+Averaged Test Accurancy: 0.8802
+Averaged Test AUC: 0.9787
+Std Test Accurancy: 0.1117
+Std Test AUC: 0.0245
+-------------------------------------------------- 220.22144889831543
+INFO:----------fix client id is :group is 54 select id list is: [3, 6, 8, 9, 12, 14, 16, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 54-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3525
+Averaged Test Accurancy: 0.8808
+Averaged Test AUC: 0.9788
+Std Test Accurancy: 0.1103
+Std Test AUC: 0.0244
+-------------------------------------------------- 219.46744203567505
+INFO:----------fix client id is :group is 55 select id list is: [1, 2, 3, 4, 5, 6, 7, 12, 14, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 55-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3507
+Averaged Test Accurancy: 0.8813
+Averaged Test AUC: 0.9789
+Std Test Accurancy: 0.1098
+Std Test AUC: 0.0242
+-------------------------------------------------- 221.76734900474548
+INFO:----------fix client id is :group is 56 select id list is: [0, 1, 2, 5, 7, 9, 10, 14, 15, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 56-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3489
+Averaged Test Accurancy: 0.8817
+Averaged Test AUC: 0.9790
+Std Test Accurancy: 0.1100
+Std Test AUC: 0.0241
+-------------------------------------------------- 221.8412582874298
+INFO:----------fix client id is :group is 57 select id list is: [2, 5, 8, 9, 11, 12, 13, 14, 15, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 57-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3471
+Averaged Test Accurancy: 0.8821
+Averaged Test AUC: 0.9791
+Std Test Accurancy: 0.1097
+Std Test AUC: 0.0240
+-------------------------------------------------- 224.8583219051361
+INFO:----------fix client id is :group is 58 select id list is: [1, 4, 5, 7, 9, 10, 11, 12, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 58-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3453
+Averaged Test Accurancy: 0.8823
+Averaged Test AUC: 0.9793
+Std Test Accurancy: 0.1101
+Std Test AUC: 0.0239
+-------------------------------------------------- 219.73856711387634
+INFO:----------fix client id is :group is 59 select id list is: [0, 3, 5, 6, 8, 10, 11, 13, 17, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 59-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3435
+Averaged Test Accurancy: 0.8830
+Averaged Test AUC: 0.9794
+Std Test Accurancy: 0.1094
+Std Test AUC: 0.0238
+-------------------------------------------------- 227.44799208641052
+INFO:----------fix client id is :group is 60 select id list is: [0, 1, 3, 4, 6, 8, 10, 13, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 60-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3416
+Averaged Test Accurancy: 0.8836
+Averaged Test AUC: 0.9795
+Std Test Accurancy: 0.1090
+Std Test AUC: 0.0236
+-------------------------------------------------- 219.37738299369812
+INFO:----------fix client id is :group is 61 select id list is: [0, 1, 2, 3, 5, 6, 9, 10, 14, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 61-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3397
+Averaged Test Accurancy: 0.8841
+Averaged Test AUC: 0.9796
+Std Test Accurancy: 0.1082
+Std Test AUC: 0.0235
+-------------------------------------------------- 221.22743487358093
+INFO:----------fix client id is :group is 62 select id list is: [0, 2, 5, 7, 8, 10, 12, 13, 17, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 62-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3378
+Averaged Test Accurancy: 0.8850
+Averaged Test AUC: 0.9797
+Std Test Accurancy: 0.1072
+Std Test AUC: 0.0234
+-------------------------------------------------- 218.1266438961029
+INFO:----------fix client id is :group is 63 select id list is: [2, 4, 5, 8, 9, 11, 12, 16, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 63-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3359
+Averaged Test Accurancy: 0.8856
+Averaged Test AUC: 0.9798
+Std Test Accurancy: 0.1071
+Std Test AUC: 0.0233
+-------------------------------------------------- 223.73020696640015
+INFO:----------fix client id is :group is 64 select id list is: [0, 1, 2, 8, 10, 12, 13, 15, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 64-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3340
+Averaged Test Accurancy: 0.8856
+Averaged Test AUC: 0.9799
+Std Test Accurancy: 0.1069
+Std Test AUC: 0.0231
+-------------------------------------------------- 191.70695424079895
+INFO:----------fix client id is :group is 65 select id list is: [1, 4, 6, 7, 8, 11, 12, 13, 14, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 65-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3321
+Averaged Test Accurancy: 0.8860
+Averaged Test AUC: 0.9801
+Std Test Accurancy: 0.1067
+Std Test AUC: 0.0230
+-------------------------------------------------- 231.51503014564514
+INFO:----------fix client id is :group is 66 select id list is: [0, 1, 6, 7, 8, 10, 12, 14, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 66-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3302
+Averaged Test Accurancy: 0.8866
+Averaged Test AUC: 0.9802
+Std Test Accurancy: 0.1056
+Std Test AUC: 0.0229
+-------------------------------------------------- 270.3652081489563
+INFO:----------fix client id is :group is 67 select id list is: [2, 5, 6, 7, 8, 11, 12, 13, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 67-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3282
+Averaged Test Accurancy: 0.8871
+Averaged Test AUC: 0.9803
+Std Test Accurancy: 0.1055
+Std Test AUC: 0.0228
+-------------------------------------------------- 271.41929173469543
+INFO:----------fix client id is :group is 68 select id list is: [4, 6, 10, 11, 12, 13, 14, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 68-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3263
+Averaged Test Accurancy: 0.8873
+Averaged Test AUC: 0.9804
+Std Test Accurancy: 0.1050
+Std Test AUC: 0.0227
+-------------------------------------------------- 199.48181009292603
+INFO:----------fix client id is :group is 69 select id list is: [0, 1, 3, 6, 8, 10, 12, 14, 16, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 69-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3243
+Averaged Test Accurancy: 0.8873
+Averaged Test AUC: 0.9805
+Std Test Accurancy: 0.1057
+Std Test AUC: 0.0226
+-------------------------------------------------- 206.78531408309937
+INFO:----------fix client id is :group is 70 select id list is: [4, 6, 7, 8, 10, 11, 13, 14, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 70-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3224
+Averaged Test Accurancy: 0.8876
+Averaged Test AUC: 0.9806
+Std Test Accurancy: 0.1057
+Std Test AUC: 0.0224
+-------------------------------------------------- 203.20779705047607
+INFO:----------fix client id is :group is 71 select id list is: [0, 1, 2, 5, 10, 14, 15, 16, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 71-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3204
+Averaged Test Accurancy: 0.8880
+Averaged Test AUC: 0.9807
+Std Test Accurancy: 0.1055
+Std Test AUC: 0.0223
+-------------------------------------------------- 208.1696970462799
+INFO:----------fix client id is :group is 72 select id list is: [2, 3, 4, 5, 6, 7, 9, 11, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 72-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3185
+Averaged Test Accurancy: 0.8883
+Averaged Test AUC: 0.9808
+Std Test Accurancy: 0.1054
+Std Test AUC: 0.0222
+-------------------------------------------------- 201.56566500663757
+INFO:----------fix client id is :group is 73 select id list is: [0, 1, 2, 4, 6, 7, 10, 13, 14, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 73-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3165
+Averaged Test Accurancy: 0.8886
+Averaged Test AUC: 0.9809
+Std Test Accurancy: 0.1055
+Std Test AUC: 0.0221
+-------------------------------------------------- 203.40579891204834
+INFO:----------fix client id is :group is 74 select id list is: [0, 3, 4, 6, 7, 9, 10, 11, 16, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 74-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3146
+Averaged Test Accurancy: 0.8891
+Averaged Test AUC: 0.9811
+Std Test Accurancy: 0.1048
+Std Test AUC: 0.0220
+-------------------------------------------------- 200.1448051929474
+INFO:----------fix client id is :group is 75 select id list is: [0, 1, 7, 8, 9, 10, 12, 13, 14, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 75-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3126
+Averaged Test Accurancy: 0.8896
+Averaged Test AUC: 0.9812
+Std Test Accurancy: 0.1043
+Std Test AUC: 0.0219
+-------------------------------------------------- 249.68814420700073
+INFO:----------fix client id is :group is 76 select id list is: [1, 5, 7, 8, 10, 11, 15, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 76-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3107
+Averaged Test Accurancy: 0.8900
+Averaged Test AUC: 0.9813
+Std Test Accurancy: 0.1032
+Std Test AUC: 0.0217
+-------------------------------------------------- 195.75495624542236
+INFO:----------fix client id is :group is 77 select id list is: [2, 3, 7, 8, 9, 10, 12, 15, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 77-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3087
+Averaged Test Accurancy: 0.8906
+Averaged Test AUC: 0.9814
+Std Test Accurancy: 0.1028
+Std Test AUC: 0.0216
+-------------------------------------------------- 181.60874915122986
+INFO:----------fix client id is :group is 78 select id list is: [0, 3, 4, 5, 7, 9, 12, 13, 14, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 78-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3067
+Averaged Test Accurancy: 0.8907
+Averaged Test AUC: 0.9815
+Std Test Accurancy: 0.1029
+Std Test AUC: 0.0215
+-------------------------------------------------- 175.8684151172638
+INFO:----------fix client id is :group is 79 select id list is: [0, 1, 2, 8, 9, 10, 11, 12, 14, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 79-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3047
+Averaged Test Accurancy: 0.8913
+Averaged Test AUC: 0.9816
+Std Test Accurancy: 0.1020
+Std Test AUC: 0.0214
+-------------------------------------------------- 175.78948998451233
+INFO:----------fix client id is :group is 80 select id list is: [0, 3, 6, 7, 9, 13, 15, 16, 17, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 80-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3028
+Averaged Test Accurancy: 0.8916
+Averaged Test AUC: 0.9817
+Std Test Accurancy: 0.1017
+Std Test AUC: 0.0213
+-------------------------------------------------- 173.63662123680115
+INFO:----------fix client id is :group is 81 select id list is: [0, 1, 3, 4, 8, 9, 11, 15, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 81-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.3009
+Averaged Test Accurancy: 0.8922
+Averaged Test AUC: 0.9818
+Std Test Accurancy: 0.1009
+Std Test AUC: 0.0212
+-------------------------------------------------- 184.88248491287231
+INFO:----------fix client id is :group is 82 select id list is: [2, 8, 9, 12, 13, 14, 15, 16, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 82-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2990
+Averaged Test Accurancy: 0.8922
+Averaged Test AUC: 0.9819
+Std Test Accurancy: 0.1004
+Std Test AUC: 0.0210
+-------------------------------------------------- 176.40756011009216
+INFO:----------fix client id is :group is 83 select id list is: [1, 2, 3, 6, 7, 8, 10, 15, 16, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 83-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2971
+Averaged Test Accurancy: 0.8924
+Averaged Test AUC: 0.9820
+Std Test Accurancy: 0.1000
+Std Test AUC: 0.0209
+-------------------------------------------------- 184.7863450050354
+INFO:----------fix client id is :group is 84 select id list is: [0, 1, 5, 6, 8, 9, 10, 13, 14, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 84-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2952
+Averaged Test Accurancy: 0.8928
+Averaged Test AUC: 0.9821
+Std Test Accurancy: 0.0994
+Std Test AUC: 0.0208
+-------------------------------------------------- 237.1601631641388
+INFO:----------fix client id is :group is 85 select id list is: [0, 1, 4, 5, 7, 8, 13, 15, 16, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 85-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2932
+Averaged Test Accurancy: 0.8929
+Averaged Test AUC: 0.9822
+Std Test Accurancy: 0.0992
+Std Test AUC: 0.0207
+-------------------------------------------------- 228.47687816619873
+INFO:----------fix client id is :group is 86 select id list is: [0, 1, 2, 4, 8, 9, 11, 12, 16, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 86-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2913
+Averaged Test Accurancy: 0.8938
+Averaged Test AUC: 0.9823
+Std Test Accurancy: 0.0975
+Std Test AUC: 0.0206
+-------------------------------------------------- 238.63015294075012
+INFO:----------fix client id is :group is 87 select id list is: [5, 6, 7, 8, 9, 10, 11, 14, 17, 18] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 87-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2894
+Averaged Test Accurancy: 0.8942
+Averaged Test AUC: 0.9824
+Std Test Accurancy: 0.0970
+Std Test AUC: 0.0205
+-------------------------------------------------- 227.51485204696655
+INFO:----------fix client id is :group is 88 select id list is: [4, 6, 8, 9, 11, 15, 16, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 88-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2875
+Averaged Test Accurancy: 0.8946
+Averaged Test AUC: 0.9825
+Std Test Accurancy: 0.0969
+Std Test AUC: 0.0204
+-------------------------------------------------- 227.85069108009338
+INFO:----------fix client id is :group is 89 select id list is: [2, 3, 6, 7, 12, 13, 16, 17, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 89-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2856
+Averaged Test Accurancy: 0.8952
+Averaged Test AUC: 0.9826
+Std Test Accurancy: 0.0967
+Std Test AUC: 0.0203
+-------------------------------------------------- 233.78863215446472
+INFO:----------fix client id is :group is 90 select id list is: [0, 3, 4, 8, 9, 12, 13, 14, 15, 16] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 90-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2837
+Averaged Test Accurancy: 0.8955
+Averaged Test AUC: 0.9827
+Std Test Accurancy: 0.0964
+Std Test AUC: 0.0202
+-------------------------------------------------- 234.19702219963074
+INFO:----------fix client id is :group is 91 select id list is: [1, 2, 4, 6, 8, 10, 13, 15, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 91-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2819
+Averaged Test Accurancy: 0.8958
+Averaged Test AUC: 0.9828
+Std Test Accurancy: 0.0964
+Std Test AUC: 0.0201
+-------------------------------------------------- 226.32655215263367
+INFO:----------fix client id is :group is 92 select id list is: [0, 3, 5, 7, 8, 9, 10, 11, 15, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 92-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2800
+Averaged Test Accurancy: 0.8960
+Averaged Test AUC: 0.9828
+Std Test Accurancy: 0.0966
+Std Test AUC: 0.0200
+-------------------------------------------------- 233.54305982589722
+INFO:----------fix client id is :group is 93 select id list is: [0, 1, 2, 3, 4, 10, 11, 12, 13, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 93-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2782
+Averaged Test Accurancy: 0.8964
+Averaged Test AUC: 0.9829
+Std Test Accurancy: 0.0963
+Std Test AUC: 0.0199
+-------------------------------------------------- 232.8437840938568
+INFO:----------fix client id is :group is 94 select id list is: [3, 6, 9, 10, 11, 12, 13, 15, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 94-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2764
+Averaged Test Accurancy: 0.8966
+Averaged Test AUC: 0.9830
+Std Test Accurancy: 0.0961
+Std Test AUC: 0.0199
+-------------------------------------------------- 224.89255714416504
+INFO:----------fix client id is :group is 95 select id list is: [0, 3, 6, 7, 8, 9, 11, 13, 17, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 95-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2745
+Averaged Test Accurancy: 0.8975
+Averaged Test AUC: 0.9831
+Std Test Accurancy: 0.0952
+Std Test AUC: 0.0198
+-------------------------------------------------- 228.9152970314026
+INFO:----------fix client id is :group is 96 select id list is: [2, 3, 4, 6, 8, 10, 11, 12, 15, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 96-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2727
+Averaged Test Accurancy: 0.8978
+Averaged Test AUC: 0.9831
+Std Test Accurancy: 0.0949
+Std Test AUC: 0.0197
+-------------------------------------------------- 236.37999725341797
+INFO:----------fix client id is :group is 97 select id list is: [1, 4, 8, 10, 11, 12, 13, 14, 16, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 97-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2709
+Averaged Test Accurancy: 0.8980
+Averaged Test AUC: 0.9832
+Std Test Accurancy: 0.0952
+Std Test AUC: 0.0196
+-------------------------------------------------- 227.4658019542694
+INFO:----------fix client id is :group is 98 select id list is: [0, 3, 4, 5, 8, 10, 13, 14, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 98-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2691
+Averaged Test Accurancy: 0.8982
+Averaged Test AUC: 0.9833
+Std Test Accurancy: 0.0951
+Std Test AUC: 0.0195
+-------------------------------------------------- 228.35971784591675
+INFO:----------fix client id is :group is 99 select id list is: [0, 1, 3, 5, 6, 7, 11, 14, 15, 17] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 99-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2674
+Averaged Test Accurancy: 0.8990
+Averaged Test AUC: 0.9834
+Std Test Accurancy: 0.0942
+Std Test AUC: 0.0194
+-------------------------------------------------- 225.37890601158142
+INFO:----------fix client id is :group is 100 select id list is: [0, 2, 4, 9, 11, 12, 13, 14, 18, 19] <class 'flcore.clients.clientapple.clientAPPLE'>
+
+-------------Round number: 100-------------
+
+Evaluate personalized models
+Averaged Train Loss: 0.2656
+Averaged Test Accurancy: 0.8990
+Averaged Test AUC: 0.9834
+Std Test Accurancy: 0.0943
+Std Test AUC: 0.0194
+-------------------------------------------------- 229.52159881591797
+
+Best accuracy.
+0.8990336554481839
+
+Average time cost per round.
+381.9941834831238
+success training write acc txt /Users/alice/Desktop/python/PFL//res/APPLE/Cifar10_acc.csv
+[['mnist', 'APPLE', 0, 2.3039326570634455, 0.09370209930023325, 0.4940292791749328, 0.18145544267502495, 0.21821810742021094], ['mnist', 'APPLE', 1, 1.9884619478976586, 0.4957014328557148, 0.8355102734829666, 0.39248360046898856, 0.1496367258860322], ['mnist', 'APPLE', 2, 1.7384274841678804, 0.5985338220593136, 0.8709473170863841, 0.35576561251016103, 0.15665443750337238], ['mnist', 'APPLE', 3, 1.150484341678034, 0.7027657447517495, 0.9248084994717548, 0.2779394900510125, 0.10477151124316032], ['mnist', 'APPLE', 4, 0.7924206466249171, 0.7728090636454515, 0.9507964642974386, 0.24153176508773136, 0.060568637066635456], ['mnist', 'APPLE', 5, 0.6780080122923372, 0.7945351549483506, 0.9583301841855826, 0.20750694413022788, 0.04645280220888021], ['mnist', 'APPLE', 6, 0.6253250736896254, 0.8085971342885705, 0.9617151566535268, 0.18103637107878479, 0.04079949110988637], ['mnist', 'APPLE', 7, 0.5935904159175576, 0.815994668443852, 0.963861373230342, 0.17030565692743932, 0.03781724744325261], ['mnist', 'APPLE', 8, 0.5700700841027023, 0.8225258247250916, 0.965487893218774, 0.1624850949094794, 0.03587514773066435], ['mnist', 'APPLE', 9, 0.5502442077693552, 0.8273242252582472, 0.96688522121691, 0.1561046699305359, 0.03442527650174689], ['mnist', 'APPLE', 10, 0.5325322861776363, 0.8315894701766078, 0.968136358255569, 0.15272731466830083, 0.03325776854407591], ['mnist', 'APPLE', 11, 0.516456132218722, 0.8351216261246251, 0.9692570595368845, 0.15014977558629725, 0.03231283361359264], ['mnist', 'APPLE', 12, 0.5020019343686694, 0.8389870043318893, 0.9702277871626626, 0.1468812171364742, 0.031531714380697004], ['mnist', 'APPLE', 13, 0.4891079341793863, 0.8425191602799067, 0.9710730446020703, 0.14195795298411987, 0.03086727801833575], ['mnist', 'APPLE', 14, 0.47781183354071716, 0.8457847384205265, 0.971790833597606, 0.1397705809121132, 0.030319246889429788], ['mnist', 'APPLE', 15, 0.4678716203801299, 0.8494501832722425, 0.9724040866371482, 0.13715815992161637, 0.02981970863606864], ['mnist', 'APPLE', 16, 0.4591358070949433, 0.8517160946351217, 0.972932378512708, 0.13471886722725737, 0.02939181374083005], ['mnist', 'APPLE', 17, 0.4514780610831829, 0.8541152949016995, 0.9733868539465075, 0.13348584397001276, 0.029022128268927014], ['mnist', 'APPLE', 18, 0.4448024588870351, 0.854915028323892, 0.9737629173178625, 0.13143571360322978, 0.028706830848884375], ['mnist', 'APPLE', 19, 0.43894737562302777, 0.8573142285904698, 0.9740985721347271, 0.12931867400443794, 0.028419747617486182], ['mnist', 'APPLE', 20, 0.4337096944951314, 0.8584471842719094, 0.9743924106400005, 0.12874432421037518, 0.028179996076797314], ['mnist', 'APPLE', 21, 0.4289695887563639, 0.8594468510496501, 0.9746455303923663, 0.12820518562682956, 0.02796355884398071], ['mnist', 'APPLE', 22, 0.424692759146782, 0.8615794735088304, 0.9748668905209998, 0.1261923970225225, 0.02778598451696264], ['mnist', 'APPLE', 23, 0.42074604316533587, 0.8629790069976675, 0.9750633717976056, 0.12485748953994683, 0.02763726559052169], ['mnist', 'APPLE', 24, 0.4170531881322248, 0.8645118293902032, 0.9752487551528943, 0.12294784577197393, 0.02749628676491396], ['mnist', 'APPLE', 25, 0.4136543093132864, 0.8645784738420527, 0.9754078339080622, 0.1234167845230668, 0.027383472652215936], ['mnist', 'APPLE', 26, 0.41051551313386275, 0.8651116294568477, 0.9755591217260315, 0.12249104645501535, 0.02728254158131464], ['mnist', 'APPLE', 27, 0.4075916190878205, 0.8665111629456848, 0.9756971059663806, 0.12082705371164666, 0.027185331438163107], ['mnist', 'APPLE', 28, 0.40483647158782204, 0.8678440519826724, 0.9758260390011844, 0.12019518348430543, 0.027096925896240298], ['mnist', 'APPLE', 29, 0.4022686889108577, 0.8689103632122626, 0.975949548746613, 0.11975483394976107, 0.027015373431758475], ['mnist', 'APPLE', 30, 0.39980555064445855, 0.8694435188270576, 0.9760720966520336, 0.11969312014773312, 0.02693991570570243], ['mnist', 'APPLE', 31, 0.3974234301901877, 0.8694435188270576, 0.9761956245896161, 0.11933372527095991, 0.02685510715026018], ['mnist', 'APPLE', 32, 0.39513251256717996, 0.8709763412195934, 0.97631738609136, 0.11850754920976637, 0.026763922356705654], ['mnist', 'APPLE', 33, 0.3929524827029256, 0.871242919026991, 0.9764239001523178, 0.11828633642274304, 0.026682086619997793], ['mnist', 'APPLE', 34, 0.3908140570721059, 0.8713762079306898, 0.9765345039798808, 0.11838338285208366, 0.02659325425222165], ['mnist', 'APPLE', 35, 0.3886992887842034, 0.8722425858047318, 0.9766478000292766, 0.11779206454297493, 0.026496636801903433], ['mnist', 'APPLE', 36, 0.3866158290335876, 0.8725091636121293, 0.9767658803252945, 0.11832511422077065, 0.026398686147832924], ['mnist', 'APPLE', 37, 0.3845582033246337, 0.8727090969676774, 0.9768872844587317, 0.11836423037588663, 0.026294844865602372], ['mnist', 'APPLE', 38, 0.3824885859631595, 0.8733088970343219, 0.9770050750867743, 0.11744092315365413, 0.026202244044006666], ['mnist', 'APPLE', 39, 0.38047759018884963, 0.8733088970343219, 0.9771234286926798, 0.11736653061273307, 0.02609755539178976], ['mnist', 'APPLE', 40, 0.37848884773766134, 0.8739753415528158, 0.9772430012140464, 0.11674999560799125, 0.02599335198617126], ['mnist', 'APPLE', 41, 0.3765342536924819, 0.8747084305231589, 0.977362099973584, 0.11585116501952306, 0.02588228728227267], ['mnist', 'APPLE', 42, 0.37460893115642935, 0.8758413862045985, 0.9774774709784589, 0.11534626630108502, 0.025777738969387603], ['mnist', 'APPLE', 43, 0.37269920569303966, 0.8769076974341886, 0.9775909582116572, 0.11435632608509524, 0.02567458116248853], ['mnist', 'APPLE', 44, 0.37080112410281496, 0.8768410529823393, 0.9777047614930212, 0.11416071113439384, 0.025551499077199752], ['mnist', 'APPLE', 45, 0.3689523490841521, 0.876974341886038, 0.9778136114349072, 0.11414433761224363, 0.025441096524979105], ['mnist', 'APPLE', 46, 0.36710587788977833, 0.8773742085971343, 0.977926408485713, 0.11343564089746772, 0.025326240035802448], ['mnist', 'APPLE', 47, 0.36524010822876823, 0.8774408530489837, 0.9780403530342501, 0.11371812413902145, 0.025212711886484752], ['mnist', 'APPLE', 48, 0.3633641669683213, 0.877507497500833, 0.9781544520369697, 0.11334867954632911, 0.02509768701547891], ['mnist', 'APPLE', 49, 0.36148778549511634, 0.8781739420193269, 0.9782645283482257, 0.11299198790280415, 0.024973436044223585], ['mnist', 'APPLE', 50, 0.35965885154414723, 0.8786404531822726, 0.9783713762361959, 0.11236308907040703, 0.024859919067397394], ['mnist', 'APPLE', 51, 0.35785893197672203, 0.8791069643452183, 0.9784831718013642, 0.11198082786647919, 0.024740114835195653], ['mnist', 'APPLE', 52, 0.3560521739269956, 0.8795068310563146, 0.9785917781922556, 0.11229748555341806, 0.024620220731653878], ['mnist', 'APPLE', 53, 0.35424809237236815, 0.8801732755748084, 0.9786988201705166, 0.1116979202297234, 0.024496546605914944], ['mnist', 'APPLE', 54, 0.35245344366726783, 0.8808397200933022, 0.978811825279848, 0.11030035075372105, 0.02436904230613476], ['mnist', 'APPLE', 55, 0.35066819416447825, 0.881306231256248, 0.9789221544947475, 0.10980864256791756, 0.024245612910242378], ['mnist', 'APPLE', 56, 0.34887900366056446, 0.8817060979673442, 0.9790329388257358, 0.10997665989424849, 0.024120571223276176], ['mnist', 'APPLE', 57, 0.34707467002306086, 0.8821059646784405, 0.9791450039028031, 0.10966228553016218, 0.023998724855259668], ['mnist', 'APPLE', 58, 0.34529123152446767, 0.8823058980339886, 0.9792524354610516, 0.11005092449096472, 0.023878384082285344], ['mnist', 'APPLE', 59, 0.3434730278554178, 0.8829723425524825, 0.9793624557669707, 0.10941695829270666, 0.02376142915147576], ['mnist', 'APPLE', 60, 0.34161528414405895, 0.8836387870709763, 0.9794788417406801, 0.10899183375306663, 0.023635813051244917], ['mnist', 'APPLE', 61, 0.33971574968640555, 0.884105298233922, 0.9795991883362637, 0.1081934500298323, 0.02351020281385501], ['mnist', 'APPLE', 62, 0.3378224042355072, 0.8850383205598134, 0.979715847196575, 0.10720565916338873, 0.023389778650968435], ['mnist', 'APPLE', 63, 0.3359293339613452, 0.8855714761746085, 0.9798323270711325, 0.10712457702045858, 0.023269171906251836], ['mnist', 'APPLE', 64, 0.33401213220171694, 0.8856381206264579, 0.9799477921947224, 0.1068596132928258, 0.023149141519710488], ['mnist', 'APPLE', 65, 0.332087029339601, 0.8859713428857048, 0.9800599329375477, 0.10674227353493397, 0.023031963567260522], ['mnist', 'APPLE', 66, 0.3301664708182786, 0.8865711429523492, 0.9801716125667769, 0.10562574093784997, 0.022907179825469096], ['mnist', 'APPLE', 67, 0.32822344140972154, 0.8871042985671442, 0.9802801616218662, 0.10547351953610447, 0.02280008685686286], ['mnist', 'APPLE', 68, 0.32629217990609327, 0.8873042319226925, 0.980390072470196, 0.1050061179884099, 0.02267873825421763], ['mnist', 'APPLE', 69, 0.3243401633346331, 0.8873042319226925, 0.9805031943194352, 0.10566573198728949, 0.02255918854130621], ['mnist', 'APPLE', 70, 0.32239156324490326, 0.88757080973009, 0.9806150231773696, 0.10569089383652645, 0.02243995053701594], ['mnist', 'APPLE', 71, 0.32043392553498995, 0.8880373208930357, 0.9807254865027136, 0.10548450765634243, 0.022322450838147177], ['mnist', 'APPLE', 72, 0.31846466829453435, 0.8883038987004331, 0.980844122729699, 0.10543230511504757, 0.022195540443906207], ['mnist', 'APPLE', 73, 0.3165115761565241, 0.8886371209596801, 0.9809495224055117, 0.10548754043445042, 0.022088516243322677], ['mnist', 'APPLE', 74, 0.31456793326133237, 0.8891036321226258, 0.9810567143241696, 0.10476486374522051, 0.02197374579099087], ['mnist', 'APPLE', 75, 0.3126069516303012, 0.8896367877374208, 0.9811727011599272, 0.10429590903158832, 0.02185357061259491], ['mnist', 'APPLE', 76, 0.31065380735065634, 0.8899700099966678, 0.9812838573716411, 0.10315509258697429, 0.02173130602812407], ['mnist', 'APPLE', 77, 0.308681978892982, 0.8905698100633123, 0.9813955602231261, 0.10277802464152613, 0.021611072742423958], ['mnist', 'APPLE', 78, 0.30671882150307633, 0.8907030989670109, 0.9815093718778619, 0.10291378775116704, 0.021495704189765628], ['mnist', 'APPLE', 79, 0.3047458373100535, 0.8913028990336554, 0.9816205556711931, 0.10197665041373893, 0.02138571653579972], ['mnist', 'APPLE', 80, 0.30280226020343876, 0.8916361212929024, 0.9817391823813504, 0.1016731851289076, 0.02126754808454802], ['mnist', 'APPLE', 81, 0.3008828357963322, 0.8921692769076974, 0.9818481900415497, 0.10087626441857844, 0.02115479831843176], ['mnist', 'APPLE', 82, 0.2989839984492114, 0.8921692769076974, 0.9819464038120785, 0.10035028316002015, 0.021047837097031796], ['mnist', 'APPLE', 83, 0.2970676620884953, 0.8923692102632456, 0.9820343680383886, 0.09995555380053418, 0.020939244891990706], ['mnist', 'APPLE', 84, 0.2951674416251476, 0.8927690769743419, 0.9821297837525031, 0.09940699236985387, 0.02083720278138618], ['mnist', 'APPLE', 85, 0.2932432556549278, 0.8929023658780406, 0.9822247918828113, 0.09921650492371896, 0.020729073389440255], ['mnist', 'APPLE', 86, 0.2913280756950664, 0.893835388203932, 0.9823094900199616, 0.0974532334057381, 0.020632071027401732], ['mnist', 'APPLE', 87, 0.28939042482767996, 0.894168610463179, 0.9823955251025462, 0.09700059310167934, 0.0205336077528321], ['mnist', 'APPLE', 88, 0.2874901460551028, 0.8946351216261246, 0.9824873237302212, 0.09688853535255493, 0.020433690473828002], ['mnist', 'APPLE', 89, 0.2855975956354917, 0.8951682772409197, 0.9825755917671632, 0.09668322398553382, 0.020335486069534184], ['mnist', 'APPLE', 90, 0.28371652585227053, 0.8955014995001667, 0.9826644964810728, 0.09639940042739399, 0.020236957079288517], ['mnist', 'APPLE', 91, 0.28187800899794585, 0.8957680773075641, 0.9827500804745888, 0.09641575080810175, 0.020135396831090464], ['mnist', 'APPLE', 92, 0.2800324008828228, 0.8960346551149617, 0.9828261296427722, 0.09662083612576539, 0.020043750062777387], ['mnist', 'APPLE', 93, 0.27819366255691225, 0.896434521826058, 0.982908705472435, 0.09632323905434449, 0.019948615277751], ['mnist', 'APPLE', 94, 0.27638002154674673, 0.8966344551816061, 0.9829830981162992, 0.09610272335004194, 0.019858380602975696], ['mnist', 'APPLE', 95, 0.27454724453655704, 0.8975008330556481, 0.9830605368560164, 0.09524297962049437, 0.019769112888247394], ['mnist', 'APPLE', 96, 0.2727267370448673, 0.897834055314895, 0.983136473474436, 0.09490562379265441, 0.019681923161189604], ['mnist', 'APPLE', 97, 0.27093652888058917, 0.8979673442185938, 0.983209287637555, 0.09515753782421675, 0.019601882058658978], ['mnist', 'APPLE', 98, 0.269138632655301, 0.8982339220259913, 0.9832845318072951, 0.09514718051974053, 0.019522059713640523], ['mnist', 'APPLE', 99, 0.2673645012034276, 0.8989670109963346, 0.9833574896296248, 0.09417235121242892, 0.019441241412597617], ['mnist', 'APPLE', 100, 0.26557139678390085, 0.8990336554481839, 0.983429360556638, 0.09429037478545392, 0.01936212698240899]]
+File path: ../results/Cifar10_APPLE_test_0.h5
+
+Average time cost: 39032.34s.
+Length:  101
+std for best accurancy: 0.0
+mean for best accurancy: 0.8990336554481839
+All done!
+
+Storage on cpu
+-------------------------------------------------------------------------------
+Total Tensors: 458370876 	Used Memory: 978.50M
+-------------------------------------------------------------------------------

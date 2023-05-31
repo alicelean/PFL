@@ -8,8 +8,8 @@ from flcore.clients.clientbase import Client
 
 
 class clientAMP(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id, traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata, train_samples, test_samples, **kwargs)
         
         self.alphaK = args.alphaK
         self.lamda = args.lamda

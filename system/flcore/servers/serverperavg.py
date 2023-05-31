@@ -18,6 +18,15 @@ class PerAvg(Server):
         print("Finished creating server and clients.")
 
     def train(self):
+        print(f"*************************** {self.method} train ***************************")
+        self.writeparameters()
+        colum_value = []
+        select_id = []
+
+        if self.fix_ids:
+            file_path = self.programpath + "/res/selectids/" + self.dataset + "_select_client_ids" + str(
+                self.num_clients) + "_" + str(self.join_ratio) + ".csv"
+            self.select_idlist = self.read_selectInfo(file_path)
         for i in range(self.global_rounds+1):
             self.selected_clients = self.select_clients()
             # send all parameter for clients

@@ -9,8 +9,8 @@ from utils.data_utils import read_client_data
 
 
 class clientFomo(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id, traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata, train_samples, test_samples, **kwargs)
         
         self.num_clients = args.num_clients
         self.old_model = copy.deepcopy(self.model)

@@ -9,8 +9,8 @@ from utils.privacy import *
 
 
 class clientSCAFFOLD(Client):
-    def __init__(self, args, id, train_samples, test_samples, **kwargs):
-        super().__init__(args, id, train_samples, test_samples, **kwargs)
+    def __init__(self, args, id, traindata,testsdata, train_samples, test_samples, **kwargs):
+        super().__init__(args, id, traindata,testsdata, train_samples, test_samples, **kwargs)
 
         self.optimizer = SCAFFOLDOptimizer(self.model.parameters(), lr=self.learning_rate)
         self.learning_rate_scheduler = torch.optim.lr_scheduler.ExponentialLR(

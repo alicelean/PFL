@@ -34,7 +34,10 @@ from flcore.servers.serverscaffold import SCAFFOLD
 from flcore.servers.serverdistill import FedDistill
 from flcore.servers.serverala import FedALA
 
-from flcore.servers.server_alajs import ALAJS
+from flcore.servers.serverjs import FedJS
+from flcore.servers.server_aaw import FedAAW
+from flcore.servers.serveralajs import ALAJS
+from flcore.servers.serverala_aaw import FedALA_AAW
 
 from flcore.trainmodel.models import *
 
@@ -168,7 +171,7 @@ def run(args):
             args.head = copy.deepcopy(args.model.fc)
             args.model.fc = nn.Identity()
             args.model = BaseHeadSplit(args.model, args.head)
-            server = FedAvg(args, i)
+            server = FedAvg(args, i,filedir)
 
         elif args.algorithm == "Local":
             server = Local(args, i)
@@ -246,7 +249,7 @@ def run(args):
             server = FedBABU(args, i)
 
         elif args.algorithm == "APPLE":
-            server = APPLE(args, i)
+            server = APPLE(args, i,filedir)
 
         elif args.algorithm == "FedGen":
             args.head = copy.deepcopy(args.model.fc)
@@ -264,8 +267,14 @@ def run(args):
             server = FedALA(args, i,filedir)
         elif args.algorithm == "ALAJS":
             server = ALAJS(args, i,filedir)
-            
+        elif args.algorithm == "FedALA_AAW":
+            server = FedALA_AAW(args, i, filedir)
+        elif args.algorithm == "FedAAW":
+            server = FedAAW(args, i, filedir)
+        elif args.algorithm == "FedJS":
+            server = FedJS(args, i, filedir)
         else:
+            print("args.algorithm",args.algorithm)
             raise NotImplementedError
 
         #模型训练
@@ -303,8 +312,11 @@ if __name__ == "__main__":
                         help="Local learning rate")
     parser.add_argument('-ld', "--learning_rate_decay", type=bool, default=False)
     parser.add_argument('-ldg', "--learning_rate_decay_gamma", type=float, default=0.99)
-    parser.add_argument('-gr', "--global_rounds", type=int, default=1)
-    parser.add_argument('-ls', "--local_epochs", type=int, default=1, 
+    parser.add_argument('-gr', "--global_rounds", type=int, default=5)
+
+
+    #1,2,5,7,10
+    parser.add_argument('-ls', "--local_epochs", type=int, default=1,
                         help="Multiple update steps in one local epoch.")
     parser.add_argument('-algo', "--algorithm", type=str, default="FedAvg")
     parser.add_argument('-jr', "--join_ratio", type=float, default=1.0,
