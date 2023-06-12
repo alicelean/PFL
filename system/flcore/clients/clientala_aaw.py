@@ -18,7 +18,10 @@ class clientALA_AAW(Client):
         #新增5个属性，
         self.traindata=traindata
         self.testsdata=testsdata
-        self.label=[0 for i in range(10)]
+        if args.dataset=='Cifar10':
+            self.label = [0 for i in range(10)]
+        elif  args.dataset=='Cifar100':
+            self.label=[0 for i in range(100)]
         self.distance=0
         self.alldistance=0
         self.alllabel=None

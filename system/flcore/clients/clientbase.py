@@ -30,10 +30,18 @@ class Client(object):
         self.learning_rate = args.local_learning_rate
         self.local_epochs = args.local_epochs
         self.sizerate = 0
+        #记录迭代的次数
+        self.current_round=0
+        self.timecost = []
+        self.losslist=[]
+
 
         self.traindata = traindata
         self.testsdata = testsdata
-        self.label = [0 for i in range(10)]
+        if self.dataset=='Cifar100':
+            self.label = [0 for i in range(100)]
+        if self.dataset == 'Cifar10':
+            self.label = [0 for i in range(10)]
         self.jsweight=0
 
         # check BatchNorm
@@ -224,11 +232,19 @@ class Client(object):
     def setlabel(self):
         # train_data = [(x, y) for x, y in zip(X_train, y_train)]
         label = []
+        total_num=0
         for data in self.traindata:
             label.append(data[1].tolist())
         for data in self.testsdata:
             label.append(data[1].tolist())
         for i in label:
             self.label[i] += 1
-        #print(f"client base client  {self.id} label is {self.label}")
+            total_num+=1
+
+        print(f"client base client  {self.id}, total_num is {total_num},label is {self.label}")
+
+
+    def local_initialization(self, received_global_model, round):
+        #self.AAW.adaptive_aggregation_weight(received_global_model, self.model, round)
+        self.AAW.adaptive_aggregation_weight_update(received_global_model, self.model, round)
 

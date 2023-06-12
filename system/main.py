@@ -33,11 +33,15 @@ from flcore.servers.servergen import FedGen
 from flcore.servers.serverscaffold import SCAFFOLD
 from flcore.servers.serverdistill import FedDistill
 from flcore.servers.serverala import FedALA
+from flcore.servers.server_fedda import FedDA
 
+from flcore.servers.server_moonaaw import MOONAAW
 from flcore.servers.serverjs import FedJS
 from flcore.servers.server_aaw import FedAAW
 from flcore.servers.serveralajs import ALAJS
 from flcore.servers.serverala_aaw import FedALA_AAW
+from flcore.servers.server_scafflod_aaw import SCAFFOLDAAW
+from flcore.servers.server_newaaw import NewAAW
 
 from flcore.trainmodel.models import *
 
@@ -241,6 +245,11 @@ def run(args):
             args.model.fc = nn.Identity()
             args.model = BaseHeadSplit(args.model, args.head)
             server = MOON(args, i)
+        elif args.algorithm == "MOONAAW":
+            args.head = copy.deepcopy(args.model.fc)
+            args.model.fc = nn.Identity()
+            args.model = BaseHeadSplit(args.model, args.head)
+            server = MOONAAW(args, i)
 
         elif args.algorithm == "FedBABU":
             args.head = copy.deepcopy(args.model.fc)
@@ -259,6 +268,8 @@ def run(args):
 
         elif args.algorithm == "SCAFFOLD":
             server = SCAFFOLD(args, i,filedir)
+        elif args.algorithm == "SCAFFOLDAAW":
+            server = SCAFFOLDAAW(args, i)
 
         elif args.algorithm == "FedDistill":
             server = FedDistill(args, i)
@@ -273,6 +284,10 @@ def run(args):
             server = FedAAW(args, i, filedir)
         elif args.algorithm == "FedJS":
             server = FedJS(args, i, filedir)
+        elif args.algorithm == "FedDA":
+            server = FedDA(args, i, filedir)
+        elif args.algorithm == "NewAAW":
+            server = NewAAW(args, i, filedir)
         else:
             print("args.algorithm",args.algorithm)
             raise NotImplementedError
@@ -304,7 +319,7 @@ if __name__ == "__main__":
                         choices=["cpu", "cuda"])
     parser.add_argument('-did', "--device_id", type=str, default="0")
     #"mnist","Cifar10"
-    parser.add_argument('-data', "--dataset", type=str, default="Cifar10")
+    parser.add_argument('-data', "--dataset", type=str, default="Cifar100")
     parser.add_argument('-nb', "--num_classes", type=int, default=10)
     parser.add_argument('-m', "--model", type=str, default="cnn")
     parser.add_argument('-lbs', "--batch_size", type=int, default=10)

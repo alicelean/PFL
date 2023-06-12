@@ -15,9 +15,14 @@ class FedAAW(Server):
         self.set_slow_clients()
 
         self.method = "FedAAW"
+        self.labellenght = 10
+        if self.dataset == 'Cifar100':
+            self.labellenght = 100
 
         self.set_clients(clientAAW)
         self.fix_ids = True
+
+
 
 
 
@@ -200,7 +205,6 @@ class FedAAW(Server):
 
         for client in self.clients:
             client.setlabel()
-
             client.AAW.sizerate= (client.train_samples + client.test_samples) / samples
             client.AAW.global_model = self.global_model
         #根据label 来计算distance
@@ -210,7 +214,8 @@ class FedAAW(Server):
         self.writeclientInfo()
 
     def setdistance(self):
-        alllabel = [0 for i in range (10)]
+        #cifar100
+        alllabel = [0 for i in range (self.labellenght)]
         for client in self.clients:
             #print(f"before alllabel is {alllabel},client.label is{client.label}")
             for j in range(10):
@@ -421,7 +426,7 @@ class FedAAW(Server):
 
     def select_weight_vector(self):
         active_distance = 0
-        activelabel = [0 for i in range(10)]
+        activelabel=[0 for i in range(self.labellenght)]
         active_train_samples = 0
 
         for client in self.selected_clients:
@@ -444,8 +449,6 @@ class FedAAW(Server):
             if not client.AAW.hasinit:
                 client.AAW.init_weight(self.global_model)
                 client.AAW.hasinit=True
-
-
 
     def adpativeweight(self):
         pass

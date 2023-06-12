@@ -9,10 +9,12 @@ from utils.vars import Programpath
 class Ditto(Server):
     def __init__(self, args, times):
         super().__init__(args, times)
-
+        self.fix_ids = True
+        self.method = "Ditto"
         # select slow clients
         self.set_slow_clients()
         self.set_clients(clientDitto)
+
 
         print(f"\nJoin ratio / total clients: {self.join_ratio} / {self.num_clients}")
         print("Finished creating server and clients.")

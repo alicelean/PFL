@@ -9,6 +9,8 @@ class FedAvg(Server):
     def __init__(self, args, times,filedir):
         super().__init__(args, times,filedir)
         self.method="FedAvg"
+        self.fix_ids = True
+
 
 
         # select slow clients
@@ -62,7 +64,9 @@ class FedAvg(Server):
                 resc = [self.filedir]
                 for line in res:
                     resc.append(line)
+                resc.append(self.join_ratio)
                 colum_value.append(resc)
+                print("envaluate:",i,colum_value)
                 # -------------------------------------------------------------------------
 
             for client in self.selected_clients:
@@ -103,7 +107,7 @@ class FedAvg(Server):
             redf.to_csv(idpath, mode='a', header=False)
             print("write select id list ",idpath)
         # --------------7.训练过程中的全局模型的acc
-        colum_name = ["case", "method", "group", "Loss", "Accurancy", "AUC", "Std Test Accurancy", "Std Test AUC"]
+        colum_name = ["case", "method", "group", "Loss", "Accurancy", "AUC", "Std Test Accurancy", "Std Test AUC","join_ratio"]
         redf = pd.DataFrame(columns=colum_name)
         redf.loc[len(redf) + 1] = colum_name
         for i in range(len(colum_value)):

@@ -1,0 +1,95 @@
+/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: 'dlopen(/Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so, 6): Library not loaded: @rpath/libpng16.16.dylib
+  Referenced from: /Users/alice/opt/anaconda3/lib/python3.8/site-packages/torchvision/image.so
+  Reason: Incompatible library version: image.so requires version 56.0.0 or later, but libpng16.16.dylib provides version 54.0.0'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+/Users/alice/Desktop/python/PFL/system /Users/alice/Desktop/python/PFL
+
+cuda is not avaiable.
+
+==================================================
+Algorithm: SCAFFOLDAAW
+Local batch size: 10
+Local steps: 1
+Local learing rate: 0.005
+Local learing rate decay: False
+Total number of clients: 20
+Clients join in each round: 0.5
+Clients randomly join: False
+Client drop rate: 0.0
+Client select regarding time: False
+Running times: 1
+Dataset: Cifar10
+Number of classes: 10
+Backbone: cnn
+Using device: cpu
+Using DP: False
+Auto break: False
+Global rounds: 20
+DLG attack: False
+Total number of new clients: 0
+Fine tuning epoches on new clients: 0
+==================================================
+
+============= Running time: 0th =============
+Creating server and clients ...
+FedAvgCNN(
+  (conv1): Sequential(
+    (0): Conv2d(3, 32, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv2): Sequential(
+    (0): Conv2d(32, 64, kernel_size=(5, 5), stride=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): MaxPool2d(kernel_size=(2, 2), stride=(2, 2), padding=0, dilation=1, ceil_mode=False)
+  )
+  (fc1): Sequential(
+    (0): Linear(in_features=1600, out_features=512, bias=True)
+    (1): ReLU(inplace=True)
+  )
+  (fc): Linear(in_features=512, out_features=10, bias=True)
+)
+INFO:------------------------args.algorithm is:SCAFFOLDAAW-----------------------
+**************************1.INfo,set_clients ,init data********************
+
+Join ratio / total clients: 0.5 / 20
+Finished creating server and clients.
+*************************** server_sccafoold train ***************************
+-------------------------------------------------------------------------write exe canshu,txt path is /Users/alice/Desktop/python/PFL//res/SCAFFOLDAAW/Cifar10_canshu.csv
+INFO:---------Using fix select id list--------------------------------
+/Users/alice/Desktop/python/PFL//res/selectids/Cifar10_select_client_ids20_0.5.csv
+       2 global_rounds                                 id_list
+0      3             0     [10, 8, 14, 11, 9, 5, 7, 13, 12, 3]
+1      4             1    [2, 0, 6, 13, 10, 16, 18, 1, 17, 19]
+2      5             2    [11, 15, 17, 16, 4, 18, 9, 12, 2, 1]
+3      6             3      [4, 14, 6, 2, 11, 18, 3, 12, 5, 1]
+4      7             4    [8, 11, 12, 2, 17, 18, 4, 19, 15, 7]
+..   ...           ...                                     ...
+199   99            96      [6, 16, 13, 8, 15, 1, 2, 7, 3, 18]
+200  100            97    [18, 11, 3, 6, 13, 16, 10, 9, 19, 0]
+201  101            98      [5, 6, 14, 11, 13, 8, 19, 3, 7, 0]
+202  102            99     [12, 17, 4, 18, 7, 14, 2, 11, 0, 3]
+203  103           100  [6, 16, 15, 14, 11, 17, 18, 9, 10, 13]
+
+[204 rows x 3 columns]
+Traceback (most recent call last):
+  File "/Users/alice/Desktop/python/PFL/system/main.py", line 466, in <module>
+    run(args)
+  File "/Users/alice/Desktop/python/PFL/system/main.py", line 285, in run
+    server.train()
+  File "/Users/alice/Desktop/python/PFL/system/flcore/servers/server_scafflod_aaw.py", line 54, in train
+    self.select_idlist = self.read_selectInfo(file_path)
+  File "/Users/alice/Desktop/python/PFL/system/flcore/servers/serverbase.py", line 470, in read_selectInfo
+    ids = [ast.literal_eval(i) for i in data['id_list'].tolist()]
+  File "/Users/alice/Desktop/python/PFL/system/flcore/servers/serverbase.py", line 470, in <listcomp>
+    ids = [ast.literal_eval(i) for i in data['id_list'].tolist()]
+  File "/Users/alice/opt/anaconda3/lib/python3.8/ast.py", line 59, in literal_eval
+    node_or_string = parse(node_or_string, mode='eval')
+  File "/Users/alice/opt/anaconda3/lib/python3.8/ast.py", line 47, in parse
+    return compile(source, filename, mode, flags,
+  File "<unknown>", line 1
+    *********************
+    ^
+SyntaxError: invalid syntax

@@ -15,9 +15,13 @@ class FedJS(Server):
         self.set_slow_clients()
 
         self.method = "FedJS"
+        self.labellenght = 10
+        if self.dataset == 'Cifar100':
+            self.labellenght = 100
 
         self.set_clients(clientJS)
         self.fix_ids = True
+
 
 
 
@@ -183,7 +187,8 @@ class FedJS(Server):
         self.writeclientInfo()
 
     def setdistance(self):
-        alllabel = [0 for i in range (10)]
+        #cifar100
+        alllabel = [0 for i in range (self.labellenght)]
         for client in self.clients:
             #print(f"before alllabel is {alllabel},client.label is{client.label}")
             for j in range(10):
@@ -191,8 +196,8 @@ class FedJS(Server):
             #print(f"after alllabel is {alllabel}")
         alldistance = 0
         for client in self.clients:
-            #client.distance = jensen_shannon_distance(client.label, alllabel)
-            client.distance = self.calculate_hellinger_distance(client.label, alllabel)
+            client.distance = jensen_shannon_distance(client.label, alllabel)
+            #client.distance = self.calculate_hellinger_distance(client.label, alllabel)
             alldistance += client.distance
             print(f"INFormation-------------serveralajs----------------------init client {client.id} JS distance is {client.distance}-------------------------------")
 
@@ -223,7 +228,8 @@ class FedJS(Server):
         # for client in active_clients:
         #     active_distance += client.distance
 
-        activelabel=[0 for i in range(10)]
+
+        activelabel=[0 for i in range(self.labellenght)]
         for client in active_clients:
             for j in range(10):
                 activelabel[j] += client.label[j]

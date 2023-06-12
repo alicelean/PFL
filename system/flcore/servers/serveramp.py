@@ -12,7 +12,8 @@ from utils.dlg import DLG
 class FedAMP(Server):
     def __init__(self, args, times):
         super().__init__(args, times)
-
+        self.fix_ids = True
+        self.method = "FedAMP"
         # select slow clients
         self.set_slow_clients()
         self.set_clients(clientAMP)

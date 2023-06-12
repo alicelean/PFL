@@ -17,7 +17,6 @@ class clientJS(Client):
         #新增5个属性，
         self.traindata=traindata
         self.testsdata=testsdata
-        self.label=[0 for i in range(10)]
         self.distance=0
         self.alldistance=0
         self.alllabel=None

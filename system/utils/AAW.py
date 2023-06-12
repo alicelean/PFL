@@ -5,7 +5,8 @@ import copy,statistics
 import random,time
 from torch.utils.data import DataLoader
 from typing import List, Tuple
-
+import math
+import tensorflow as tf
 class AAW:
     def __init__(self,
                 sizerate:float,
@@ -60,6 +61,9 @@ class AAW:
         self.hasinit=False
         self.global_model=None
         self.stop=False
+        self.etaj=0.01
+        self.learning_rate = tf.keras.optimizers.schedules.CosineDecay(
+    self.etaj, 100)
 
 
     def init_weight(self, global_model: nn.Module):
@@ -74,9 +78,9 @@ class AAW:
         if self.initweight==0:
             raise ValueError("ERROR:AAW.self.initweight is zero")
         params = list(global_model.parameters())
-        print(f"client  {self.cid} self.initweight   {self.initweight}")
+        #print(f"client  {self.cid} self.initweight   {self.initweight}")
         self.AAweights = [torch.mul(torch.ones_like(param.data), self.initweight).to(self.device) for param in params]
-        print("INit AAweight is  -----------------------", type(self.AAweights))
+       # print("INit AAweight is  -----------------------", type(self.AAweights))
 
 
 
@@ -151,11 +155,11 @@ class AAW:
             #print(f"y,{y},loss is:",loss_value.item())
             aloss.append(loss_value.item())
             #losses.append(loss_value.item())
-
+            etaj=0.01
             for para_g, para_l_t, aaweight,upgrad in zip(params_g_t, params_l_t, self.AAweights,self.updategrad):
                 #aaweight.data = aaweight - torch.mul(para_g.grad, 0.01 * self.sizerate) * para_l_t
-                aaweight.data = aaweight - torch.mul(para_g.grad, 0.01* self.sizerate)
-                upgrad.data = upgrad + torch.mul(para_g.grad, 0.01* self.sizerate)
+                aaweight.data = aaweight - torch.mul(para_g.grad,   self.etaj* self.sizerate)
+                upgrad.data = upgrad + torch.mul(para_g.grad,   self.etaj* self.sizerate)
                 # print("self.sizerate",self.sizerate)
                 # print("para_g.grad",para_g.grad)
                 # print("para_l_t",para_l_t)
@@ -190,7 +194,7 @@ class AAW:
             print("aloss {aloss},rand_loader :{len(rand_loader)}")
         losses.append(statistics.mean(aloss))
         update_time = time.time() - start_time
-        print('Client:', self.cid,'mean(aloss):',statistics.mean(aloss), '\tStd:', np.std(aloss),'self.threshold:',self.threshold,'\tAAW epochs:', cnt)
+        #print('Client:', self.cid,'mean(aloss):',statistics.mean(aloss), '\tStd:', np.std(aloss),'self.threshold:',self.threshold,'\tAAW epochs:', cnt)
         #print("after", self.AAweights[0])
 
         # for tensor1, tensor2 in zip(prev_AAweights, self.AAweights):
@@ -202,7 +206,7 @@ class AAW:
         # 计算更新所使用的时间
         update_time = time.time() - start_time
         self.timecost.append(update_time)
-        print("更新所使用的时间:", update_time, "秒")
+        #print("更新所使用的时间:", update_time, "秒")
         #print(f"client {self.cid} end   learning-----------------------")
 
         #print("Updated AAweight", type(self.AAweights))
@@ -210,9 +214,132 @@ class AAW:
         if statistics.mean(aloss)<0.5:
             self.stop = True
 
+    def adaptive_aggregation_weight_update(self, global_model: nn.Module, local_model: nn.Module, round: int) -> None:
+        """
+        Args:
+            global_model: The received global/aggregated model.
+            local_model: The trained local model.
+        """
 
 
+        if self.notadptive or self.stop:
+            return
 
+        current_learning_rate=0.001
+
+
+        if not self.hasinit:
+            self.init_weight(self.global_model)
+            self.hasinit = True
+
+        rand_ratio = self.rand_percent / 100  # 随机采样比例
+        rand_num = int(rand_ratio * len(self.train_data))  # 计算随机采样的样本数量
+        if rand_num < self.batch_size:
+            print(
+                f"ERROR: example rand_num={rand_num} < self.batch_size={self.batch_size} because len(self.train_data)={len(self.train_data)}, rand_ratio={rand_ratio}")
+            return
+        rand_idx = random.randint(0, len(self.train_data) - rand_num)  # 随机选择采样的起始索引
+
+        # 使用所有数据集
+        # rand_loader = DataLoader(self.train_data[rand_idx:rand_idx + rand_num], self.batch_size, drop_last=True)
+        rand_loader = DataLoader(self.train_data, len(self.train_data), drop_last=True)
+
+        params_g = list(global_model.parameters())  # 获取全局模型的参数列表
+        params_l = list(local_model.parameters())  # 获取本地模型的参数列表
+        local_model_t = copy.deepcopy(global_model)
+        params_l_t = list(local_model_t.parameters())
+
+        global_model_t = copy.deepcopy(global_model)
+        params_g_t = list(global_model_t.parameters())
+        optimizer = torch.optim.SGD(params_g_t, lr=0)  # 使用全局模型的参数列表创建优化器
+
+        self.updategrad = [(torch.ones_like(param.data) * 0).to(self.device) for param in params_g]
+
+        # print("w", self.AAweights)
+        # 如果是第一次更新，初始化 AAweight 为元素值为 init_value 的张量
+
+        # 使用随机采样的数据创建 DataLoader
+
+        losses = []  # 记录损失值
+        cnt = 0  # 权重训练迭代计数器
+        samples = 0
+        # print(f"client {self.cid} start  aaweight learning------------------------")
+
+        # 记录更新前的时间戳
+        start_time = time.time()
+        # prev_AAweights = [aaweight.clone() for aaweight in self.AAweights]  # 复制之前的self.AAweights
+        # print("before adptive", self.AAweights)
+        aloss = []
+        for x, y in rand_loader:
+            if type(x) == type([]):
+                x[0] = x[0].to(self.device)
+            else:
+                x = x.to(self.device)
+            y = y.to(self.device)
+            optimizer.zero_grad()
+            output = global_model_t(x)  # 使用全局模型计算输出
+            loss_value = self.loss(output, y)  # 计算损失值
+            loss_value.backward()  # 反向传播计算梯度
+            # 此时可以获取梯度信息
+            # print(f"y,{y},loss is:",loss_value.item())
+            aloss.append(loss_value.item())
+            # losses.append(loss_value.item())
+
+            for para_g, para_l_t, aaweight, upgrad in zip(params_g_t, params_l_t, self.AAweights, self.updategrad):
+                # aaweight.data = aaweight - torch.mul(para_g.grad, 0.01 * self.sizerate) * para_l_t
+                aaweight.data = aaweight - torch.mul(para_g.grad, current_learning_rate * self.sizerate)
+                upgrad.data = upgrad + torch.mul(para_g.grad, current_learning_rate * self.sizerate)
+                # print("self.sizerate",self.sizerate)
+                # print("para_g.grad",para_g.grad)
+                # print("para_l_t",para_l_t)
+                # print("torch.mul(para_g.grad, 0.01 * self.sizerate) * para_l_t", torch.mul(para_g.grad, 0.01 * self.sizerate) * para_l_t)
+
+                # weight.data=weight-torch.mul(para_g.grad, self.eta * self.datasizerate) * para_l_t
+
+                # print("self.eta * self.datasizerate", self.eta * self.sizerate )
+                # print("self.eta ", self.eta )
+                # print(" self.datasizerate", self.sizerate)
+                # print("para_g.grad", para_g.grad)
+                # print("para_l_t", para_l_t)
+                # if torch.equal(aaweight, updated_aaweight):
+                #     print("aaweight和更新后的AAweights的元素相同")
+                # else:
+                #     print("aaweight和更新后的AAweights的元素不同")
+                # self.AAweights[i] = updated_aaweight
+                # i=i+1
+
+                # 更新 AAweight，根据全局模型在本地数据上的梯度和本地模型的参数
+
+        # 计算梯度张量的平均范数
+        mean_gradient_norm = sum(torch.norm(g) for g in self.updategrad) / len(self.updategrad)
+        # 判断平均范数是否小于阈值
+        if mean_gradient_norm < 0.00001:
+            print("平均梯度范数小于阈值，停止训练")
+            self.stop = True
+        if len(aloss) == 0:
+            print("aloss {aloss},rand_loader :{len(rand_loader)}")
+        losses.append(statistics.mean(aloss))
+        update_time = time.time() - start_time
+        print('Client:', self.cid, 'mean(aloss):', statistics.mean(aloss), '\tStd:', np.std(aloss), 'self.threshold:',
+              self.threshold, '\tAAW epochs:', cnt)
+        # print("after", self.AAweights[0])
+
+        # for tensor1, tensor2 in zip(prev_AAweights, self.AAweights):
+        #     if torch.allclose(tensor1, tensor2):
+        #         print("newweight和初始的AAweights的元素相同")
+        #     else:
+        #         print("newweight和初始的AAweights的元素不同")
+
+        # 计算更新所使用的时间
+        update_time = time.time() - start_time
+        self.timecost.append(update_time)
+        #print("更新所使用的时间:", update_time, "秒")
+        # print(f"client {self.cid} end   learning-----------------------")
+
+        # print("Updated AAweight", type(self.AAweights))
+
+        if statistics.mean(aloss) < 0.5:
+            self.stop = True
 
     def adaptive_aggregation_weight_local_model(self, global_model: nn.Module, local_model: nn.Module) -> None:
         """

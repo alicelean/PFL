@@ -3,9 +3,10 @@ import os
 import numpy as np
 import h5py
 import copy
-import time
+import time,math
 import random
 import pandas as pd
+from utils.distance import jensen_shannon_distance
 from utils.data_utils import read_client_data
 from utils.dlg import DLG
 import ast
@@ -20,7 +21,7 @@ from utils.vars import Programpath
 class Server(object):
     def __init__(self, args, times,filedir="test"):
         #记录数据文件的位置，同一个数据集不同程度的数据分布差异
-        self.filedir=filedir
+        self.filedir=args.dataset
         self.method =None
         self.select_idlist = []
         self.randomSelect = False
@@ -29,6 +30,7 @@ class Server(object):
         self.client_learning_rate = args.local_learning_rate
         self.client_local_epochs = args.local_epochs
         self.fix_ids = False
+        self.ISAAW=False
         self.programpath=Programpath
 
         # 记录所有的weights
@@ -103,6 +105,7 @@ class Server(object):
             self.clients.append(client)
 
         for client in self.clients:
+            client.setlabel()
             client.sizerate=(client.train_samples+client.test_samples)/samples
 
             #print(f"client {client.id} ,sizerate is {client.sizerate}")
@@ -155,10 +158,14 @@ class Server(object):
         '''
         assert (len(self.clients) > 0)
 
+        # 更新模型参数，将globalmodel复制给本地模型
+        for client in self.selected_clients:
+            if self.ISAAW:
+                client.local_initialization(self.global_model, round)
+
+
         for client in self.clients:
             start_time = time.time()
-
-            #更新模型参数，将globalmodel复制给本地模型
             client.set_parameters(self.global_model)
             client.send_time_cost['num_rounds'] += 1
             client.send_time_cost['total_cost'] += 2 * (time.time() - start_time)
@@ -463,6 +470,8 @@ class Server(object):
         print("INFO:---------Using fix select id list--------------------------------")
 
         data = pd.read_csv(file_path)
+        print(file_path)
+        print(data)
         rounds = data['global_rounds'].tolist()
         # print(data['ids'].tolist()[0])
         ids = [ast.literal_eval(i) for i in data['id_list'].tolist()]
@@ -556,5 +565,56 @@ class Server(object):
 
         # print(f"client {client.id} ,sizerate is {client.sizerate}")
         self.writeclientInfo()
+
+    def select_weight_vector(self):
+        active_distance = 0
+        activelabel = [0 for i in range(10)]
+        active_train_samples = 0
+
+        for client in self.selected_clients:
+            active_train_samples += client.train_samples
+            for j in range(10):
+                activelabel[j] += client.label[j]
+        for client in self.selected_clients:
+            # 计算参与训练的client分布差异
+            client.distance = jensen_shannon_distance(client.label, activelabel)
+            active_distance += client.distance
+
+        for client in self.selected_clients:
+            scale_factor = 0.1
+            jsweight = self.weight_from_distance2(client.distance / active_distance, scale_factor) + 0.5 * (
+                    client.train_samples / active_train_samples)
+
+            client.AAW.initweight = jsweight
+            client.AAW.initweight = client.train_samples / active_train_samples
+            # 第一次参与训练需要初始化它的weight，weight 按照js计算weight的方式进行
+            if not client.AAW.hasinit:
+                client.AAW.init_weight(self.global_model)
+                client.AAW.hasinit = True
+
+
+    def weight_from_distance2(self,distance, scale_factor=0.1, exponent=0.5):
+        '''
+        distance：表示数据分布的距离。
+        scale_factor：用于调整权重的比例因子。
+        exponent：用于控制指数函数的指数。
+        确定合适的scale_factor和exponent值是根据具体问题和数据分布而定的，没有固定的通用值。你可以根据实际情况进行实验和调整，以找到适合你问题的最佳值。
+
+一般来说，scale_factor的选择可以考虑数据的范围和分布。如果数据的范围很大，可以选择较大的scale_factor，以使权重下降得更快。如果数据的范围较小，可以选择较小的scale_factor，以使权重下降得更慢。
+
+对于exponent，它控制指数函数的指数，可以调整权重下降的速率和曲线的形状。较大的exponent会使权重下降得更快，而较小的exponent会使权重下降得更慢。你可以根据问题的需求和期望的权重分布形状进行调整。
+
+建议尝试不同的值并观察权重的变化和模型的表现。通过反复实验和调整，你可以找到适合你问题的最佳scale_factor和exponent值。
+        Args:
+            scale_factor:
+            exponent:
+
+        Returns:
+
+        '''
+        if distance == 0:
+            return 1.0
+        else:
+            return math.exp(-exponent * distance * scale_factor)
 
 

@@ -15,7 +15,9 @@ class FedALA_AAW(Server):
         self.set_slow_clients()
 
         self.method = "FedALA_AAW"
-
+        self.labellenght = 10
+        if self.dataset == 'Cifar100':
+            self.labellenght = 100
         self.set_clients(clientALA_AAW)
         self.fix_ids = True
 
@@ -205,7 +207,7 @@ class FedALA_AAW(Server):
         self.writeclientInfo()
 
     def setdistance(self):
-        alllabel = [0 for i in range (10)]
+        alllabel = [0 for i in range (self.labellenght)]
         for client in self.clients:
             #print(f"before alllabel is {alllabel},client.label is{client.label}")
             for j in range(10):
@@ -416,7 +418,7 @@ class FedALA_AAW(Server):
 
     def select_weight_vector(self):
         active_distance = 0
-        activelabel = [0 for i in range(10)]
+        activelabel = [0 for i in range(self.labellenght)]
         active_train_samples = 0
 
         for client in self.selected_clients:
