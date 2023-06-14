@@ -1,0 +1,6 @@
+1,dataset,global_rounds,client_enpoches,client_batch_size,client_learning_rate,ratio,client_num,Dirichlet alpha
+2,Cifar100,500,1,4,0.005,1.0,20,0.1
+1,dataset,global_rounds,client_enpoches,client_batch_size,client_learning_rate,ratio,client_num,Dirichlet alpha
+2,Cifar100,500,1,4,0.005,0.5,20,0.1
+1,dataset,global_rounds,client_enpoches,client_batch_size,client_learning_rate,ratio,client_num,Dirichlet alpha
+2,Cifar100,500,1,4,0.005,0.5,20,0.1

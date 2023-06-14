@@ -51,6 +51,7 @@ class FedALA(Server):
                 ids = []
                 for client in self.selected_clients:
                     ids.append(client.id)
+                    #print(f"num_classes,{len(client.label)}",client.num_classes,client.label)
                 select_id.append([i, ids])
                 # -------------------------------------------------------------------------
 
