@@ -251,3 +251,4 @@ class Client(object):
         #self.AAW.adaptive_aggregation_weight(received_global_model, self.model, round)
         self.AAW.adaptive_aggregation_weight_update(received_global_model, self.model, round)
 
+
