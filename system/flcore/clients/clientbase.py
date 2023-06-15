@@ -34,7 +34,9 @@ class Client(object):
         self.current_round=0
         self.timecost = []
         self.losslist=[]
-
+        self.prev_weight=None
+        self.layer=1
+        print(args.num_classes,"args.num_classes")
 
         self.traindata = traindata
         self.testsdata = testsdata

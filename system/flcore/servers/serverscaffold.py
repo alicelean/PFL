@@ -142,6 +142,13 @@ class SCAFFOLD(Server):
         print("success training write acc txt", accpath)
         redf.to_csv(accpath, mode='a', header=False)
         print(colum_value)
+        # ---------------记录数据-----------
+        redf = pd.DataFrame(columns=["dataset", "method", "round", "ratio", "average_time_per", "time_list"])
+        redf.loc[len(redf) + 1] = [self.dataset, self.method, self.global_rounds, self.join_ratio,
+                                   sum(self.Budget[1:]) / len(self.Budget[1:]), self.Budget[1:]]
+        accpath = self.programpath + "/res/time_cost.csv"
+        print("success training write acc txt", accpath)
+        redf.to_csv(accpath, mode='a', header=False)
         # -----------------------------------------------------------------------------------------------
         self.save_results()
         self.save_global_model()

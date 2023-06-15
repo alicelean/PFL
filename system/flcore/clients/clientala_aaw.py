@@ -72,7 +72,7 @@ class clientALA_AAW(Client):
         #print(f"***************************client {self.id}     end training***************************")
 
     def local_initialization(self, received_global_model,round):
-        print("------------clientala_aaw.local_initialization")
+        #print("------------clientala_aaw.local_initialization")
         #ALA模块
         self.ALA.adaptive_local_aggregation(received_global_model, self.model)
         self.AAW.adaptive_aggregation_weight(received_global_model, self.model,round)

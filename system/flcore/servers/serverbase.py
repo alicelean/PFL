@@ -35,7 +35,7 @@ class Server(object):
 
         # 记录所有的weights
         self.allweights = []
-
+        self.total_time=36000
 
 
 

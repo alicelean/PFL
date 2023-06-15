@@ -1,3 +1,5 @@
+import copy
+
 import torch
 import torch.nn as nn
 import numpy as np
@@ -12,6 +14,9 @@ class clientDA(Client):
         self.lossvalue=None
 
     def train(self):
+        #在上层，保留部分全局信息
+        if self.prev_weight!=None:
+            self.initnext_model()
         # 加载训练数据集，返回一个数据加载器 trainloader。
         trainloader = self.load_train_data()
         # self.model.to(self.device)，将模型设置为训练模式
@@ -55,6 +60,11 @@ class clientDA(Client):
 
         self.train_time_cost['num_rounds'] += 1
         self.train_time_cost['total_cost'] += time.time() - start_time
+        #记录当前模型
+        model_t=copy.deepcopy(self.model)
+        self.prev_weight = list(model_t.parameters())
+
+
 
         # 如果启用了隐私保护（self.privacy为True），则打印当前客户端的隐私参数信息，包括隐私预算 epsilon 和 sigma
         if self.privacy:
@@ -66,3 +76,16 @@ class clientDA(Client):
         #print(f"client {self.id},current round is {self.current_round},loss:{cl},{ns}")
         #losses.append(cl * 1.0)
         self.lossvalue=math.log(cl*1.0)*math.log(cl*1.0)
+
+
+    def initnext_model(self):
+        params_g = list(self.model.parameters())
+        #print("before ",params_g[-self.layer:])
+        # #保留底层全局模型的数据
+        # for param, param_g in zip(self.prev_weight[:-self.layer], params_g[:-self.layer]):
+        #     param.data = param_g.data.clone()
+        # 更新上层数据为本地模型与全局模型的差异，这样的话，上层模型是被修正的本地模型，下层是全局模型，整体既保留了局部信息，又保留了全局信息。
+        for param, param_g in zip(self.prev_weight[-self.layer:], params_g[-self.layer:]):
+            param_g.data = param+(param_g - param) * 0.5
+        #params_t= list(self.model.parameters())
+        #print("after ", params_t[-self.layer:])

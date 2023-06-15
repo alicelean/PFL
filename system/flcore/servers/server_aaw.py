@@ -120,8 +120,9 @@ class FedAAW(Server):
 
 
 
-
+            #记录每一轮花费的时间
             self.Budget.append(time.time() - s_t)
+
             print('-'*25, 'time cost', '-'*25, self.Budget[-1])
 
             if self.auto_break and self.check_done(acc_lss=[self.rs_test_acc], top_cnt=self.top_cnt):
@@ -132,8 +133,9 @@ class FedAAW(Server):
         # self.print_(max(self.rs_test_acc), max(
         #     self.rs_train_acc), min(self.rs_train_loss))
         print(max(self.rs_test_acc))
-        print("\nAverage time cost per round.")
-        print(sum(self.Budget[1:])/len(self.Budget[1:]))
+        time_cost_per=sum(self.Budget[1:])/len(self.Budget[1:])
+        print(f"\nAverage time cost per round:{time_cost_per}")
+
 
         # 6.写入idlist----保证整个客户端选择一致，更好的判别两种算法的差异---------------------------------------
         if not self.fix_ids:
@@ -156,6 +158,12 @@ class FedAAW(Server):
         print("success training write acc txt", accpath)
         redf.to_csv(accpath, mode='a', header=False)
         print(colum_value)
+        #---------------记录数据-----------
+        redf = pd.DataFrame(columns=["dataset","method","round","ratio","average_time_per","time_list"])
+        redf.loc[len(redf) + 1] = [self.dataset,self.method,self.global_rounds,self.join_ratio,sum(self.Budget[1:]) / len(self.Budget[1:]),self.Budget[1:]]
+        accpath = self.programpath + "/res/time_cost.csv"
+        print("success training write acc txt", accpath)
+        redf.to_csv(accpath, mode='a', header=False)
         # -----------------------------------------------------------------------------------------------
 
         self.save_results()
